@@ -1,0 +1,47 @@
+##### APIs
+
+### root api
+GET http://localhost:8000/
+
+### Create new user
+POST http://localhost:8000/api/v1/user/register
+Content-Type: application/json
+
+{
+    "firstName": "Pariwesh",
+    "lastName": "Tamrakar",
+    "username": "pariwesh7",
+    "email": "user@example.com",
+    "password": "1234567"
+}
+
+##### Email APIs
+
+### verify user email
+PATCH  http://localhost:8000/api/v1/user/email-verification
+Content-Type: application/json
+
+{
+    "pin": "645562",
+    "email": "user@example.com"
+}
+
+### Login User
+POST http://localhost:8000/api/v1/user/login
+Content-Type: application/json
+
+{
+    "username": "pariwesh7",
+    "password": "12345678"
+}
+
+### Get Products
+GET http://localhost:8000/api/v1/products/
+
+########### TOKEN ROUTERS
+
+### Get new access token
+GET http://localhost:8000/api/v1/token
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNoNyIsImlhdCI6MTY0NDQwNDIzMCwiZXhwIjoxNjQ2OTk2MjMwfQ.jqgF_s5Cgef5-THPJKFHhKkM7KwVHjVyjokVNxo7lpM
+
+
