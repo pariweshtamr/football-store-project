@@ -20,7 +20,7 @@ export const products = [
     type: 'Indoor',
     price: 130,
     inStock: 20,
-    rating: 3.5,
+    rating: 4,
     numReviews: 5,
     description:
       'Unlock the blueprint for speed with the Nike Mercurial Vapor 14 Academy IC. Colour-blocking at the sides and forefoot highlights key areas for precise dribbling, passing and shooting. Plus, a grippy texture throughout the upper lets you take total control of the game.',
@@ -45,7 +45,7 @@ export const products = [
     type: 'Indoor',
     price: 140,
     inStock: 9,
-    rating: 3.5,
+    rating: 4,
     numReviews: 5,
     description:
       'Designed for turf, the Nike Mercurial Superfly 8 Academy TF features a unique design that brings together the essential components of speed to deliver optimal touch and traction.',
@@ -58,7 +58,7 @@ export const products = [
     type: 'Outdoor',
     price: 220,
     inStock: 0,
-    rating: 3.5,
+    rating: 4.5,
     numReviews: 5,
     description:
       'The Nike Mercurial Superfly 8 Pro AG features a new look with specialised components to let you play your fastest from start to finish.A stretchy collar provides extra support, and the innovative plate provides instant responsiveness for quicker cuts at high speeds.',
@@ -71,7 +71,7 @@ export const products = [
     type: 'Indoor',
     price: 160,
     inStock: 50,
-    rating: 3.5,
+    rating: 3,
     numReviews: 5,
     description:
       'The Nike Lunar Gato II is ideal for the small-sided game. Soft leather at the forefoot has a smooth, natural feel for precision strikes. Lunarlon cushioning feels springy and responsive, while the rubber tread gives you traction for quick cuts on indoor surfaces.',

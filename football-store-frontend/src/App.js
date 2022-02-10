@@ -36,12 +36,11 @@ function App() {
           element={<EmailVerificationScreen />}
         ></Route>
         <Route path="/product/:id" element={<ProductScreen />}></Route>
-        <Route path="/products" element={<ProductScreen />}></Route>
         <Route
           path="/products/:category"
           element={<ProductListScreen />}
         ></Route>
-        {/* <Route path="/products" element={<ProductListScreen />}></Route> */}
+        <Route path="/products" element={<ProductListScreen />}></Route>
         <Route path="/" exact element={<HomeScreen />}></Route>
       </Routes>
       <Footer />

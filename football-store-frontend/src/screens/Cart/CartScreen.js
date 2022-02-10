@@ -31,6 +31,7 @@ import {
   CartActionButton,
   ProductLink,
   Hr,
+  HrMain,
   TopText,
 } from './CartScreenStyles'
 import { addToCart, removeFromCart } from '../../redux/Cart/CartAction'
@@ -42,7 +43,6 @@ const CartScreen = () => {
   const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
   const { cartItems } = useSelector((state) => state.cart)
-  console.log(id, cartItems)
 
   const dispatch = useDispatch()
   // const navigate = useNavigate()
@@ -63,10 +63,13 @@ const CartScreen = () => {
 
   return (
     <CartContainer>
+      <HrMain>
+        <hr />
+      </HrMain>
       <CartWrapper>
         <CartTitle>Your Cart</CartTitle>
         <CartTop>
-          <Link to="/product">
+          <Link to="/products">
             <CartTopButton>CONTINUE SHOPPING</CartTopButton>
           </Link>
           <CartTopTexts>
@@ -76,7 +79,7 @@ const CartScreen = () => {
 
         {cartItems.length === 0 ? (
           <MessageBox>
-            Cart is empty. <ShopLink to="/product">Go to Shop</ShopLink>
+            Cart is empty. <ShopLink to="/products">Go to Shop</ShopLink>
           </MessageBox>
         ) : (
           <CartBottom>

@@ -68,6 +68,12 @@ export const FooterList = styled.ul`
 export const FooterListItem = styled(Link)`
   cursor: pointer;
   margin-bottom: 10px;
+  text-decoration: none;
+  color: #000;
+
+  &:hover {
+    color: teal;
+  }
 `
 
 export const FooterRight = styled.div`

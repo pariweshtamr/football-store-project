@@ -23,7 +23,6 @@ const Products = ({ cat, filters }) => {
             ? `http://localhost:8000/api/v1/products?category=${cat}`
             : 'http://localhost:8000/api/v1/products',
         )
-        console.log(result)
         setProducts(result.data)
       } catch (error) {}
     }
@@ -49,9 +48,13 @@ const Products = ({ cat, filters }) => {
         <MessageBox variant="danger">{productResponse.message}</MessageBox>
       ) : (
         <ProductsListContainer>
-          {filteredProducts.map((product) => (
-            <ProductItem key={product._id} product={product} />
-          ))}
+          {cat
+            ? filteredProducts.map((product) => (
+                <ProductItem key={product._id} product={product} />
+              ))
+            : products.map((product) => (
+                <ProductItem key={product._id} product={product} />
+              ))}
         </ProductsListContainer>
       )}
     </ProductsContainer>

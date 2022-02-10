@@ -30,7 +30,7 @@ const ProductScreen = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [qty, setQty] = useState(1)
-  const [size, setSize] = useState()
+  const [sizes, setSizes] = useState()
 
   const { isLoading, productResponse, selectedProduct } = useSelector(
     (state) => state.product,
@@ -53,7 +53,7 @@ const ProductScreen = () => {
       ) : (
         <ProductContainer>
           <LinkContainer>
-            <BackLink to="/product">Back to product list</BackLink>
+            <BackLink to="/products">Back to product list</BackLink>
           </LinkContainer>
           <ProductWrapper>
             <ImgContainer>
@@ -75,17 +75,23 @@ const ProductScreen = () => {
                       onChange={(e) => setQty(e.target.value)}
                     >
                       {[...Array(selectedProduct.inStock).keys()].map((x) => (
-                        <option value={x + 1}>{x + 1}</option>
+                        <Option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </Option>
                       ))}
                     </Quantity>
                   </QtyContainer>
                   <SizeContainer>
                     Size:
-                    <Size>
-                      <Option>6</Option>
-                      <Option>7</Option>
-                      <Option>8</Option>
-                      <Option>9</Option>
+                    <Size
+                      value={sizes}
+                      onChange={(e) => setSizes(e.target.value)}
+                    >
+                      {[...Array(selectedProduct.size).keys()].map((x) => (
+                        <Option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </Option>
+                      ))}
                     </Size>
                   </SizeContainer>
                   <Button onClick={addToCartHandler}>ADD TO CART</Button>

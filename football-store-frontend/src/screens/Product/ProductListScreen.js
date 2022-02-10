@@ -30,36 +30,41 @@ const ProductListScreen = () => {
       <Hr>
         <hr />
       </Hr>
-      <Title>{cat}</Title>
-      <FilterContainer>
-        <Filter>
-          <FilterText>Filter Products:</FilterText>
-          <ProductListSelect
-            name="type"
-            defaultValue=""
-            onChange={handleFilters}
-          >
-            <Option disabled value="">
-              Type
-            </Option>
-            <Option>Indoor</Option>
-            <Option>Outdoor</Option>
-          </ProductListSelect>
-          <ProductListSelect
-            name="size"
-            defaultValue=""
-            onChange={handleFilters}
-          >
-            <Option disabled value="">
-              Size
-            </Option>
-            <Option>6</Option>
-            <Option>7</Option>
-            <Option>8</Option>
-            <Option>9</Option>
-          </ProductListSelect>
-        </Filter>
-      </FilterContainer>
+      {cat ? (
+        <>
+          <Title>{cat}</Title>
+          <FilterContainer>
+            <Filter>
+              <FilterText>Filter Products:</FilterText>
+              <ProductListSelect
+                name="type"
+                defaultValue=""
+                onChange={handleFilters}
+              >
+                <Option disabled value="">
+                  Type
+                </Option>
+                <Option>Indoor</Option>
+                <Option>Outdoor</Option>
+              </ProductListSelect>
+              <ProductListSelect
+                name="size"
+                defaultValue=""
+                onChange={handleFilters}
+              >
+                <Option disabled value="">
+                  Size
+                </Option>
+                <Option>6</Option>
+                <Option>7</Option>
+                <Option>8</Option>
+                <Option>9</Option>
+              </ProductListSelect>
+            </Filter>
+          </FilterContainer>{' '}
+        </>
+      ) : null}
+
       <Products cat={cat} filters={filters} />
     </ProductListScreenContainer>
   )

@@ -31,11 +31,9 @@ export const userEmailVerification = (userObj) => async (dispatch) => {
 
   // call api
   const data = await verifyNewUser(userObj)
-  console.log(data, 'from verifyUser action')
   data?.status === 'success'
     ? dispatch(requestSuccess(data))
     : dispatch(requestFail(data))
-  // dispatch response
 }
 
 const setJWTinBrowserMemory = ({ accessJWT, refreshJWT }) => {

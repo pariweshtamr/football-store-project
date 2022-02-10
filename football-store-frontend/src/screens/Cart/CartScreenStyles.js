@@ -159,3 +159,9 @@ export const CartSummaryButton = styled.button`
   border: none;
   border-radius: 5px;
 `
+export const HrMain = styled.div`
+  width: 95vw;
+  height: 1px;
+  color: teal;
+  margin: 0 auto;
+`

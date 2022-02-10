@@ -1,17 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Rating from '../Rating/Rating'
 import {
   ProductItemContainer,
   ProductItemImage,
   ProductItemInfo,
   ProductItemPrice,
+  ProductLink,
 } from './ProductStyles'
 
 const ProductItem = ({ product }) => {
+  console.log(product)
   return (
     <ProductItemContainer>
-      <Link to={`/product/${product._id}`}>
+      <ProductLink to={`/product/${product._id}`}>
         <ProductItemImage src={product.image} alt={product.name} />
         <ProductItemInfo>
           <h2>{product.name}</h2>
@@ -21,7 +22,7 @@ const ProductItem = ({ product }) => {
           ></Rating>
           <ProductItemPrice>${product.price}</ProductItemPrice>
         </ProductItemInfo>
-      </Link>
+      </ProductLink>
     </ProductItemContainer>
   )
 }

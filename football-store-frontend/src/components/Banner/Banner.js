@@ -26,7 +26,7 @@ const Banner = () => {
               HIGH-TECH SOCCER FOOTWEAR WITH MANY GREAT DESIGNS AND COLOURS TO
               CHOOSE FROM.
             </Description>
-            <Link to="/products">
+            <Link to="/products?">
               <Button>SHOP NOW</Button>
             </Link>
           </InfoContainer>

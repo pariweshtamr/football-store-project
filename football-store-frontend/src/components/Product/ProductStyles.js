@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const ProductsContainer = styled.div`
@@ -40,4 +41,12 @@ export const ProductItemInfo = styled.div`
 `
 export const ProductItemPrice = styled.div`
   font-size: 2rem;
+`
+export const ProductLink = styled(Link)`
+  text-decoration: none;
+  color: teal;
+
+  &:hover {
+    color: #000;
+  }
 `

@@ -4,8 +4,6 @@ import { getUserByUsernameAndRefreshToken } from '../models/User/User.model.js'
 const tokenRouter = express.Router()
 
 tokenRouter.all('/', (req, res, next) => {
-  console.log('token got hit')
-
   next()
 })
 
