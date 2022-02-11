@@ -19,7 +19,6 @@ export const getProducts = async () => {
 export const getAProductById = async (_id) => {
   try {
     const { data } = await Axios.get(`${prodApi}/${_id}`)
-    console.log(data)
     return data
   } catch (error) {
     console.log(error)

@@ -26,7 +26,7 @@ const LoginScreen = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const { isLoggedIn, isLoading, userLoginResponse } = useSelector(
+  const { userInfo, isLoggedIn, isLoading, userLoginResponse } = useSelector(
     (state) => state.user,
   )
   const [loginInfo, setLoginInfo] = useState(initialState)
@@ -34,10 +34,10 @@ const LoginScreen = () => {
   const from = location?.state?.from?.pathname || '/'
 
   useEffect(() => {
-    !isLoggedIn && dispatch(autoLogin())
+    !userInfo._id && dispatch(autoLogin())
 
     isLoggedIn && navigate(from)
-  }, [isLoggedIn, dispatch, navigate, from])
+  }, [isLoggedIn, userInfo, dispatch, navigate, from])
 
   const handleOnChange = (e) => {
     const { name, value } = e.target

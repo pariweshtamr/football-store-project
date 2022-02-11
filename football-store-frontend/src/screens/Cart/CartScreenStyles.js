@@ -19,6 +19,8 @@ export const CartWrapper = styled.div`
 export const CartTitle = styled.h1`
   font-weight: 300;
   text-align: center;
+  text-decoration: underline;
+  text-decoration-color: teal;
 `
 export const CartTop = styled.div`
   display: flex;
@@ -93,10 +95,23 @@ export const CartProductAmountContainer = styled.div`
 `
 export const CartProductQty = styled.select`
   font-size: 24px;
-  margin: 5px;
+  margin: 10px;
 
   ${mobile({ margin: '0px 15px' })}
 `
+export const CartProductSize = styled.select`
+  font-size: 24px;
+  margin: 10px;
+
+  ${mobile({ margin: '0px 15px' })}
+`
+export const CartProductInfoTitle = styled.div`
+  font-weight: bolder;
+  margin-left: 10px;
+`
+export const FilterCartQtyOption = styled.option``
+export const FilterCartSizeOption = styled.option``
+
 export const CartProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;

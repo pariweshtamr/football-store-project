@@ -3,7 +3,6 @@ import { RatingContainer, RatingSpan } from './RatingStyles'
 
 const Rating = (props) => {
   const { rating, numReviews } = props
-  console.log(rating)
   return (
     <RatingContainer>
       <RatingSpan>

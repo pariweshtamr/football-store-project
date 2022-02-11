@@ -77,6 +77,8 @@ export const Size = styled.select`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 `
+export const FilterSizeOption = styled.option``
+export const FilterQuantityOption = styled.div``
 export const Option = styled.option``
 export const Button = styled.button`
   padding: 10px;

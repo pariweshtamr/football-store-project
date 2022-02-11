@@ -20,7 +20,7 @@ const HomeScreen = () => {
     }
 
     isLoggedIn && navigate('/')
-  }, [isLoggedIn, navigate, dispatch])
+  }, [isLoggedIn, , navigate, dispatch])
   return (
     <>
       <Announcement />

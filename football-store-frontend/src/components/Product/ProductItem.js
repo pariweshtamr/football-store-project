@@ -9,7 +9,6 @@ import {
 } from './ProductStyles'
 
 const ProductItem = ({ product }) => {
-  console.log(product)
   return (
     <ProductItemContainer>
       <ProductLink to={`/product/${product._id}`}>

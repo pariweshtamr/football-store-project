@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import LoadingBox from '../../components/LoadingBox/LoadingBox'
 import MessageBox from '../../components/MessageBox/MessageBox'
 import { userRegister } from '../../redux/User/UserAction'
 import {
-  LoginButton,
+  LoginLink,
   LoginOption,
   RegisterButton,
   RegisterContainer,
@@ -99,7 +98,7 @@ const RegisterScreen = () => {
             name="password"
             onChange={handleOnChange}
             type="password"
-            minLength="8"
+            minLength="7"
             placeholder="Create a password"
             required
           />
@@ -113,9 +112,7 @@ const RegisterScreen = () => {
           <RegisterButton type="submit">REGISTER</RegisterButton>
         </RegisterForm>
         <LoginOption>Already have an account?</LoginOption>
-        <Link to="/login">
-          <LoginButton>LOGIN</LoginButton>
-        </Link>
+        <LoginLink to="/login">LOGIN</LoginLink>
       </RegisterWrapper>
     </RegisterContainer>
   )

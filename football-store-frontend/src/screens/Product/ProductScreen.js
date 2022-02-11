@@ -21,6 +21,7 @@ import {
   Size,
   Option,
   Unavailable,
+  FilterSizeOption,
 } from './ProductScreenStyles'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchAProductById } from '../../redux/Product/ProductAction'
@@ -30,7 +31,7 @@ const ProductScreen = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [qty, setQty] = useState(1)
-  const [sizes, setSizes] = useState()
+  const [size, setSize] = useState()
 
   const { isLoading, productResponse, selectedProduct } = useSelector(
     (state) => state.product,
@@ -84,13 +85,11 @@ const ProductScreen = () => {
                   <SizeContainer>
                     Size:
                     <Size
-                      value={sizes}
-                      onChange={(e) => setSizes(e.target.value)}
+                      value={size}
+                      onChange={(e) => setSize(e.target.value)}
                     >
-                      {[...Array(selectedProduct.size).keys()].map((x) => (
-                        <Option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </Option>
+                      {selectedProduct.size.map((s) => (
+                        <FilterSizeOption key={s}>{s}</FilterSizeOption>
                       ))}
                     </Size>
                   </SizeContainer>

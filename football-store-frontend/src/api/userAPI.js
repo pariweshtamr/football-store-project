@@ -46,6 +46,21 @@ export const loginUser = async (info) => {
   }
 }
 
+export const getUser = async (info) => {
+  try {
+    const { data } = await Axios.get(userApi, {
+      headers: {
+        authorization: window.sessionStorage.getItem('accessJWT'),
+      },
+    })
+    console.log(data, 'user api')
+    return data
+  } catch (error) {
+    console.log(error)
+    return error?.response?.data
+  }
+}
+
 export const logoutUser = async (tokens) => {
   try {
     const { data } = await Axios.post(userApi + '/logout', tokens)

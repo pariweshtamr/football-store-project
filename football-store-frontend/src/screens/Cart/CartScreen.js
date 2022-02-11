@@ -15,6 +15,10 @@ import {
   CartProductName,
   CartProductPrice,
   CartProductQty,
+  CartProductSize,
+  CartProductInfoTitle,
+  FilterCartQtyOption,
+  FilterCartSizeOption,
   CartSummary,
   CartSummaryButton,
   CartSummaryItem,
@@ -36,24 +40,19 @@ import {
 } from './CartScreenStyles'
 import { addToCart, removeFromCart } from '../../redux/Cart/CartAction'
 import MessageBox from '../../components/MessageBox/MessageBox'
+import Announcement from '../../components/Announcement/Announcement'
 
 const CartScreen = () => {
   const { id } = useParams()
   const location = useLocation()
+  const dispatch = useDispatch()
   const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
   const { cartItems } = useSelector((state) => state.cart)
 
-  const dispatch = useDispatch()
-  // const navigate = useNavigate()
-
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
   }
-
-  // const checkoutHandler = () => {
-  //   navigate('/shipping')
-  // }
 
   useEffect(() => {
     if (id) {
@@ -66,6 +65,7 @@ const CartScreen = () => {
       <HrMain>
         <hr />
       </HrMain>
+      <Announcement />
       <CartWrapper>
         <CartTitle>Your Cart</CartTitle>
         <CartTop>
@@ -101,6 +101,7 @@ const CartScreen = () => {
 
                       <CartPriceDetail>
                         <CartProductAmountContainer>
+                          <CartProductInfoTitle>Qty:</CartProductInfoTitle>
                           <CartProductQty
                             value={item.qty}
                             onChange={(e) =>
@@ -110,9 +111,19 @@ const CartScreen = () => {
                             }
                           >
                             {[...Array(item.inStock).keys()].map((x) => (
-                              <option value={x + 1}>{x + 1}</option>
+                              <FilterCartQtyOption value={x + 1} key={x}>
+                                {x + 1}
+                              </FilterCartQtyOption>
                             ))}
                           </CartProductQty>
+                          <CartProductInfoTitle>Size:</CartProductInfoTitle>
+                          <CartProductSize>
+                            {/* {item.size.map((s) => (
+                              <FilterCartSizeOption key={s}>
+                                {s}
+                              </FilterCartSizeOption>
+                            ))} */}
+                          </CartProductSize>
                         </CartProductAmountContainer>
                         <CartProductPrice>${item.price}</CartProductPrice>
                       </CartPriceDetail>

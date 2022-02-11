@@ -7,7 +7,6 @@ import ProductItem from './ProductItem'
 import { ProductsContainer, ProductsListContainer } from './ProductStyles'
 
 const Products = ({ cat, filters }) => {
-  console.log(cat, filters)
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
 

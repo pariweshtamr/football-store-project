@@ -5,6 +5,7 @@ import {
   sendEmailVerificationLink,
 } from '../helpers/email.helper.js'
 import { getJWTs } from '../helpers/jwt.helper.js'
+import { isUser } from '../middlewares/auth.middleware.js'
 import {
   loginUserFormValidation,
   userEmailVerificationValidation,
@@ -171,6 +172,15 @@ userRouter.post('/logout', async (req, res) => {
       message: 'Error, unable to Logout, Please try again later.',
     })
   }
+})
+
+// Get user info
+userRouter.get('/', isUser, (req, res) => {
+  res.json({
+    statur: 'success',
+    message: 'User Profile',
+    user: req.user,
+  })
 })
 
 export default userRouter

@@ -29,6 +29,10 @@ export const setRefreshJWT = (_id, token) => {
   })
 }
 
+export const getUserById = (id) => {
+  return User.findById(id)
+}
+
 export const getUserByUsername = (username) => {
   return User.findOne({ username })
 }

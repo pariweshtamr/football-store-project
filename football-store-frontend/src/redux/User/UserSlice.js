@@ -4,6 +4,7 @@ const initialState = {
   userInfo: {},
   isLoggedIn: false,
   isLoading: false,
+  userFetchResponse: {},
   userRegisterResponse: {},
   userLoginResponse: {},
   isAutoLoginPending: false,
@@ -34,7 +35,15 @@ const userSlice = createSlice({
       state.isLoading = false
     },
 
-    loginAuto: (state) => {
+    getUserDetailsSuccess: (state, { payload }) => {
+      state.userInfo = payload || {}
+      state.userFetchResponse = {}
+      state.isLoggedIn = true
+      state.isLoading = false
+    },
+
+    loginAuto: (state, { payload }) => {
+      state.userInfo = payload || {}
       state.isLoggedIn = true
       state.isAutoLoginPending = false
     },
@@ -67,6 +76,7 @@ export const {
   loginAuto,
   logoutSuccess,
   autoLoginPending,
+  getUserDetailsSuccess,
 } = actions
 
 export default reducer

@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import ProfileForm from '../../components/Profile/ProfileForm'
+import { fetchUserDetails } from '../../redux/User/UserAction'
+import { Hr } from './UserProfileScreenStyles'
 
 const UserProfileScreen = () => {
-  return <div>UserProfileScreen</div>
+  const dispatch = useDispatch()
+
+  const { userInfo } = useSelector((state) => state.user)
+
+  useEffect(() => {
+    !userInfo._id && dispatch(fetchUserDetails())
+  }, [dispatch, userInfo])
+
+  return (
+    <>
+      <Hr />
+      <ProfileForm />
+    </>
+  )
 }
 
 export default UserProfileScreen

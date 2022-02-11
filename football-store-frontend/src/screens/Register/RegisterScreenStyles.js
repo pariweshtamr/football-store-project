@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { mobile } from '../../responsive'
 
@@ -55,10 +56,27 @@ export const RegisterButton = styled.button`
   ${mobile({ padding: '10px' })}
 `
 export const LoginOption = styled.p`
-  text-align: center;
+  text-align: left;
+  color: blue;
 `
-export const LoginButton = styled.button`
+export const LoginLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 30%;
+  margin: 20px 0;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #ffc107e3;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: black;
+  }
+
+  ${mobile({ padding: '10px' })}
 `

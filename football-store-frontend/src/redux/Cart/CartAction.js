@@ -5,9 +5,8 @@ import {
 } from './CartSlice'
 import { addToCartById } from '../../api/cartAPI'
 
-export const addToCart = (_id, qty) => async (dispatch, getState) => {
-  const data = await addToCartById(_id, qty)
-  console.log(data)
+export const addToCart = (_id, qty, size) => async (dispatch, getState) => {
+  const data = await addToCartById(_id, qty, size)
   if (data) {
     dispatch(
       addProductToCartSuccess({

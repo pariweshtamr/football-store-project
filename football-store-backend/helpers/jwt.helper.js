@@ -41,3 +41,11 @@ export const getJWTs = async ({ _id, username }) => {
 export const verifyRefreshJWT = (refreshJWT) => {
   return jwt.verify(refreshJWT, process.env.JWT_REFRESH_SECRET)
 }
+
+export const verifyAccessJWT = (accessJWT) => {
+  try {
+    return jwt.verify(accessJWT, process.env.JWT_ACCESS_SECRET)
+  } catch (error) {
+    return error.message
+  }
+}

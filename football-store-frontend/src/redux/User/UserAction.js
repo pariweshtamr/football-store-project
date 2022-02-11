@@ -1,12 +1,14 @@
-import { getNewAccessJWT } from '../../api/tokenAPI'
+import { getNewAccessJWT, updateAccessJWT } from '../../api/tokenAPI'
 import {
   createUser,
+  getUser,
   loginUser,
   logoutUser,
   verifyNewUser,
 } from '../../api/userAPI'
 import {
   autoLoginPending,
+  getUserDetailsSuccess,
   loginAuto,
   loginFail,
   loginSuccess,
@@ -88,4 +90,24 @@ export const autoLogin = () => async (dispatch) => {
 
     dispatch(userLogout())
   }
+}
+
+export const fetchUserDetails = () => async (dispatch) => {
+  dispatch(requestPending())
+  const data = await getUser()
+  console.log(data, 'action user')
+  if (data?.message === 'jwt expired') {
+    // request for new accessJWT
+    const token = await updateAccessJWT()
+    if (token) {
+      return dispatch(fetchUserDetails())
+    } else {
+      dispatch(userLogout())
+    }
+  }
+
+  if (data?.user) {
+    return dispatch(getUserDetailsSuccess(data.user))
+  }
+  dispatch(requestFail(data))
 }
