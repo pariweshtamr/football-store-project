@@ -89,7 +89,9 @@ const ProductScreen = () => {
                       onChange={(e) => setSize(e.target.value)}
                     >
                       {selectedProduct.size.map((s) => (
-                        <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                        <FilterSizeOption key={s} value={s}>
+                          {s}
+                        </FilterSizeOption>
                       ))}
                     </Size>
                   </SizeContainer>

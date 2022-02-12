@@ -15,12 +15,12 @@ const HomeScreen = () => {
   // const refreshJWT = window.localStorage.getItem('refreshJWT')
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       dispatch(autoLogin())
     }
 
-    isLoggedIn && navigate('/')
-  }, [isLoggedIn, , navigate, dispatch])
+    isLoggedIn && navigate('/', { replace: true })
+  }, [isLoggedIn, navigate, dispatch])
   return (
     <>
       <Announcement />

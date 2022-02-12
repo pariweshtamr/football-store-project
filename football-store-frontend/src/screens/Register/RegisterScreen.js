@@ -13,6 +13,7 @@ import {
   RegisterTitle,
   RegisterWrapper,
 } from './RegisterScreenStyles'
+import registerWallpaper from '../../assets/registerWallpaper.jpg'
 
 const initialState = {
   firstName: '',
@@ -55,7 +56,11 @@ const RegisterScreen = () => {
     })
   }
   return (
-    <RegisterContainer>
+    <RegisterContainer
+      style={{
+        backgroundImage: `url(${registerWallpaper})`,
+      }}
+    >
       <RegisterWrapper>
         <RegisterTitle>CREATE AN ACCOUNT</RegisterTitle>
         <hr />
@@ -112,7 +117,10 @@ const RegisterScreen = () => {
           <RegisterButton type="submit">REGISTER</RegisterButton>
         </RegisterForm>
         <LoginOption>Already have an account?</LoginOption>
-        <LoginLink to="/login">LOGIN</LoginLink>
+
+        <LoginLink to="/login">
+          <i className="fa">L O G I N</i>
+        </LoginLink>
       </RegisterWrapper>
     </RegisterContainer>
   )

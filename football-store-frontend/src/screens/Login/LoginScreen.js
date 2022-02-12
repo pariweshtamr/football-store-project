@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import LoadingBox from '../../components/LoadingBox/LoadingBox'
 import MessageBox from '../../components/MessageBox/MessageBox'
 import { autoLogin, userLogin } from '../../redux/User/UserAction'
@@ -14,7 +14,11 @@ import {
   LoginInput,
   LoginTitle,
   LoginWrapper,
+  ForgotPasswordLink,
+  LoginLink,
+  HomeLink,
 } from './LoginScreenStyles'
+import loginWallpaper from '../../assets/loginWallpaper.jpg'
 
 const initialState = {
   username: 'pariwesh7',
@@ -55,7 +59,11 @@ const LoginScreen = () => {
   }
 
   return (
-    <LoginContainer>
+    <LoginContainer
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)), url(${loginWallpaper})`,
+      }}
+    >
       <LoginWrapper>
         <LoginTitle>SIGN IN</LoginTitle>
         <hr />
@@ -88,12 +96,16 @@ const LoginScreen = () => {
           <LoginButton type="submit">LOGIN</LoginButton>
           <RegisterOrHome>
             <ExternalLink>
-              <Link to="/">Forgot your password?</Link>
-              <Link to="/register">Create a new account</Link>
+              <ForgotPasswordLink to="/">
+                Forgot your password?
+              </ForgotPasswordLink>
+              <LoginLink to="/register">Create a new account</LoginLink>
             </ExternalLink>
 
             <Back>
-              <Link to="/">Home</Link>
+              <HomeLink to="/">
+                <i className="fa">H O M E</i>
+              </HomeLink>
             </Back>
           </RegisterOrHome>
         </LoginForm>

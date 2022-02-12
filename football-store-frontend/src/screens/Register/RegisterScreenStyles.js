@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { mobile } from '../../responsive'
 
 export const RegisterContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background: linear-gradient(
     rgba(255, 255, 255, 0.2),
@@ -13,7 +13,7 @@ export const RegisterContainer = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   ${mobile({ height: '100%' })}
 `
@@ -23,6 +23,7 @@ export const RegisterWrapper = styled.div`
   background-color: #f0f0f0;
   opacity: 0.9;
   border-radius: 5px;
+  margin-left: 5rem;
 
   ${mobile({ width: '80%', margin: '20px 0' })}
 `
@@ -30,6 +31,7 @@ export const RegisterTitle = styled.h1`
   font-size: 24px;
   font-weight: 700;
   text-align: center;
+  color: teal;
 `
 export const RegisterForm = styled.form`
   display: flex;
@@ -55,27 +57,19 @@ export const RegisterButton = styled.button`
 
   ${mobile({ padding: '10px' })}
 `
+
 export const LoginOption = styled.p`
   text-align: left;
-  color: blue;
+  color: teal;
+  text-decoration: underline;
 `
 export const LoginLink = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 30%;
-  margin: 20px 0;
-  border: none;
-  border-radius: 5px;
-  padding: 15px;
-  background-color: #ffc107e3;
-  color: black;
-  text-decoration: none;
   cursor: pointer;
+  font-size: 2rem;
+  color: teal;
 
   &:hover {
-    color: black;
+    color: #000;
   }
 
   ${mobile({ padding: '10px' })}

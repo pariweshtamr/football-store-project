@@ -83,3 +83,25 @@ export const sendEmailVerificationConfirmation = (emailObj) => {
   }
   emailProcessor(obj)
 }
+
+//send the email confirming password update
+
+export const sendPasswordUpdateNotification = (emailObj) => {
+  const { firstName } = emailObj
+
+  const obj = {
+    ...emailObj,
+    subject: 'Password update successful',
+    text: `Hi ${firstName}, Your password has been successfully updated. You can now use your new password to log in! If you did not make this change, please contact us immediately!`, // plain text body
+    html: `
+Hello ${firstName},
+<br/>
+Your password has been successfully updated. You can now use your new password to log in! If you did not make this change, please contact us immediately!
+<br/><br/>
+Thank you<br/><br/>
+Kind Regards, <br/><br/>
+--some company information--
+`, // html body
+  }
+  emailProcessor(obj)
+}

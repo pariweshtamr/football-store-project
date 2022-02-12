@@ -4,6 +4,8 @@ import {
   getUser,
   loginUser,
   logoutUser,
+  updateUserPassword,
+  updateUserProfile,
   verifyNewUser,
 } from '../../api/userAPI'
 import {
@@ -13,6 +15,8 @@ import {
   loginFail,
   loginSuccess,
   logoutSuccess,
+  passwordUpdateSuccess,
+  profileUpdateSuccess,
   requestFail,
   requestPending,
   requestSuccess,
@@ -68,34 +72,9 @@ export const userLogout = () => async (dispatch) => {
   dispatch(logoutSuccess())
 }
 
-export const autoLogin = () => async (dispatch) => {
-  dispatch(autoLoginPending(true))
-  const accessJWT = window.sessionStorage.getItem('accessJWT')
-  const refreshJWT = window.localStorage.getItem('refreshJWT')
-
-  //1. accessJWT EXISTS
-  if (accessJWT) {
-    return dispatch(loginAuto())
-  }
-
-  //2. accessJWT does not exist but refreshJWT exists
-  if (!accessJWT && refreshJWT) {
-    // CALL API to get refreshJWT
-    const result = await getNewAccessJWT()
-    console.log(result, 'from user action')
-    if (result?.accessJWT) {
-      window.sessionStorage.setItem('accessJWT', result.accessJWT)
-      return dispatch(loginAuto())
-    }
-
-    dispatch(userLogout())
-  }
-}
-
 export const fetchUserDetails = () => async (dispatch) => {
   dispatch(requestPending())
   const data = await getUser()
-  console.log(data, 'action user')
   if (data?.message === 'jwt expired') {
     // request for new accessJWT
     const token = await updateAccessJWT()
@@ -110,4 +89,61 @@ export const fetchUserDetails = () => async (dispatch) => {
     return dispatch(getUserDetailsSuccess(data.user))
   }
   dispatch(requestFail(data))
+}
+
+export const autoLogin = () => async (dispatch) => {
+  dispatch(autoLoginPending(true))
+  const accessJWT = window.sessionStorage.getItem('accessJWT')
+  const refreshJWT = window.localStorage.getItem('refreshJWT')
+
+  //1. accessJWT EXISTS
+  if (accessJWT) {
+    dispatch(fetchUserDetails())
+    dispatch(loginAuto())
+    return
+  }
+
+  //2. accessJWT does not exist but refreshJWT exists
+  if (!accessJWT && refreshJWT) {
+    // CALL API to get refreshJWT
+    const result = await getNewAccessJWT()
+    if (result?.accessJWT) {
+      window.sessionStorage.setItem('accessJWT', result.accessJWT)
+      return dispatch(loginAuto())
+    }
+
+    dispatch(userLogout())
+  }
+}
+
+export const userInfoUpdate = (userInfo) => async (dispatch) => {
+  dispatch(requestPending())
+  const data = await updateUserProfile(userInfo)
+  if (data?.message === 'jwt expired') {
+    // request for new accessJWT
+    const token = await updateAccessJWT()
+    if (token) {
+      return dispatch(userInfoUpdate(userInfo))
+    } else {
+      dispatch(userLogout())
+    }
+  }
+
+  dispatch(profileUpdateSuccess(data))
+}
+
+export const userPasswordUpdate = (passInfo) => async (dispatch) => {
+  dispatch(requestPending())
+  const data = await updateUserPassword(passInfo)
+  if (data?.message === 'jwt expired') {
+    //request for new accessJWT
+    const token = await updateAccessJWT()
+    if (token) {
+      return dispatch(userPasswordUpdate(passInfo))
+    } else {
+      dispatch(userLogout())
+    }
+  }
+
+  dispatch(passwordUpdateSuccess(data))
 }

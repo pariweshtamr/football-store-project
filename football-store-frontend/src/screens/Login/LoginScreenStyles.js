@@ -1,13 +1,11 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { mobile } from '../../responsive'
 
 export const LoginContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  background: linear-gradient(
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.1)
-  );
+
   background-size: cover;
 
   display: flex;
@@ -33,7 +31,7 @@ export const LoginWrapper = styled.div`
   padding: 20px;
   width: 40%;
   background-color: #f0f0f0;
-  opacity: 0.9;
+  opacity: 0.85;
   border-radius: 5px;
 
   ${mobile({ width: '80%' })}
@@ -65,9 +63,38 @@ export const LoginButton = styled.button`
   ${mobile({ padding: '10px' })}
 `
 
-export const Link = styled.a`
+export const ForgotPasswordLink = styled(Link)`
   margin: 5px 0;
   cursor: pointer;
-  text-decoration: underline;
-  font-size: 14px;
+  text-decoration: none;
+  font-size: 1rem;
+  color: teal;
+
+  &:hover {
+    color: #000;
+  }
+`
+export const LoginLink = styled(Link)`
+  margin: 5px 0;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  color: teal;
+
+  &:hover {
+    color: #000;
+  }
+`
+export const HomeLink = styled(Link)`
+  cursor: pointer;
+  font-size: 2rem;
+  color: teal;
+
+  margin: 20px 0;
+
+  &:hover {
+    color: #000;
+  }
+
+  ${mobile({ padding: '10px' })}
 `

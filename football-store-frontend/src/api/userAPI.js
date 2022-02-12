@@ -46,14 +46,14 @@ export const loginUser = async (info) => {
   }
 }
 
-export const getUser = async (info) => {
+export const getUser = async () => {
   try {
     const { data } = await Axios.get(userApi, {
       headers: {
         authorization: window.sessionStorage.getItem('accessJWT'),
       },
     })
-    console.log(data, 'user api')
+    console.log(data)
     return data
   } catch (error) {
     console.log(error)
@@ -70,5 +70,33 @@ export const logoutUser = async (tokens) => {
       status: 'error',
       message: 'Error, unable to process your request. Please try again later.',
     }
+  }
+}
+
+export const updateUserProfile = async (userInfo) => {
+  try {
+    const { data } = await Axios.patch(userApi, userInfo, {
+      headers: {
+        authorization: window.sessionStorage.getItem('accessJWT'),
+      },
+    })
+    return data
+  } catch (error) {
+    console.log(error)
+    return error?.response?.data
+  }
+}
+
+export const updateUserPassword = async (passInfo) => {
+  try {
+    const { data } = await Axios.post(userApi + '/password-update', passInfo, {
+      headers: {
+        authorization: window.sessionStorage.getItem('accessJWT'),
+      },
+    })
+    return data
+  } catch (error) {
+    console.log(error)
+    return error?.response?.data
   }
 }

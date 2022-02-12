@@ -5,9 +5,13 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   userFetchResponse: {},
+  userUpdateResponse: {},
   userRegisterResponse: {},
   userLoginResponse: {},
   isAutoLoginPending: false,
+  showResetPasswordForm: false,
+  resetPasswordRequestResponse: {},
+  passwordResettingEmail: {},
 }
 
 const userSlice = createSlice({
@@ -42,8 +46,16 @@ const userSlice = createSlice({
       state.isLoading = false
     },
 
-    loginAuto: (state, { payload }) => {
-      state.userInfo = payload || {}
+    profileUpdateSuccess: (state, { payload }) => {
+      state.userUpdateResponse = payload || {}
+      state.isLoading = false
+    },
+    passwordUpdateSuccess: (state, { payload }) => {
+      state.userUpdateResponse = payload || {}
+      state.isPending = false
+    },
+
+    loginAuto: (state) => {
       state.isLoggedIn = true
       state.isAutoLoginPending = false
     },
@@ -62,6 +74,16 @@ const userSlice = createSlice({
     autoLoginPending: (state, { payload }) => {
       state.isAutoLoginPending = payload
     },
+    switchLoginResetPassForm: (state) => {
+      state.showResetPasswordForm = !state.showResetPasswordForm
+    },
+
+    resetPassResponse: (state, { payload }) => {
+      state.isPending = false
+      state.resetPasswordRequestResponse = payload.data
+      state.passwordResettingEmail = payload.email
+      state.showResetPasswordForm = payload.data.status === 'success'
+    },
   },
 })
 
@@ -77,6 +99,10 @@ export const {
   logoutSuccess,
   autoLoginPending,
   getUserDetailsSuccess,
+  profileUpdateSuccess,
+  passwordUpdateSuccess,
+  resetPassResponse,
+  switchLoginResetPassForm,
 } = actions
 
 export default reducer

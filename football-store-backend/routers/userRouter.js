@@ -3,11 +3,13 @@ import { comparePassword, hashPassword } from '../helpers/bcrypt.helper.js'
 import {
   sendEmailVerificationConfirmation,
   sendEmailVerificationLink,
+  sendPasswordUpdateNotification,
 } from '../helpers/email.helper.js'
 import { getJWTs } from '../helpers/jwt.helper.js'
 import { isUser } from '../middlewares/auth.middleware.js'
 import {
   loginUserFormValidation,
+  passwordUpdateFormValidation,
   userEmailVerificationValidation,
 } from '../middlewares/formValidation.middleware.js'
 import {
@@ -21,6 +23,7 @@ import {
   getUserByUsername,
   removeRefreshJWT,
   verifyEmail,
+  updateUserProfile,
 } from '../models/User/User.model.js'
 
 const userRouter = express.Router()
@@ -183,4 +186,75 @@ userRouter.get('/', isUser, (req, res) => {
   })
 })
 
+// Update User info
+userRouter.patch('/', isUser, async (req, res) => {
+  try {
+    const { _id } = req.user
+    console.log(_id, req.body)
+
+    if (_id) {
+      const result = await updateUserProfile(_id, req.body)
+
+      if (result?._id) {
+        return res.json({
+          status: 'success',
+          message: 'Your profile has been updated successfully',
+        })
+      }
+    }
+
+    return res.json({
+      status: 'error',
+      message: 'Unable to update user information. Please try again later.',
+    })
+  } catch (error) {
+    console.log(error)
+    return res.json({
+      status: 'error',
+      message: 'Unable to update user information. Please try again later.',
+    })
+  }
+})
+
+// Update password when logged in
+userRouter.post(
+  '/password-update',
+  isUser,
+  passwordUpdateFormValidation,
+  async (req, res) => {
+    try {
+      const { _id, password, firstName, email } = req.user
+      const { currentPassword } = req.body
+      console.log(req.user, req.body)
+      //make sure the current password matches the onse in the database
+      const passMatched = comparePassword(currentPassword, password)
+      if (passMatched) {
+        // if matched, then encrypt the new password and store in db
+        const hashedPass = hashPassword(req.body.password)
+        if (hashedPass) {
+          //update user table
+          const user = await updateUserProfile(_id, { password: hashedPass })
+          if (user._id) {
+            res.json({
+              status: 'success',
+              message: 'Password updated successfully',
+            })
+            // send email notification
+            sendPasswordUpdateNotification({ firstName, email })
+            return
+          }
+        }
+      }
+      res.json({
+        status: 'error',
+        message: 'Unable to update password. Please try again later.',
+      })
+    } catch (error) {
+      res.json({
+        status: 'error',
+        message: 'Error, unable to process your request.',
+      })
+    }
+  },
+)
 export default userRouter

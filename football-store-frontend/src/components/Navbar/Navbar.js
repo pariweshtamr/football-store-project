@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   Left,
   LogoLink,
@@ -14,12 +14,16 @@ import {
 import { Badge } from '@material-ui/core'
 import { ShoppingCartOutlined } from '@material-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { userLogout } from '../../redux/User/UserAction'
+import { autoLogin, userLogout } from '../../redux/User/UserAction'
 
 const Navbar = () => {
   const { cartItems } = useSelector((state) => state.cart)
   const { isLoggedIn, userInfo } = useSelector((state) => state.user)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    !userInfo._id && dispatch(autoLogin())
+  }, [userInfo._id, dispatch])
 
   const signoutHandler = () => {
     dispatch(userLogout())

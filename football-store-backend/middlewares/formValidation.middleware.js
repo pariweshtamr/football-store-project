@@ -73,19 +73,47 @@ export const loginUserFormValidation = (req, res, next) => {
   }
 }
 
-export const newCategoryValidation = (req, res, next) => {
-  const schema = Joi.object({
-    name: plainShortStr,
-    parentCategory: shortStrNull,
-  })
-
-  const value = schema.validate(req.body)
-
-  if (value.error) {
-    return res.json({
+export const passwordUpdateFormValidation = (req, res, next) => {
+  try {
+    const schema = Joi.object({
+      currentPassword: password,
+      password: password,
+    })
+    const { error } = schema.validate(req.body)
+    if (error) {
+      return res.json({
+        status: 'error',
+        message: error.message,
+      })
+    }
+    next()
+  } catch (error) {
+    res.json({
       status: 'error',
-      message: value.error.message,
+      message: 'Error, Unable to process your request. Please try again later.',
     })
   }
-  next()
+}
+
+export const forgotPasswordResetFormValidation = (req, res, next) => {
+  try {
+    const schema = Joi.object({
+      otp: shortstr,
+      email: email,
+      password: password,
+    })
+    const { error } = schema.validate(req.body)
+    if (error) {
+      return res.json({
+        status: 'error',
+        message: error.message,
+      })
+    }
+    next()
+  } catch (error) {
+    res.json({
+      status: 'error',
+      message: 'Error, Unable to process your request. Please try again later.',
+    })
+  }
 }

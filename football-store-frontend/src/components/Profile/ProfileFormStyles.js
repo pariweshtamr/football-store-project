@@ -2,17 +2,11 @@ import styled from 'styled-components'
 import { mobile } from '../../responsive'
 
 export const ProfileFormContainer = styled.div`
-  width: 100vw;
+  /* width: 100vw; */
   height: 100%;
-  /* background-image: linear-gradient(
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.1)
-    ),
-    url('../../assets/profileWallpaper.jpg'); */
-  background-size: cover;
   display: flex;
   align-items: Flex-start;
-  padding: 4rem;
+  padding: 2rem;
   justify-content: flex-start;
 
   ${mobile({ height: '100%' })}
@@ -21,11 +15,12 @@ export const FormTitle = styled.h1`
   font-size: 24px;
   font-weight: 700;
   text-align: center;
+  color: teal;
 `
 export const ProfileFormWrapper = styled.form`
   padding: 20px;
-  width: 40%;
-  background-color: #f0f0f0;
+  width: 30rem;
+  background-color: #f8f8f8;
   opacity: 0.9;
   border-radius: 5px;
 

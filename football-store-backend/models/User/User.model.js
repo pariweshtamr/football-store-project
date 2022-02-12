@@ -11,6 +11,15 @@ export const createUser = (newUser) => {
   }
 }
 
+export const updateUserProfile = (_id, updateUser) => {
+  try {
+    const result = User.findByIdAndUpdate(_id, updateUser, { new: true })
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 export const verifyEmail = (email) => {
   try {
     return User.findOneAndUpdate(
