@@ -1,5 +1,5 @@
 import {
-  addProductToCartSuccess,
+  addProductToCart,
   removeProductFromCartSuccess,
   addProductToCartFail,
 } from './CartSlice'
@@ -9,7 +9,7 @@ export const addToCart = (_id, qty, size) => async (dispatch, getState) => {
   const data = await addToCartById(_id, qty, size)
   if (data) {
     dispatch(
-      addProductToCartSuccess({
+      addProductToCart({
         name: data.name,
         image: data.image,
         price: data.price,
@@ -19,13 +19,13 @@ export const addToCart = (_id, qty, size) => async (dispatch, getState) => {
         qty,
       }),
     )
-    localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+    localStorage.setItem('products', JSON.stringify(getState().cart.products))
     return
   }
   dispatch(addProductToCartFail(data))
 }
 
 export const removeFromCart = (_id) => (dispatch, getState) => {
-  dispatch(removeProductFromCartSuccess(_id))
-  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
+  //   dispatch(removeProductFromCartSuccess(_id))
+  localStorage.setItem('products', JSON.stringify(getState().cart.products))
 }

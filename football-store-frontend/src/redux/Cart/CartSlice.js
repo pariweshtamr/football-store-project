@@ -1,38 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  cartItems: localStorage.getItem('cartItems')
-    ? JSON.parse(localStorage.getItem('cartItems'))
-    : [],
+  products: [],
+  quantity: 0,
+  total: 0,
 }
 
 const cartSlice = createSlice({
   name: 'cartSlice',
   initialState,
   reducers: {
-    addProductToCartSuccess: (state, { payload }) => {
-      const item = payload
-      const existItem = state.cartItems.find((x) => x.product === item.product)
-
-      if (existItem) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.product === existItem.product ? item : x,
-          ),
-        }
-      } else {
-        return { ...state, cartItems: [...state.cartItems, item] }
-      }
+    addProductToCart: (state, { payload }) => {
+      state.quantity += 1
+      state.products.push(payload)
+      state.total += payload.price * payload.qty
     },
-
-    removeProductFromCartSuccess: (state, { payload }) => {
-      return {
-        ...state,
-        cartItems: state.cartItems.filter((x) => x.product !== payload),
-      }
-    },
-
     addProductToCartFail: (state, { payload }) => {
       state.cartResponse = payload
     },
@@ -40,10 +22,6 @@ const cartSlice = createSlice({
 })
 
 const { reducer, actions } = cartSlice
-export const {
-  addProductToCartSuccess,
-  removeProductFromCartSuccess,
-  addProductToCartFail,
-} = actions
+export const { addProductToCart, addProductToCartFail } = actions
 
 export default reducer

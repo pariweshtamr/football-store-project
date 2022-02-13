@@ -53,7 +53,6 @@ export const getUser = async () => {
         authorization: window.sessionStorage.getItem('accessJWT'),
       },
     })
-    console.log(data)
     return data
   } catch (error) {
     console.log(error)

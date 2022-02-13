@@ -17,7 +17,7 @@ const UserProfileScreen = () => {
   const { userInfo } = useSelector((state) => state.user)
 
   useEffect(() => {
-    !userInfo._id && dispatch(fetchUserDetails())
+    !userInfo && dispatch(fetchUserDetails())
   }, [dispatch, userInfo])
 
   return (

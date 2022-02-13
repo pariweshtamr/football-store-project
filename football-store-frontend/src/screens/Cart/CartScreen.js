@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   CartBottom,
@@ -38,27 +38,32 @@ import {
   HrMain,
   TopText,
 } from './CartScreenStyles'
-import { addToCart, removeFromCart } from '../../redux/Cart/CartAction'
+import { removeFromCart } from '../../redux/Cart/CartAction'
 import MessageBox from '../../components/MessageBox/MessageBox'
 import Announcement from '../../components/Announcement/Announcement'
+import { Add, Remove } from '@material-ui/icons'
 
 const CartScreen = () => {
   const { id } = useParams()
-  const location = useLocation()
   const dispatch = useDispatch()
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
+  const navigate = useNavigate()
 
-  const { cartItems } = useSelector((state) => state.cart)
+  const { products } = useSelector((state) => state.cart)
+  const { isLoggedIn } = useSelector((state) => state.user)
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
   }
 
-  useEffect(() => {
-    if (id) {
-      dispatch(addToCart(id, qty))
+  const checkoutHandler = () => {
+    if (!isLoggedIn) {
+      alert('Please log in to continue')
+      navigate('/login', { replace: true })
+    } else {
+      alert('go to checkout page')
     }
-  }, [dispatch, id, qty])
+    return
+  }
 
   return (
     <CartContainer>
@@ -73,19 +78,19 @@ const CartScreen = () => {
             <CartTopButton>CONTINUE SHOPPING</CartTopButton>
           </Link>
           <CartTopTexts>
-            <TopText>Shopping Bag({cartItems.length})</TopText>
+            <TopText>Shopping Bag({products.length})</TopText>
           </CartTopTexts>
         </CartTop>
 
-        {cartItems.length === 0 ? (
+        {products.length === 0 ? (
           <MessageBox>
             Cart is empty. <ShopLink to="/products">Go to Shop</ShopLink>
           </MessageBox>
         ) : (
           <CartBottom>
             <CartProductInfo>
-              {cartItems.map((item) => (
-                <div key={item.product}>
+              {products.map((item) => (
+                <div key={item._id}>
                   <CartProduct>
                     <CartProductDetails>
                       <CartProductImage src={item.image} alt={item.name} />
@@ -93,7 +98,7 @@ const CartScreen = () => {
                       <CartProductDescription>
                         <CartProductName>
                           <b>Product:</b>{' '}
-                          <ProductLink to={`/product/${item.product}`}>
+                          <ProductLink to={`/product/${item._id}`}>
                             {item.name}
                           </ProductLink>
                         </CartProductName>
@@ -101,31 +106,14 @@ const CartScreen = () => {
 
                       <CartPriceDetail>
                         <CartProductAmountContainer>
-                          <CartProductInfoTitle>Qty:</CartProductInfoTitle>
-                          <CartProductQty
-                            value={item.qty}
-                            onChange={(e) =>
-                              dispatch(
-                                addToCart(item.product, Number(e.target.value)),
-                              )
-                            }
-                          >
-                            {[...Array(item.inStock).keys()].map((x) => (
-                              <FilterCartQtyOption value={x + 1} key={x}>
-                                {x + 1}
-                              </FilterCartQtyOption>
-                            ))}
-                          </CartProductQty>
-                          <CartProductInfoTitle>Size:</CartProductInfoTitle>
-                          <CartProductSize>
-                            {/* {item.size.map((s) => (
-                              <FilterCartSizeOption key={s}>
-                                {s}
-                              </FilterCartSizeOption>
-                            ))} */}
-                          </CartProductSize>
+                          <Remove />
+                          <CartProductQty>{item.qty}</CartProductQty>
+                          <Add />
+                          <CartProductSize>{item.size}</CartProductSize>
                         </CartProductAmountContainer>
-                        <CartProductPrice>${item.price}</CartProductPrice>
+                        <CartProductPrice>
+                          ${item.price * item.qty}
+                        </CartProductPrice>
                       </CartPriceDetail>
 
                       <CartActionButton>
@@ -147,11 +135,10 @@ const CartScreen = () => {
               <CartSummaryTitle>ORDER SUMMARY</CartSummaryTitle>
               <CartSummaryItem>
                 <CartSummaryItemText>
-                  Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} item(s))
-                  :{' '}
+                  Subtotal ({products.reduce((a, c) => a + c.qty, 0)} item(s)) :{' '}
                 </CartSummaryItemText>
                 <CartSummaryItemPrice>
-                  ${cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                  ${products.reduce((a, c) => a + c.price * c.qty, 0)}
                 </CartSummaryItemPrice>
               </CartSummaryItem>
               <CartSummaryItem>
@@ -162,7 +149,7 @@ const CartScreen = () => {
                 <CartSummaryItemText>Discount: </CartSummaryItemText>
                 <CartSummaryItemDiscount variant="danger">
                   $
-                  {cartItems.reduce((a, c) => a + c.price * c.qty, 0) > 250
+                  {products.reduce((a, c) => a + c.price * c.qty, 0) > 250
                     ? 4.99
                     : 0.0}
                 </CartSummaryItemDiscount>
@@ -172,7 +159,9 @@ const CartScreen = () => {
                 <CartSummaryItemPrice>$$$</CartSummaryItemPrice>
               </CartSummaryItem>
 
-              <CartSummaryButton>PROCEED TO CHECKOUT</CartSummaryButton>
+              <CartSummaryButton onClick={checkoutHandler}>
+                PROCEED TO CHECKOUT
+              </CartSummaryButton>
             </CartSummary>
           </CartBottom>
         )}

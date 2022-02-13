@@ -93,7 +93,7 @@ export const CartProductAmountContainer = styled.div`
   align-items: center;
   margin-bottom: 20px;
 `
-export const CartProductQty = styled.select`
+export const CartProductQty = styled.span`
   font-size: 24px;
   margin: 10px;
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import LoadingBox from '../../components/LoadingBox/LoadingBox'
 import MessageBox from '../../components/MessageBox/MessageBox'
-import { autoLogin, userLogin } from '../../redux/User/UserAction'
+import { userLogin } from '../../redux/User/UserAction'
 import {
   Back,
   ExternalLink,
@@ -30,7 +30,7 @@ const LoginScreen = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const { userInfo, isLoggedIn, isLoading, userLoginResponse } = useSelector(
+  const { isLoggedIn, isLoading, userLoginResponse } = useSelector(
     (state) => state.user,
   )
   const [loginInfo, setLoginInfo] = useState(initialState)
@@ -38,10 +38,8 @@ const LoginScreen = () => {
   const from = location?.state?.from?.pathname || '/'
 
   useEffect(() => {
-    !userInfo._id && dispatch(autoLogin())
-
     isLoggedIn && navigate(from)
-  }, [isLoggedIn, userInfo, dispatch, navigate, from])
+  }, [isLoggedIn, dispatch, navigate, from])
 
   const handleOnChange = (e) => {
     const { name, value } = e.target

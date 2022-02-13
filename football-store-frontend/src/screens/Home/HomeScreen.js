@@ -11,11 +11,8 @@ const HomeScreen = () => {
   const navigate = useNavigate()
   const { isLoggedIn } = useSelector((state) => state.user)
 
-  // const accessJWT = window.sessionStorage.getItem('accessJWT')
-  // const refreshJWT = window.localStorage.getItem('refreshJWT')
-
   useEffect(() => {
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       dispatch(autoLogin())
     }
 

@@ -19,12 +19,14 @@ import {
   SizeContainer,
   Quantity,
   Size,
-  Option,
   Unavailable,
   FilterSizeOption,
+  Hr,
 } from './ProductScreenStyles'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchAProductById } from '../../redux/Product/ProductAction'
+import { Add, Remove } from '@material-ui/icons'
+import { addProductToCart } from '../../redux/Cart/CartSlice'
 
 const ProductScreen = () => {
   const dispatch = useDispatch()
@@ -37,16 +39,37 @@ const ProductScreen = () => {
     (state) => state.product,
   )
 
+  // const addToCartHandler = () => {
+  //   navigate(`/cart/${id}?qty=${qty}`)
+  // }
+
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qty=${qty}`)
+    dispatch(
+      addProductToCart({
+        ...selectedProduct,
+        qty,
+        size,
+      }),
+    )
   }
 
   useEffect(() => {
     dispatch(fetchAProductById(id))
   }, [dispatch, id])
 
+  const handleQuantity = (type) => {
+    if (type === 'decrease') {
+      qty > 1 && setQty(qty - 1)
+    } else {
+      qty < selectedProduct.inStock && setQty(qty + 1)
+    }
+  }
+
   return (
     <>
+      <Hr>
+        <hr />
+      </Hr>
       {isLoading ? (
         <LoadingBox />
       ) : productResponse.message ? (
@@ -70,28 +93,19 @@ const ProductScreen = () => {
               {selectedProduct.inStock > 0 ? (
                 <AddContainer>
                   <QtyContainer>
-                    Qty:
-                    <Quantity
-                      value={qty}
-                      onChange={(e) => setQty(e.target.value)}
-                    >
-                      {[...Array(selectedProduct.inStock).keys()].map((x) => (
-                        <Option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </Option>
-                      ))}
-                    </Quantity>
+                    <Remove onClick={() => handleQuantity('decrease')} />
+                    <Quantity>{qty}</Quantity>
+                    <Add onClick={() => handleQuantity('increase')} />
                   </QtyContainer>
+
                   <SizeContainer>
-                    Size:
+                    Size
                     <Size
                       value={size}
                       onChange={(e) => setSize(e.target.value)}
                     >
-                      {selectedProduct.size.map((s) => (
-                        <FilterSizeOption key={s} value={s}>
-                          {s}
-                        </FilterSizeOption>
+                      {selectedProduct.size?.map((s) => (
+                        <FilterSizeOption key={s}>{s}</FilterSizeOption>
                       ))}
                     </Size>
                   </SizeContainer>
