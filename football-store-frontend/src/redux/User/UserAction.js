@@ -135,6 +135,7 @@ export const userInfoUpdate = (userInfo) => async (dispatch) => {
 export const userPasswordUpdate = (passInfo) => async (dispatch) => {
   dispatch(requestPending())
   const data = await updateUserPassword(passInfo)
+  console.log(data)
   if (data?.message === 'jwt expired') {
     //request for new accessJWT
     const token = await updateAccessJWT()

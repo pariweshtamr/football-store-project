@@ -12,6 +12,7 @@ import ProductScreen from './screens/Product/ProductScreen'
 import CartScreen from './screens/Cart/CartScreen'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import UserProfileScreen from './screens/UserProfile/UserProfileScreen'
+import PaymentSuccessScreen from './screens/PaymentSuccess/PaymentSuccessScreen'
 
 function App() {
   return (
@@ -25,6 +26,14 @@ function App() {
           element={
             <PrivateRoute>
               <UserProfileScreen />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/paymentSuccess"
+          element={
+            <PrivateRoute>
+              <PaymentSuccessScreen />
             </PrivateRoute>
           }
         ></Route>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -42,28 +42,55 @@ import { removeFromCart } from '../../redux/Cart/CartAction'
 import MessageBox from '../../components/MessageBox/MessageBox'
 import Announcement from '../../components/Announcement/Announcement'
 import { Add, Remove } from '@material-ui/icons'
+import StripeCheckout from 'react-stripe-checkout'
+import Axios from 'axios'
+
+const KEY = process.env.REACT_APP_STRIPE
 
 const CartScreen = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { products } = useSelector((state) => state.cart)
+  const [stripeToken, setStripeToken] = useState(null)
+
+  const cart = useSelector((state) => state.cart)
+
   const { isLoggedIn } = useSelector((state) => state.user)
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
   }
 
-  const checkoutHandler = () => {
-    if (!isLoggedIn) {
-      alert('Please log in to continue')
-      navigate('/login', { replace: true })
-    } else {
-      alert('go to checkout page')
-    }
-    return
+  // const checkoutHandler = () => {
+  //   if (!isLoggedIn) {
+  //     alert('Please log in to continue')
+  //     navigate('/login', { replace: true })
+  //   } else {
+  //     alert('go to checkout page')
+  //   }
+  //   return
+  // }
+
+  const onToken = (token) => {
+    setStripeToken(token)
   }
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await Axios.post(
+          'http://localhost:8000/api/v1/checkout/payment',
+          {
+            tokenId: stripeToken.id,
+            amount: cart.total * 100,
+          },
+        )
+        navigate('/paymentSuccess', { data: res.data })
+      } catch (error) {}
+    }
+    stripeToken && cart.total >= 1 && makeRequest()
+  }, [stripeToken, cart.total, navigate])
 
   return (
     <CartContainer>
@@ -78,18 +105,18 @@ const CartScreen = () => {
             <CartTopButton>CONTINUE SHOPPING</CartTopButton>
           </Link>
           <CartTopTexts>
-            <TopText>Shopping Bag({products.length})</TopText>
+            <TopText>Shopping Bag({cart.products.length})</TopText>
           </CartTopTexts>
         </CartTop>
 
-        {products.length === 0 ? (
+        {cart.products.length === 0 ? (
           <MessageBox>
             Cart is empty. <ShopLink to="/products">Go to Shop</ShopLink>
           </MessageBox>
         ) : (
           <CartBottom>
             <CartProductInfo>
-              {products.map((item) => (
+              {cart.products.map((item) => (
                 <div key={item._id}>
                   <CartProduct>
                     <CartProductDetails>
@@ -119,7 +146,7 @@ const CartScreen = () => {
                       <CartActionButton>
                         <RemoveButton
                           type="button"
-                          onClick={() => removeFromCartHandler(item.product)}
+                          onClick={() => removeFromCartHandler(item._id)}
                         >
                           REMOVE
                         </RemoveButton>
@@ -135,33 +162,37 @@ const CartScreen = () => {
               <CartSummaryTitle>ORDER SUMMARY</CartSummaryTitle>
               <CartSummaryItem>
                 <CartSummaryItemText>
-                  Subtotal ({products.reduce((a, c) => a + c.qty, 0)} item(s)) :{' '}
+                  Subtotal ({cart.products.reduce((a, c) => a + c.qty, 0)}{' '}
+                  item(s)) :
                 </CartSummaryItemText>
-                <CartSummaryItemPrice>
-                  ${products.reduce((a, c) => a + c.price * c.qty, 0)}
-                </CartSummaryItemPrice>
+                <CartSummaryItemPrice>${cart.total}</CartSummaryItemPrice>
               </CartSummaryItem>
               <CartSummaryItem>
                 <CartSummaryItemText>Shipping: </CartSummaryItemText>
-                <CartSummaryItemPrice>$4.99</CartSummaryItemPrice>
+                <CartSummaryItemPrice>$ 14.99</CartSummaryItemPrice>
               </CartSummaryItem>
               <CartSummaryItem>
                 <CartSummaryItemText>Discount: </CartSummaryItemText>
                 <CartSummaryItemDiscount variant="danger">
-                  $
-                  {products.reduce((a, c) => a + c.price * c.qty, 0) > 250
-                    ? 4.99
-                    : 0.0}
+                  ${cart.total > 250 ? -14.99 : 0.0}
                 </CartSummaryItemDiscount>
               </CartSummaryItem>
               <CartSummaryItem type="total">
                 <CartSummaryItemText>Total</CartSummaryItemText>
-                <CartSummaryItemPrice>$$$</CartSummaryItemPrice>
+                <CartSummaryItemPrice>${cart.total}</CartSummaryItemPrice>
               </CartSummaryItem>
 
-              <CartSummaryButton onClick={checkoutHandler}>
-                PROCEED TO CHECKOUT
-              </CartSummaryButton>
+              <StripeCheckout
+                name="Soccer Boot Store"
+                billingAddress
+                shippingAddress
+                description={`Your total is $${cart.total}`}
+                amount={cart.total * 100}
+                token={onToken}
+                stripeKey={KEY}
+              >
+                <CartSummaryButton>PROCEED TO CHECKOUT</CartSummaryButton>
+              </StripeCheckout>
             </CartSummary>
           </CartBottom>
         )}

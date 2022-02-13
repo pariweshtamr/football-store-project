@@ -24,7 +24,7 @@ export const isUser = async (req, res, next) => {
 
         if (user?.isAdmin === false) {
           req.user = user
-          req.user.password = undefined
+          // req.user.password = undefined
           // req.user.refreshJWT = undefined;
 
           next()

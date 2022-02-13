@@ -179,6 +179,8 @@ userRouter.post('/logout', async (req, res) => {
 
 // Get user info
 userRouter.get('/', isUser, (req, res) => {
+  req.user.password = undefined
+  req.user.refreshJWT = undefined
   res.json({
     statur: 'success',
     message: 'User Profile',
@@ -225,7 +227,7 @@ userRouter.post(
     try {
       const { _id, password, firstName, email } = req.user
       const { currentPassword } = req.body
-      console.log(req.user, req.body)
+      console.log(req.body)
       //make sure the current password matches the onse in the database
       const passMatched = comparePassword(currentPassword, password)
       if (passMatched) {

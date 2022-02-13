@@ -77,7 +77,7 @@ export const passwordUpdateFormValidation = (req, res, next) => {
   try {
     const schema = Joi.object({
       currentPassword: password,
-      password: password,
+      password,
     })
     const { error } = schema.validate(req.body)
     if (error) {

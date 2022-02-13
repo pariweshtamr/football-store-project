@@ -160,8 +160,9 @@ export const PasswordForm = () => {
 
   const { isLoading, userUpdateResponse } = useSelector((state) => state.user)
 
-  const submitHandler = (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault()
+    console.log(updatePassword)
     const { currentPassword, password } = updatePassword
     dispatch(userPasswordUpdate({ currentPassword, password }))
   }
@@ -206,7 +207,7 @@ export const PasswordForm = () => {
   return (
     <>
       <ProfileFormContainer>
-        <ProfileFormWrapper onSubmit={submitHandler}>
+        <ProfileFormWrapper onSubmit={handleOnSubmit}>
           <FormTitle>Update Password</FormTitle>
           <hr />
           {isLoading && <LoadingBox />}

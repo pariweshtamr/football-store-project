@@ -100,7 +100,7 @@ Your password has been successfully updated. You can now use your new password t
 <br/><br/>
 Thank you<br/><br/>
 Kind Regards, <br/><br/>
---some company information--
+Soccer Boot Store.
 `, // html body
   }
   emailProcessor(obj)
