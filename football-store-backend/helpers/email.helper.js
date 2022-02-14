@@ -105,3 +105,26 @@ Soccer Boot Store.
   }
   emailProcessor(obj)
 }
+
+//send email with otp to client
+
+export const sendPasswordResetOtp = (emailObj) => {
+  const { firstName, otp } = emailObj
+
+  const obj = {
+    ...emailObj,
+    subject: 'Password reset request',
+    text: `Hi ${firstName}, please use the following OTP to reset your password. ${otp}. The OTP will expire in 10 minutes. `, // plain text body
+    html: `
+Hello ${firstName},
+<br/><br/>
+please use the following OTP to reset your password.
+<br/><br/>${otp} 
+<br/><br/>The OTP will expire in 10 minutes.<br/><br/>
+Thank you<br/><br/>
+Kind Regards, <br/><br/>
+Soccer Boot Store.
+`, // html body
+  }
+  emailProcessor(obj)
+}

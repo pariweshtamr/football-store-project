@@ -35,3 +35,20 @@ export const updateAccessJWT = async () => {
     return false
   }
 }
+
+export const requestOTP = async (email) => {
+  try {
+    if (!email) {
+      return false
+    }
+
+    const { data } = await Axios.post(tokenApi + '/request-otp', { email })
+    return data
+  } catch (error) {
+    console.log(error)
+    return {
+      status: 'error',
+      message: error.message,
+    }
+  }
+}

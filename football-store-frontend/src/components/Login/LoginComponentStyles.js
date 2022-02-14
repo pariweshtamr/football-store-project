@@ -39,6 +39,8 @@ export const LoginWrapper = styled.div`
 export const LoginTitle = styled.h1`
   font-size: 24px;
   font-weight: 700;
+  display: flex;
+  justify-content: center;
 `
 export const LoginForm = styled.form`
   display: flex;

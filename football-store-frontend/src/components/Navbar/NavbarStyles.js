@@ -80,6 +80,14 @@ export const MenuLink = styled(Link)`
     color: #000;
   }
 `
+export const ProfileLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+
+  &:hover {
+    color: teal;
+  }
+`
 
 export const Links = styled.div`
   display: flex;

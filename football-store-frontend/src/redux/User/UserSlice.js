@@ -9,7 +9,7 @@ const initialState = {
   userRegisterResponse: {},
   userLoginResponse: {},
   isAutoLoginPending: false,
-  showResetPasswordForm: false,
+  showResetPassForm: false,
   resetPasswordRequestResponse: {},
   passwordResettingEmail: {},
 }
@@ -74,15 +74,16 @@ const userSlice = createSlice({
     autoLoginPending: (state, { payload }) => {
       state.isAutoLoginPending = payload
     },
-    switchLoginResetPassForm: (state) => {
-      state.showResetPasswordForm = !state.showResetPasswordForm
+
+    switchResetPassForm: (state) => {
+      state.showResetPassForm = !state.showResetPassForm
     },
 
     resetPassResponse: (state, { payload }) => {
-      state.isPending = false
+      state.isLoading = false
       state.resetPasswordRequestResponse = payload.data
       state.passwordResettingEmail = payload.email
-      state.showResetPasswordForm = payload.data.status === 'success'
+      state.showResetPassForm = payload.data.status === 'success'
     },
   },
 })
@@ -102,7 +103,7 @@ export const {
   profileUpdateSuccess,
   passwordUpdateSuccess,
   resetPassResponse,
-  switchLoginResetPassForm,
+  switchResetPassForm,
 } = actions
 
 export default reducer

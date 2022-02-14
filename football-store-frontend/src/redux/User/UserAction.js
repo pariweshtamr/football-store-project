@@ -1,4 +1,8 @@
-import { getNewAccessJWT, updateAccessJWT } from '../../api/tokenAPI'
+import {
+  getNewAccessJWT,
+  requestOTP,
+  updateAccessJWT,
+} from '../../api/tokenAPI'
 import {
   createUser,
   getUser,
@@ -20,6 +24,7 @@ import {
   requestFail,
   requestPending,
   requestSuccess,
+  resetPassResponse,
 } from './UserSlice'
 
 export const userRegister = (newUser) => async (dispatch) => {
@@ -135,7 +140,6 @@ export const userInfoUpdate = (userInfo) => async (dispatch) => {
 export const userPasswordUpdate = (passInfo) => async (dispatch) => {
   dispatch(requestPending())
   const data = await updateUserPassword(passInfo)
-  console.log(data)
   if (data?.message === 'jwt expired') {
     //request for new accessJWT
     const token = await updateAccessJWT()
@@ -147,4 +151,11 @@ export const userPasswordUpdate = (passInfo) => async (dispatch) => {
   }
 
   dispatch(passwordUpdateSuccess(data))
+}
+
+export const requestPasswordResetOtp = (email) => async (dispatch) => {
+  dispatch(requestPending())
+  const data = await requestOTP(email)
+
+  dispatch(resetPassResponse({ data, email }))
 }

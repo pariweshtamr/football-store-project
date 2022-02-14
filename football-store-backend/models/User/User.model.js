@@ -45,6 +45,9 @@ export const getUserById = (id) => {
 export const getUserByUsername = (username) => {
   return User.findOne({ username })
 }
+export const getUserByEmail = (email) => {
+  return User.findOne({ email })
+}
 
 export const getUserByUsernameAndRefreshToken = (filter) => {
   return User.findOne(filter)

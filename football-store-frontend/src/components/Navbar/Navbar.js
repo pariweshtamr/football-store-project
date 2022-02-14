@@ -10,12 +10,12 @@ import {
   Right,
   UserGreet,
   Welcome,
+  ProfileLink,
 } from './NavbarStyles'
 import { Badge } from '@material-ui/core'
 import { ShoppingCartOutlined } from '@material-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { autoLogin, userLogout } from '../../redux/User/UserAction'
-import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const { quantity } = useSelector((state) => state.cart)
@@ -43,7 +43,8 @@ const Navbar = () => {
             {isLoggedIn ? (
               <Welcome>
                 <UserGreet>
-                  Hi, <Link to="/profile">{userInfo.firstName}</Link>
+                  Hi,{' '}
+                  <ProfileLink to="/profile">{userInfo.firstName}</ProfileLink>
                 </UserGreet>
                 <MenuLink to="/" onClick={signoutHandler}>
                   SIGN OUT

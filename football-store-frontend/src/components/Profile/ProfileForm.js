@@ -162,7 +162,7 @@ export const PasswordForm = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
-    console.log(updatePassword)
+
     const { currentPassword, password } = updatePassword
     dispatch(userPasswordUpdate({ currentPassword, password }))
   }

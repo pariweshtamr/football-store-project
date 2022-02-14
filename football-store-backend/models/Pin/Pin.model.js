@@ -26,6 +26,30 @@ export const createUniqueEmailConfirmation = async (email) => {
   }
 }
 
+export const createUniqueOtp = async ({ email, type }) => {
+  try {
+    // generate random 6 digit numbers
+    const pin = RandomNumberGenerator(pinLength)
+
+    if (!pin || !email) {
+      return false
+    }
+
+    const newOtp = {
+      pin,
+      email,
+      type,
+    }
+
+    // store pin with email in pin table
+
+    const result = await Pin(newOtp).save()
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 export const findUserEmailVerification = async (filterObj) => {
   try {
     const result = await Pin.findOne(filterObj) //{pin, email}
