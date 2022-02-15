@@ -20,6 +20,17 @@ export const updateUserProfile = (_id, updateUser) => {
   }
 }
 
+export const updateUserProfileByEmail = (email, updateUser) => {
+  try {
+    const result = User.findOneAndUpdate({ email }, updateUser, {
+      new: true,
+    })
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 export const verifyEmail = (email) => {
   try {
     return User.findOneAndUpdate(

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { mobile } from '../../responsive'
 
@@ -54,4 +55,24 @@ export const ResetPassButton = styled.button`
   cursor: pointer;
 
   ${mobile({ padding: '10px' })}
+`
+
+export const LoginLink = styled(Link)`
+  margin: 5px 0;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  color: teal;
+
+  &:hover {
+    color: #000;
+  }
+`
+export const Login = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const ExternalLink = styled.div`
+  display: flex;
+  flex-direction: column;
 `

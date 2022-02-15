@@ -52,7 +52,7 @@ export const createUniqueOtp = async ({ email, type }) => {
 
 export const findUserEmailVerification = async (filterObj) => {
   try {
-    const result = await Pin.findOne(filterObj) //{pin, email}
+    const result = await Pin.findOne({ filterObj }) //{pin, email}
     return result
 
     // store pin with email in Pin table

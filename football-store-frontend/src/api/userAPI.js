@@ -100,3 +100,16 @@ export const updateUserPassword = async (passInfo) => {
     return error?.response?.data
   }
 }
+
+export const resetForgotPassword = async (passInfo) => {
+  try {
+    const { data } = await Axios.post(userApi + '/reset-password', passInfo)
+    return data
+  } catch (error) {
+    console.log(error)
+    return {
+      status: 'error',
+      message: error.message,
+    }
+  }
+}

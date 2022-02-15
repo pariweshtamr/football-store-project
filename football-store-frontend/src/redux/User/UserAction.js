@@ -8,6 +8,7 @@ import {
   getUser,
   loginUser,
   logoutUser,
+  resetForgotPassword,
   updateUserPassword,
   updateUserProfile,
   verifyNewUser,
@@ -158,4 +159,11 @@ export const requestPasswordResetOtp = (email) => async (dispatch) => {
   const data = await requestOTP(email)
 
   dispatch(resetPassResponse({ data, email }))
+}
+
+export const resetPasswordAction = (passObj) => async (dispatch) => {
+  dispatch(requestPending())
+  const data = await resetForgotPassword(passObj)
+
+  dispatch(resetPassResponse({ data }))
 }

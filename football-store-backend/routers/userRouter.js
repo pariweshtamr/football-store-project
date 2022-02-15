@@ -8,6 +8,7 @@ import {
 import { getJWTs } from '../helpers/jwt.helper.js'
 import { isUser } from '../middlewares/auth.middleware.js'
 import {
+  forgotPasswordResetFormValidation,
   loginUserFormValidation,
   passwordUpdateFormValidation,
   userEmailVerificationValidation,
@@ -24,6 +25,7 @@ import {
   removeRefreshJWT,
   verifyEmail,
   updateUserProfile,
+  updateUserProfileByEmail,
 } from '../models/User/User.model.js'
 
 const userRouter = express.Router()
@@ -250,6 +252,54 @@ userRouter.post(
       res.json({
         status: 'error',
         message: 'Unable to update password. Please try again later.',
+      })
+    } catch (error) {
+      res.json({
+        status: 'error',
+        message: 'Error, unable to process your request.',
+      })
+    }
+  },
+)
+
+// reset forgotten password when logged out
+userRouter.post(
+  '/reset-password',
+  forgotPasswordResetFormValidation,
+  async (req, res) => {
+    try {
+      const { otp, password, firstName, email } = req.body
+
+      //validate if otp and email exists in db
+      const filter = { pin: otp, email }
+      const hasOtp = await findUserEmailVerification(filter)
+
+      if (hasOtp?._id) {
+        // encrypt new password coming from frontend
+        const hashPass = hashPassword(password)
+        if (hashPass) {
+          //update user table with the new password
+          const user = await updateUserProfileByEmail(email, {
+            password: hashPass,
+          })
+          if (user._id) {
+            res.json({
+              status: 'success',
+              message: 'Password updated successfully',
+            })
+            // send email notification
+            sendPasswordUpdateNotification({ email })
+
+            //don't forget to delete the otp set from db
+            deleteInfo(filter)
+
+            return
+          }
+        }
+      }
+      res.json({
+        status: 'error',
+        message: 'Unable to reset password. Please try again later.',
       })
     } catch (error) {
       res.json({

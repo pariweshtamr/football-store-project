@@ -19,11 +19,10 @@ import {
   HomeLink,
 } from './LoginComponentStyles'
 import loginWallpaper from '../../assets/loginWallpaper.jpg'
-import { switchResetPassForm } from '../../redux/User/UserSlice'
 
 const initialState = {
   username: 'pariwesh7',
-  password: 'C.ronaldo7',
+  password: '',
 }
 
 const LoginComponent = () => {
@@ -31,12 +30,9 @@ const LoginComponent = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const {
-    isLoggedIn,
-    isLoading,
-    userLoginResponse,
-    showResetPasswordForm,
-  } = useSelector((state) => state.user)
+  const { isLoggedIn, isLoading, userLoginResponse } = useSelector(
+    (state) => state.user,
+  )
   const [loginInfo, setLoginInfo] = useState(initialState)
 
   const from = location?.state?.from?.pathname || '/'

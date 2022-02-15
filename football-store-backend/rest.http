@@ -58,6 +58,7 @@ Content-Type: application/json
 
 {
     "otp": 476335,
+    "email": "user@gmail.com"
     "newPassword": "Pariwesh.7"
 }
 

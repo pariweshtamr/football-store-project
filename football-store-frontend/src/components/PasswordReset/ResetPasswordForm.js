@@ -13,7 +13,11 @@ import {
   ResetPassInput,
   ResetPassItemContainer,
   ResetPassLabel,
+  Login,
+  ExternalLink,
+  LoginLink,
 } from './ResetPasswordFormStyles'
+import { resetPasswordAction } from '../../redux/User/UserAction'
 
 const initialPassword = {
   otp: '',
@@ -34,12 +38,22 @@ const ResetPasswordForm = () => {
   const [resetPassword, setResetPassword] = useState(initialPassword)
   const [passError, setPassError] = useState(passErrorInitial)
 
-  const { isLoading, userUpdateResponse } = useSelector((state) => state.user)
+  const {
+    isLoading,
+    resetPasswordRequestResponse,
+    passwordResettingEmail,
+  } = useSelector((state) => state.user)
+
   const handleOnSubmit = (e) => {
     e.preventDefault()
 
     const { otp, password } = resetPassword
-    // dispatch(userPasswordUpdate({ currentPassword, password }))
+    const passObj = {
+      otp,
+      email: passwordResettingEmail,
+      password,
+    }
+    dispatch(resetPasswordAction(passObj))
   }
 
   const changeHandler = (e) => {
@@ -90,13 +104,15 @@ const ResetPasswordForm = () => {
           <FormTitle>Reset Password</FormTitle>
           <hr />
           {isLoading && <LoadingBox />}
-          {userUpdateResponse?.message && (
+          {resetPasswordRequestResponse?.message && (
             <MessageBox
               variant={
-                userUpdateResponse.status === 'success' ? 'success' : 'danger'
+                resetPasswordRequestResponse.status === 'success'
+                  ? 'success'
+                  : 'danger'
               }
             >
-              {userUpdateResponse.message}
+              {resetPasswordRequestResponse.message}
             </MessageBox>
           )}
           <ResetPassItemContainer>
@@ -107,6 +123,7 @@ const ResetPasswordForm = () => {
               minLength="6"
               placeholder="Enter OTP"
               onChange={changeHandler}
+              value={resetPassword.otp}
               required
             ></ResetPassInput>
           </ResetPassItemContainer>
@@ -119,6 +136,7 @@ const ResetPasswordForm = () => {
               minLength="7"
               placeholder="Enter a password"
               onChange={changeHandler}
+              value={resetPassword.password}
               required
             ></ResetPassInput>
           </ResetPassItemContainer>
@@ -132,6 +150,7 @@ const ResetPasswordForm = () => {
               type="password"
               placeholder="Confirm your password"
               onChange={changeHandler}
+              value={resetPassword.confirmPassword}
               required
             ></ResetPassInput>
           </ResetPassItemContainer>
@@ -243,6 +262,11 @@ const ResetPasswordForm = () => {
           >
             RESET PASSWORD
           </ResetPassButton>
+          <Login>
+            <ExternalLink>
+              <LoginLink to="/login">Back to login</LoginLink>
+            </ExternalLink>
+          </Login>
         </ResetPassFormWrapper>
       </ResetPassFormContainer>
     </>
