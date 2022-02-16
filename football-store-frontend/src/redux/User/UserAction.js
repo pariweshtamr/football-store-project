@@ -102,10 +102,11 @@ export const autoLogin = () => async (dispatch) => {
   const accessJWT = window.sessionStorage.getItem('accessJWT')
   const refreshJWT = window.localStorage.getItem('refreshJWT')
 
+  const data = await getUser()
+
   //1. accessJWT EXISTS
-  if (accessJWT) {
-    dispatch(fetchUserDetails())
-    dispatch(loginAuto())
+  if (accessJWT && data?.user) {
+    dispatch(loginAuto(data.user))
     return
   }
 
@@ -115,7 +116,7 @@ export const autoLogin = () => async (dispatch) => {
     const result = await getNewAccessJWT()
     if (result?.accessJWT) {
       window.sessionStorage.setItem('accessJWT', result.accessJWT)
-      return dispatch(loginAuto())
+      return dispatch(loginAuto(data.user))
     }
 
     dispatch(userLogout())

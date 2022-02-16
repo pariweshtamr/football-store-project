@@ -25,16 +25,15 @@ import categoryRouter from './routers/categoryRouter.js'
 import productRouter from './routers/productRouter.js'
 import cartRouter from './routers/cartRouter.js'
 import tokenRouter from './routers/tokenRouter.js'
-import stripeRouter from './routers/stripeRouter.js'
-
+import paypalRouter from './routers/paypalRouter.js'
 // USE ROUTERS
 app.use('/api/v1/user', userRouter)
 app.use('/api/v1/category', categoryRouter)
 app.use('/api/v1/products', productRouter)
 app.use('/api/v1/cart', cartRouter)
 app.use('/api/v1/token', tokenRouter)
+app.use('/api/v1/config/paypal', paypalRouter)
 // app.use('/api/v1/order', orderRouter)
-app.use('/api/v1/checkout', stripeRouter)
 
 app.use('/', (req, res) => {
   res.json('Server is ready')

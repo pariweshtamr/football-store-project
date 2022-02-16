@@ -55,7 +55,8 @@ const userSlice = createSlice({
       state.isPending = false
     },
 
-    loginAuto: (state) => {
+    loginAuto: (state, { payload }) => {
+      state.userInfo = payload || {}
       state.isLoggedIn = true
       state.isAutoLoginPending = false
     },

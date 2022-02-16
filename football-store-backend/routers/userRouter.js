@@ -184,7 +184,7 @@ userRouter.get('/', isUser, (req, res) => {
   req.user.password = undefined
   req.user.refreshJWT = undefined
   res.json({
-    statur: 'success',
+    status: 'success',
     message: 'User Profile',
     user: req.user,
   })

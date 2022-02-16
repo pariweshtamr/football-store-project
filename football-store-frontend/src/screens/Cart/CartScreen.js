@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   CartBottom,
@@ -16,9 +16,6 @@ import {
   CartProductPrice,
   CartProductQty,
   CartProductSize,
-  CartProductInfoTitle,
-  FilterCartQtyOption,
-  FilterCartSizeOption,
   CartSummary,
   CartSummaryButton,
   CartSummaryItem,
@@ -42,55 +39,16 @@ import { removeFromCart } from '../../redux/Cart/CartAction'
 import MessageBox from '../../components/MessageBox/MessageBox'
 import Announcement from '../../components/Announcement/Announcement'
 import { Add, Remove } from '@material-ui/icons'
-import StripeCheckout from 'react-stripe-checkout'
-import Axios from 'axios'
-
-const KEY = process.env.REACT_APP_STRIPE
 
 const CartScreen = () => {
-  const { id } = useParams()
+  // const { id } = useParams()
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-
-  const [stripeToken, setStripeToken] = useState(null)
 
   const cart = useSelector((state) => state.cart)
-
-  const { isLoggedIn } = useSelector((state) => state.user)
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
   }
-
-  // const checkoutHandler = () => {
-  //   if (!isLoggedIn) {
-  //     alert('Please log in to continue')
-  //     navigate('/login', { replace: true })
-  //   } else {
-  //     alert('go to checkout page')
-  //   }
-  //   return
-  // }
-
-  const onToken = (token) => {
-    setStripeToken(token)
-  }
-
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        const res = await Axios.post(
-          'http://localhost:8000/api/v1/checkout/payment',
-          {
-            tokenId: stripeToken.id,
-            amount: cart.total * 100,
-          },
-        )
-        navigate('/paymentSuccess', { data: res.data })
-      } catch (error) {}
-    }
-    stripeToken && cart.total >= 1 && makeRequest()
-  }, [stripeToken, cart.total, navigate])
 
   return (
     <CartContainer>
@@ -182,17 +140,7 @@ const CartScreen = () => {
                 <CartSummaryItemPrice>${cart.total}</CartSummaryItemPrice>
               </CartSummaryItem>
 
-              <StripeCheckout
-                name="Soccer Boot Store"
-                billingAddress
-                shippingAddress
-                description={`Your total is $${cart.total}`}
-                amount={cart.total * 100}
-                token={onToken}
-                stripeKey={KEY}
-              >
-                <CartSummaryButton>PROCEED TO CHECKOUT</CartSummaryButton>
-              </StripeCheckout>
+              <CartSummaryButton>PROCEED TO CHECKOUT</CartSummaryButton>
             </CartSummary>
           </CartBottom>
         )}
