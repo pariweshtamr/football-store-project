@@ -174,6 +174,14 @@ export const CartSummaryButton = styled.button`
   border: none;
   border-radius: 5px;
 `
+export const ClearCartButton = styled.button`
+  width: 200px;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 5px;
+`
 export const HrMain = styled.div`
   width: 95vw;
   height: 1px;

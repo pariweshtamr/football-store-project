@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { autoLogin, userLogout } from '../../redux/User/UserAction'
 
 const Navbar = () => {
-  const { quantity } = useSelector((state) => state.cart)
+  const { cartItems } = useSelector((state) => state.cart)
   const { isLoggedIn, userInfo } = useSelector((state) => state.user)
   const dispatch = useDispatch()
 
@@ -63,7 +63,7 @@ const Navbar = () => {
 
             <MenuLink to="/cart">
               <MenuItem>
-                <Badge badgeContent={quantity} color="primary">
+                <Badge badgeContent={cartItems.length} color="primary">
                   <ShoppingCartOutlined />
                 </Badge>
               </MenuItem>

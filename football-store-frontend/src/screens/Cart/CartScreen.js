@@ -32,6 +32,7 @@ import {
   CartActionButton,
   ProductLink,
   Hr,
+  ClearCartButton,
   HrMain,
   TopText,
 } from './CartScreenStyles'
@@ -39,6 +40,7 @@ import { removeFromCart } from '../../redux/Cart/CartAction'
 import MessageBox from '../../components/MessageBox/MessageBox'
 import Announcement from '../../components/Announcement/Announcement'
 import { Add, Remove } from '@material-ui/icons'
+import { removeProductFromCart } from '../../redux/Cart/CartSlice'
 
 const CartScreen = () => {
   // const { id } = useParams()
@@ -46,8 +48,8 @@ const CartScreen = () => {
 
   const cart = useSelector((state) => state.cart)
 
-  const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
+  const removeFromCartHandler = (item) => {
+    dispatch(removeProductFromCart(item))
   }
 
   return (
@@ -63,18 +65,18 @@ const CartScreen = () => {
             <CartTopButton>CONTINUE SHOPPING</CartTopButton>
           </Link>
           <CartTopTexts>
-            <TopText>Shopping Bag({cart.products.length})</TopText>
+            <TopText>Shopping Bag({cart.cartItems.length})</TopText>
           </CartTopTexts>
         </CartTop>
 
-        {cart.products.length === 0 ? (
+        {cart.cartItems.length === 0 ? (
           <MessageBox>
             Cart is empty. <ShopLink to="/products">Go to Shop</ShopLink>
           </MessageBox>
         ) : (
           <CartBottom>
             <CartProductInfo>
-              {cart.products.map((item) => (
+              {cart.cartItems.map((item) => (
                 <div key={item._id}>
                   <CartProduct>
                     <CartProductDetails>
@@ -92,19 +94,21 @@ const CartScreen = () => {
                       <CartPriceDetail>
                         <CartProductAmountContainer>
                           <Remove />
-                          <CartProductQty>{item.qty}</CartProductQty>
+                          <CartProductQty>
+                            {item.productQuantity}
+                          </CartProductQty>
                           <Add />
                           <CartProductSize>{item.size}</CartProductSize>
                         </CartProductAmountContainer>
                         <CartProductPrice>
-                          ${item.price * item.qty}
+                          ${item.price * item.productQuantity}
                         </CartProductPrice>
                       </CartPriceDetail>
 
                       <CartActionButton>
                         <RemoveButton
                           type="button"
-                          onClick={() => removeFromCartHandler(item._id)}
+                          onClick={() => removeFromCartHandler(item)}
                         >
                           REMOVE
                         </RemoveButton>
@@ -114,16 +118,19 @@ const CartScreen = () => {
                   <Hr />
                 </div>
               ))}
+              <ClearCartButton>CLEAR CART</ClearCartButton>
             </CartProductInfo>
 
             <CartSummary>
               <CartSummaryTitle>ORDER SUMMARY</CartSummaryTitle>
               <CartSummaryItem>
                 <CartSummaryItemText>
-                  Subtotal ({cart.products.reduce((a, c) => a + c.qty, 0)}{' '}
+                  Subtotal ({cart.cartTotalQuantity}
                   item(s)) :
                 </CartSummaryItemText>
-                <CartSummaryItemPrice>${cart.total}</CartSummaryItemPrice>
+                <CartSummaryItemPrice>
+                  ${cart.cartTotalAmount}
+                </CartSummaryItemPrice>
               </CartSummaryItem>
               <CartSummaryItem>
                 <CartSummaryItemText>Shipping: </CartSummaryItemText>

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import HomeScreen from './screens/Home/HomeScreen'
-
 import './App.css'
 import RegisterScreen from './screens/Register/RegisterScreen'
 import Navbar from './components/Navbar/Navbar'
@@ -17,6 +18,7 @@ import ResetPasswordScreen from './screens/ResetPassword/ResetPasswordScreen'
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <Navbar />
       <Routes>
         <Route path="/cart" element={<CartScreen />}></Route>

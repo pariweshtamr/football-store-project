@@ -31,34 +31,19 @@ import { addProductToCart } from '../../redux/Cart/CartSlice'
 const ProductScreen = () => {
   const dispatch = useDispatch()
   const { id } = useParams()
-  const [qty, setQty] = useState(1)
   const [size, setSize] = useState()
 
   const { isLoading, productResponse, selectedProduct } = useSelector(
     (state) => state.product,
   )
 
-  const addToCartHandler = () => {
-    dispatch(
-      addProductToCart({
-        ...selectedProduct,
-        qty,
-        size,
-      }),
-    )
+  const addToCartHandler = (selectedProduct) => {
+    dispatch(addProductToCart(selectedProduct))
   }
 
   useEffect(() => {
     dispatch(fetchAProductById(id))
   }, [dispatch, id])
-
-  const handleQuantity = (type) => {
-    if (type === 'decrease') {
-      qty > 1 && setQty(qty - 1)
-    } else {
-      qty < selectedProduct.inStock && setQty(qty + 1)
-    }
-  }
 
   return (
     <>
@@ -87,12 +72,6 @@ const ProductScreen = () => {
 
               {selectedProduct.inStock > 0 ? (
                 <AddContainer>
-                  <QtyContainer>
-                    <Remove onClick={() => handleQuantity('decrease')} />
-                    <Quantity>{qty}</Quantity>
-                    <Add onClick={() => handleQuantity('increase')} />
-                  </QtyContainer>
-
                   <SizeContainer>
                     Size
                     <Size
@@ -104,7 +83,9 @@ const ProductScreen = () => {
                       ))}
                     </Size>
                   </SizeContainer>
-                  <Button onClick={addToCartHandler}>ADD TO CART</Button>
+                  <Button onClick={() => addToCartHandler(selectedProduct)}>
+                    ADD TO CART
+                  </Button>
                 </AddContainer>
               ) : (
                 <Unavailable>Product unavailable. Coming Soon!</Unavailable>
