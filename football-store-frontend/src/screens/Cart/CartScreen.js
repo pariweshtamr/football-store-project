@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -36,21 +36,25 @@ import {
   HrMain,
   TopText,
 } from './CartScreenStyles'
-import { removeFromCart } from '../../redux/Cart/CartAction'
 import MessageBox from '../../components/MessageBox/MessageBox'
 import Announcement from '../../components/Announcement/Announcement'
 import { Add, Remove } from '@material-ui/icons'
 import {
   addProductToCart,
+  clearCart,
   decreaseProductQuantity,
+  getTotals,
   removeProductFromCart,
 } from '../../redux/Cart/CartSlice'
 
 const CartScreen = () => {
-  // const { id } = useParams()
   const dispatch = useDispatch()
 
   const cart = useSelector((state) => state.cart)
+
+  useEffect(() => {
+    dispatch(getTotals())
+  }, [cart, dispatch])
 
   const removeFromCartHandler = (item) => {
     dispatch(removeProductFromCart(item))
@@ -61,6 +65,9 @@ const CartScreen = () => {
   }
   const handleIncreaseQuantity = (item) => {
     dispatch(addProductToCart(item))
+  }
+  const clearCartHandler = () => {
+    dispatch(clearCart())
   }
 
   return (
@@ -131,7 +138,9 @@ const CartScreen = () => {
                   <Hr />
                 </div>
               ))}
-              <ClearCartButton>CLEAR CART</ClearCartButton>
+              <ClearCartButton type="button" onClick={() => clearCartHandler()}>
+                CLEAR CART
+              </ClearCartButton>
             </CartProductInfo>
 
             <CartSummary>

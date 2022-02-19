@@ -23,13 +23,13 @@ import {
   FilterSizeOption,
   Hr,
 } from './ProductScreenStyles'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { fetchAProductById } from '../../redux/Product/ProductAction'
-import { Add, Remove } from '@material-ui/icons'
 import { addProductToCart } from '../../redux/Cart/CartSlice'
 
 const ProductScreen = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { id } = useParams()
   const [size, setSize] = useState()
 
@@ -39,6 +39,7 @@ const ProductScreen = () => {
 
   const addToCartHandler = (selectedProduct) => {
     dispatch(addProductToCart(selectedProduct))
+    navigate('/cart')
   }
 
   useEffect(() => {
