@@ -53,29 +53,14 @@ export const AddContainer = styled.div`
 
   ${mobile({ width: '100%' })}
 `
-export const QtyContainer = styled.div`
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  cursor: pointer;
-`
+
 export const SizeContainer = styled.div`
   display: flex;
   align-items: center;
   font-weight: 400;
   font-size: 1.5rem;
 `
-export const Quantity = styled.span`
-  margin: 0 10px;
-  width: 3rem;
-  height: 3rem;
-  font-size: 1.5rem;
-  font-weight: normal;
-  border: 0.1rem teal solid;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+
 export const Size = styled.select`
   padding: 0.4rem;
   width: 4rem;
@@ -88,8 +73,6 @@ export const Size = styled.select`
   margin-left: 10px;
 `
 export const FilterSizeOption = styled.option``
-
-export const FilterQuantityOption = styled.div``
 
 export const Button = styled.button`
   padding: 10px;

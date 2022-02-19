@@ -18,7 +18,7 @@ import ResetPasswordScreen from './screens/ResetPassword/ResetPasswordScreen'
 function App() {
   return (
     <Router>
-      <ToastContainer />
+      <ToastContainer autoClose={2000} />
       <Navbar />
       <Routes>
         <Route path="/cart" element={<CartScreen />}></Route>

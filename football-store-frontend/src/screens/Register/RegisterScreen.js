@@ -74,6 +74,7 @@ const RegisterScreen = () => {
             {userRegisterResponse.message}
           </MessageBox>
         )}
+
         <RegisterForm onSubmit={handleOnSubmit}>
           <RegisterInput
             name="firstName"
