@@ -70,6 +70,9 @@ const CartScreen = () => {
     dispatch(clearCart())
   }
 
+  let shipping = 15
+  let discount = 15
+
   return (
     <CartContainer>
       <HrMain>
@@ -156,17 +159,22 @@ const CartScreen = () => {
               </CartSummaryItem>
               <CartSummaryItem>
                 <CartSummaryItemText>Shipping: </CartSummaryItemText>
-                <CartSummaryItemPrice>$ 14.99</CartSummaryItemPrice>
+                <CartSummaryItemPrice>${shipping}</CartSummaryItemPrice>
               </CartSummaryItem>
               <CartSummaryItem>
                 <CartSummaryItemText>Discount: </CartSummaryItemText>
                 <CartSummaryItemDiscount variant="danger">
-                  ${cart.total > 250 ? -14.99 : 0.0}
+                  ${cart.cartTotalAmount > 250 ? `(${discount})` : 0}
                 </CartSummaryItemDiscount>
               </CartSummaryItem>
               <CartSummaryItem type="total">
                 <CartSummaryItemText>Total</CartSummaryItemText>
-                <CartSummaryItemPrice>${cart.total}</CartSummaryItemPrice>
+                <CartSummaryItemPrice>
+                  $
+                  {cart.cartTotalAmount +
+                    shipping -
+                    `${cart.cartTotalAmount > 250 ? `${discount}` : 0}`}
+                </CartSummaryItemPrice>
               </CartSummaryItem>
 
               <CartSummaryButton>PROCEED TO CHECKOUT</CartSummaryButton>
