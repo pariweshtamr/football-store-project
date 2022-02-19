@@ -40,7 +40,11 @@ import { removeFromCart } from '../../redux/Cart/CartAction'
 import MessageBox from '../../components/MessageBox/MessageBox'
 import Announcement from '../../components/Announcement/Announcement'
 import { Add, Remove } from '@material-ui/icons'
-import { removeProductFromCart } from '../../redux/Cart/CartSlice'
+import {
+  addProductToCart,
+  decreaseProductQuantity,
+  removeProductFromCart,
+} from '../../redux/Cart/CartSlice'
 
 const CartScreen = () => {
   // const { id } = useParams()
@@ -50,6 +54,13 @@ const CartScreen = () => {
 
   const removeFromCartHandler = (item) => {
     dispatch(removeProductFromCart(item))
+  }
+
+  const handleDecreaseQuantity = (item) => {
+    dispatch(decreaseProductQuantity(item))
+  }
+  const handleIncreaseQuantity = (item) => {
+    dispatch(addProductToCart(item))
   }
 
   return (
@@ -93,12 +104,14 @@ const CartScreen = () => {
 
                       <CartPriceDetail>
                         <CartProductAmountContainer>
-                          <Remove />
+                          <Remove
+                            onClick={() => handleDecreaseQuantity(item)}
+                          />
                           <CartProductQty>
                             {item.productQuantity}
                           </CartProductQty>
-                          <Add />
-                          <CartProductSize>{item.size}</CartProductSize>
+                          <Add onClick={() => handleIncreaseQuantity(item)} />
+                          {/* <CartProductSize>{item.size}</CartProductSize> */}
                         </CartProductAmountContainer>
                         <CartProductPrice>
                           ${item.price * item.productQuantity}

@@ -92,10 +92,11 @@ export const CartProductAmountContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  cursor: pointer;
 `
 export const CartProductQty = styled.span`
   font-size: 24px;
-  margin: 10px;
+  margin: 0px 20px;
 
   ${mobile({ margin: '0px 15px' })}
 `
