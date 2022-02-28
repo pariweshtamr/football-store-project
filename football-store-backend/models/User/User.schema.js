@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
+const Schema = mongoose.Schema
 
-const UserSchema = new mongoose.Schema(
+const UserSchema = new Schema(
   {
     firstName: {
       type: String,
@@ -42,6 +43,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+    Orders: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Order',
+      },
+    ],
   },
   {
     timestamps: true,

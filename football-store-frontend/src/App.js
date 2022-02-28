@@ -14,6 +14,10 @@ import CartScreen from './screens/Cart/CartScreen'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
 import UserProfileScreen from './screens/UserProfile/UserProfileScreen'
 import ResetPasswordScreen from './screens/ResetPassword/ResetPasswordScreen'
+import Checkout from './screens/Checkout/Checkout'
+import Order from './screens/Order/Order'
+import Payment from './screens/Payment/Payment'
+import OrderSuccess from './screens/Order/OrderSuccess'
 
 function App() {
   return (
@@ -31,7 +35,21 @@ function App() {
             </PrivateRoute>
           }
         ></Route>
-
+        <Route
+          path="/cart/checkout"
+          element={
+            <PrivateRoute>
+              <Checkout />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route path="/cart/checkout/order" exact element={<Order />}></Route>
+        <Route path="/order/:id" exact element={<Payment />}></Route>
+        <Route
+          path="/order/:id/success"
+          exact
+          element={<OrderSuccess />}
+        ></Route>
         <Route path="/reset-password" element={<ResetPasswordScreen />}></Route>
         <Route path="/login" element={<LoginScreen />}></Route>
         <Route path="/register" exact element={<RegisterScreen />}></Route>

@@ -5,4 +5,9 @@ const rootUrl =
     ? process.env.ROOT_URL
     : 'http://localhost:8000/api/v1'
 
-const cartApi = rootUrl + '/cart'
+export const userRequest = Axios.create({
+  baseURL: rootUrl,
+  headers: {
+    authorization: window.sessionStorage.getItem('accessJWT'),
+  },
+})

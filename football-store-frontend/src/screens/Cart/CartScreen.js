@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   CartBottom,
@@ -49,6 +49,7 @@ import {
 
 const CartScreen = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const cart = useSelector((state) => state.cart)
 
@@ -150,12 +151,10 @@ const CartScreen = () => {
               <CartSummaryTitle>ORDER SUMMARY</CartSummaryTitle>
               <CartSummaryItem>
                 <CartSummaryItemText>
-                  Subtotal ({cart.cartTotalQuantity}
+                  Subtotal ({cart.totalQuantity}
                   item(s)) :
                 </CartSummaryItemText>
-                <CartSummaryItemPrice>
-                  ${cart.cartTotalAmount}
-                </CartSummaryItemPrice>
+                <CartSummaryItemPrice>${cart.totalAmount}</CartSummaryItemPrice>
               </CartSummaryItem>
               <CartSummaryItem>
                 <CartSummaryItemText>Shipping: </CartSummaryItemText>
@@ -164,20 +163,22 @@ const CartScreen = () => {
               <CartSummaryItem>
                 <CartSummaryItemText>Discount: </CartSummaryItemText>
                 <CartSummaryItemDiscount variant="danger">
-                  ${cart.cartTotalAmount > 250 ? `(${discount})` : 0}
+                  ${cart.totalAmount > 250 ? `(${discount})` : 0}
                 </CartSummaryItemDiscount>
               </CartSummaryItem>
               <CartSummaryItem type="total">
                 <CartSummaryItemText>Total</CartSummaryItemText>
                 <CartSummaryItemPrice>
                   $
-                  {cart.cartTotalAmount +
+                  {cart.totalAmount +
                     shipping -
-                    `${cart.cartTotalAmount > 250 ? `${discount}` : 0}`}
+                    `${cart.totalAmount > 250 ? `${discount}` : 0}`}
                 </CartSummaryItemPrice>
               </CartSummaryItem>
 
-              <CartSummaryButton>PROCEED TO CHECKOUT</CartSummaryButton>
+              <CartSummaryButton onClick={() => navigate('/cart/checkout')}>
+                PROCEED TO CHECKOUT
+              </CartSummaryButton>
             </CartSummary>
           </CartBottom>
         )}

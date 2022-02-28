@@ -1,31 +1,48 @@
 import mongoose from 'mongoose'
+const Schema = mongoose.Schema
 
-const OrderSchema = new mongoose.Schema(
+const OrderSchema = new Schema(
   {
-    userId: {
-      type: String,
+    user: {
+      type: Schema.Types.ObjectId,
       required: true,
     },
-    products: [
+    cartItems: [
       {
-        productId: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-          default: 1,
-        },
+        name: { type: String },
+        qty: { type: Number },
+        image: { type: String },
+        price: { type: String },
+        numReviews: { type: String },
+        description: { type: String },
+        inStock: { type: Number },
       },
     ],
-    amount: {
-      type: Number,
-      required: true,
+    totalAmount: { type: Number },
+    totalQuantity: { type: Number },
+    shippingAddress: {
+      address: { type: String },
+      city: { type: String },
+      postalCode: { type: Number },
+      country: { type: String },
     },
-    address: {
-      type: Object,
-      required: true,
+    paymentMethod: {
+      type: String,
     },
-    status: {
+    paymentResult: {
+      id: { type: String },
+      status: { type: String },
+      update_time: { type: String },
+      emailAddress: { type: String },
+    },
+    isPaid: {
+      type: Boolean,
+      default: false,
+    },
+    paidAt: {
+      type: Date,
+    },
+    orderStatus: {
       type: String,
       default: 'pending',
     },

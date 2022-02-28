@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   userInfo: {},
-  isLoggedIn: false,
+  isLoggedIn: JSON.parse(localStorage.getItem('authState'))?.isLoggedIn
+    ? JSON.parse(localStorage.getItem('authState')).isLoggedIn
+    : false,
   isLoading: false,
   userFetchResponse: {},
   userUpdateResponse: {},
@@ -37,6 +39,8 @@ const userSlice = createSlice({
       state.userLoginResponse = {}
       state.isLoggedIn = true
       state.isLoading = false
+
+      localStorage.setItem('authState', JSON.stringify(payload))
     },
 
     getUserDetailsSuccess: (state, { payload }) => {
@@ -70,6 +74,8 @@ const userSlice = createSlice({
       state.userInfo = {}
       state.isLoggedIn = false
       state.isAutoLoginPending = false
+
+      localStorage.clear()
     },
 
     autoLoginPending: (state, { payload }) => {

@@ -36,14 +36,4 @@ productRouter.get('/:id', async (req, res) => {
   }
 })
 
-// productRouter.get('/:category', async (req, res) => {
-//   const category = await Product.distinct('category')
-//   console.log(category)
-//   if (category) {
-//     res.send(category)
-//   } else {
-//     res.status(404).send({ message: 'Category not found' })
-//   }
-// })
-
 export default productRouter

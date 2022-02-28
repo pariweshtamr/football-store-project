@@ -83,4 +83,11 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8000/api/v1/cart
+POST http://localhost:8000/api/v1/cart
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNoNyIsImlhdCI6MTY0NjAzNjU5MSwiZXhwIjoxNjQ2MDM3NDkxfQ.mArvp1ImAqBDuhnl2-n3QjOi8kjoQz6Awuwp_c5kPMc
+
+###
+PATCH http://localhost:8000/api/v1/cart/orderstatus
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNoNyIsImlhdCI6MTY0NjA0MDcxNCwiZXhwIjoxNjQ2MDQxNjE0fQ.L4Se42IMnwzqEFqL5HOn6NyNwaq63caoN3YDu0I5zsA
+
+

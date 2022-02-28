@@ -1,12 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
+const stateCartItems = JSON.parse(localStorage.getItem('state'))?.cartItems
+  ? JSON.parse(localStorage.getItem('state')).cartItems
+  : []
+const stateTotalAmount = JSON.parse(localStorage.getItem('state'))?.totalAmount
+  ? JSON.parse(localStorage.getItem('state')).totalAmount
+  : 0
+const stateTotalQuantity = JSON.parse(localStorage.getItem('state'))
+  ?.totalQuantity
+  ? JSON.parse(localStorage.getItem('state')).totalQuantity
+  : 0
+
 const initialState = {
-  cartItems: localStorage.getItem('cartItems')
-    ? JSON.parse(localStorage.getItem('cartItems'))
-    : [],
-  cartTotalQuantity: 0,
-  cartTotalAmount: 0,
+  cartItems: stateCartItems,
+  totalQuantity: stateTotalAmount,
+  totalAmount: stateTotalQuantity,
 }
 
 const cartSlice = createSlice({
@@ -31,7 +40,7 @@ const cartSlice = createSlice({
         })
       }
 
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+      localStorage.setItem('state', JSON.stringify(state))
     },
 
     addProductToCartFail: (state, { payload }) => {
@@ -75,10 +84,12 @@ const cartSlice = createSlice({
 
     clearCart: (state) => {
       state.cartItems = []
+      state.totalAmount = 0
+      state.totalQuantity = 0
       toast.error(`Cart cleared!`, {
         position: 'bottom-left',
       })
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+      localStorage.setItem('state', JSON.stringify(state))
     },
 
     getTotals: (state) => {
@@ -97,8 +108,9 @@ const cartSlice = createSlice({
           quantity: 0,
         },
       )
-      state.cartTotalQuantity = quantity
-      state.cartTotalAmount = total
+      state.totalQuantity = quantity
+      state.totalAmount = total
+      localStorage.setItem('state', JSON.stringify(state))
     },
   },
 })
