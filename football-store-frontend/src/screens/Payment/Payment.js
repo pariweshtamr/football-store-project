@@ -6,6 +6,13 @@ import { useNavigate } from 'react-router-dom'
 import { currentOrderHandler } from '../../redux/Order/OrderSlice'
 import { clearCart } from '../../redux/Cart/CartSlice'
 import { Col, Row, Card } from 'react-bootstrap'
+import {
+  OrderItemImage,
+  OrderItem,
+  OrderItemName,
+  OrderItemPrice,
+  OrderItemQty,
+} from '../Order/OrderStyles'
 
 const Payment = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
@@ -48,32 +55,17 @@ const Payment = () => {
 
   const orderItems = state.currentOrder.cartItems?.map((item) => {
     return (
-      <div
-        key={item._id}
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          paddingBottom: '20px',
-        }}
-      >
-        <div>
-          <img style={{ width: '30%', height: '100%' }} src={item.image} />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-          }}
-        >
-          <div>{item.name}</div>
-          <div style={{ marginLeft: '60px' }}>${item.price}</div>
-        </div>
-        <div>
-          <div style={{ marginLeft: '60px' }}>{item.qty}</div>
-        </div>
-      </div>
+      <OrderItem key={item._id}>
+        <OrderItemImage src={item.image} alt="product img" />
+
+        <OrderItemName>{item.name}</OrderItemName>
+        <OrderItemPrice>${item.price}</OrderItemPrice>
+
+        <OrderItemQty>
+          x&nbsp;
+          {item.productQuantity}
+        </OrderItemQty>
+      </OrderItem>
     )
   })
 
@@ -110,7 +102,7 @@ const Payment = () => {
                       <Col>
                         <Card style={{ width: '100%', fontWeight: 'bold' }}>
                           <Card.Body>
-                            <Card.Title>Order Items - </Card.Title>
+                            <Card.Title>Order Items</Card.Title>
 
                             <div>{orderItems}</div>
                           </Card.Body>
@@ -120,10 +112,10 @@ const Payment = () => {
                   </div>
                   <div>
                     <p style={{ fontWeight: 'bold' }}>
-                      Total Items - {order?.totalItems}
+                      Total Items - {order?.totalQuantity}
                     </p>
                     <p style={{ fontWeight: 'bold' }}>
-                      Total Price - ${order?.totalPrice}{' '}
+                      Total Price - ${order?.totalAmount}{' '}
                     </p>
                   </div>
                   {!paymentStatus && (

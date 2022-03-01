@@ -43,13 +43,31 @@ function App() {
             </PrivateRoute>
           }
         ></Route>
-        <Route path="/cart/checkout/order" exact element={<Order />}></Route>
-        <Route path="/order/:id" exact element={<Payment />}></Route>
+        <Route
+          path="/cart/checkout/order"
+          element={
+            <PrivateRoute>
+              <Order />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="/order/:id"
+          element={
+            <PrivateRoute>
+              <Payment />
+            </PrivateRoute>
+          }
+        ></Route>
         <Route
           path="/order/:id/success"
-          exact
-          element={<OrderSuccess />}
+          element={
+            <PrivateRoute>
+              <OrderSuccess />
+            </PrivateRoute>
+          }
         ></Route>
+
         <Route path="/reset-password" element={<ResetPasswordScreen />}></Route>
         <Route path="/login" element={<LoginScreen />}></Route>
         <Route path="/register" exact element={<RegisterScreen />}></Route>

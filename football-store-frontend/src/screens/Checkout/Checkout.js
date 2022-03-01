@@ -1,9 +1,19 @@
 import React from 'react'
-import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LoginLink } from '../Register/RegisterScreenStyles'
+import {
+  CheckoutContainer,
+  CheckoutTitle,
+  CheckoutWrapper,
+  OrderButton,
+  ShippingDetails,
+  ShippingForm,
+  ShippingInput,
+  ShippingLabel,
+  ShippingRow,
+} from './CheckoutStyles'
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -57,52 +67,57 @@ const Checkout = () => {
   return (
     <>
       {isLoggedIn ? (
-        <div
-          style={{
-            maxWidth: '40%',
-            display: 'flex',
-            alignItems: 'center',
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}
-        >
-          <Container style={{ alignItems: 'center' }}>
-            <Form>
-              <Form.Group controlId="formGridAddress1">
-                <Form.Label>Address</Form.Label>
-                <Form.Control placeholder="1234 Main St" ref={addressRef} />
-              </Form.Group>
+        <>
+          <CheckoutContainer>
+            <CheckoutWrapper>
+              <CheckoutTitle>SHIPPING DETAILS</CheckoutTitle>
+              <hr />
 
-              <Row>
-                <Form.Group as={Col} controlId="formGridCity">
-                  <Form.Label>Country</Form.Label>
-                  <Form.Control ref={countryRef} />
-                </Form.Group>
+              <ShippingForm>
+                <ShippingDetails>
+                  <ShippingLabel>Address</ShippingLabel>
+                  <ShippingInput
+                    ref={addressRef}
+                    placeholder="Your street address"
+                    required
+                  />
+                </ShippingDetails>
 
-                <Form.Group as={Col} controlId="formGridCity">
-                  <Form.Label>City</Form.Label>
-                  <Form.Control ref={cityRef} />
-                </Form.Group>
+                <ShippingDetails>
+                  <ShippingLabel>Country</ShippingLabel>
 
-                <Form.Group as={Col} controlId="formGridZip">
-                  <Form.Label>Postal Code</Form.Label>
-                  <Form.Control ref={postalCodeRef} />
-                </Form.Group>
-              </Row>
+                  <ShippingInput
+                    ref={countryRef}
+                    placeholder="Country"
+                    required
+                  />
+                </ShippingDetails>
 
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <Button
-                  variant="primary"
-                  type="submit"
-                  style={{ marginRight: '20px' }}
-                  onClick={checkoutHandler}
-                >
+                <ShippingRow>
+                  <ShippingDetails>
+                    <ShippingLabel>City</ShippingLabel>
+
+                    <ShippingInput ref={cityRef} placeholder="City" required />
+                  </ShippingDetails>
+
+                  <ShippingDetails>
+                    <ShippingLabel>Postal Code</ShippingLabel>
+
+                    <ShippingInput
+                      ref={postalCodeRef}
+                      placeholder="Postal Code"
+                      required
+                    />
+                  </ShippingDetails>
+                </ShippingRow>
+
+                <OrderButton type="submit" onClick={checkoutHandler}>
                   Continue To Order
-                </Button>
-              </div>
-            </Form>
-          </Container>
-        </div>
+                </OrderButton>
+              </ShippingForm>
+            </CheckoutWrapper>
+          </CheckoutContainer>
+        </>
       ) : (
         <div>
           <div style={{ width: '40%', marginLeft: '30%', marginTop: '5%' }}>
