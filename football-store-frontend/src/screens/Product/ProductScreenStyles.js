@@ -15,7 +15,11 @@ export const LinkContainer = styled.div`
 export const ProductWrapper = styled.div`
   padding: 30px;
   display: flex;
-  ${mobile({ flexDirection: 'column', padding: '10px' })}
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    padding: 10px;
+  }
 `
 export const ImgContainer = styled.div`
   flex: 1;
@@ -23,17 +27,25 @@ export const ImgContainer = styled.div`
 export const Image = styled.img`
   width: 100%;
 
-  ${mobile({ margin: '20px 0' })}
+  @media screen and (max-width: 600px) {
+    margin: 20px 0;
+  }
 `
 export const InfoContainer = styled.div`
   flex: 1;
   padding: 0 50px;
 
-  ${mobile({ padding: '0 10px' })}
+  @media screen and (max-width: 600px) {
+    padding: 0 10px;
+  }
 `
 export const ProductTitle = styled.h1`
   font-weight: 400;
   color: teal;
+
+  @media screen and (max-width: 600px) {
+    text-align: center;
+  }
 `
 export const ProductDescription = styled.p`
   margin: 20px 0;
@@ -44,6 +56,10 @@ export const ProductPrice = styled.div`
   font-size: 40px;
   color: teal;
   margin: 1rem 0;
+
+  @media screen and (max-width: 600px) {
+    text-align: center;
+  }
 `
 export const AddContainer = styled.div`
   display: flex;
@@ -51,7 +67,9 @@ export const AddContainer = styled.div`
   justify-content: space-between;
   width: 100%;
 
-  ${mobile({ width: '100%' })}
+  @media screen and (max-width: 600px) {
+    width: 1005;
+  }
 `
 
 export const SizeContainer = styled.div`

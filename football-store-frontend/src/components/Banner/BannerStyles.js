@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { mobile } from '../../responsive'
 
 export const BannerContainer = styled.div`
   width: 100%;
@@ -7,14 +6,17 @@ export const BannerContainer = styled.div`
   display: flex;
   position: relative;
   background: #fcf5f5;
-
-  ${mobile({ display: 'none' })}
 `
 
 export const BannerWrapper = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 
 export const ImgContainer = styled.div`
@@ -23,14 +25,31 @@ export const ImgContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 600px) {
+    height: 80%;
+  }
 `
 
 export const Image = styled.img`
   height: 75%;
+
+  @media screen and (max-width: 600px) {
+    height: 40%;
+    margin-top: -15rem;
+  }
 `
 export const InfoContainer = styled.div`
   flex: 1;
   padding: 50px;
+
+  @media screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 5px 0;
+    margin-top: -20rem;
+  }
 `
 export const Title = styled.h1`
   font-size: 70px;

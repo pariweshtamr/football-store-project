@@ -15,9 +15,10 @@ export const ProductsListContainer = styled.div`
   align-items: center;
 `
 export const ProductItemContainer = styled.div`
-  flex: 1;
-  margin: 5px;
-  max-width: 25rem;
+  /* flex: 1; */
+  padding: 0 20px;
+  margin: 10px;
+  max-width: max-content;
   height: 40rem;
   border-radius: 10px;
 
@@ -27,16 +28,28 @@ export const ProductItemContainer = styled.div`
   background-color: #f5fbfd;
   position: relative;
   cursor: pointer;
+
+  @media screen and (max-width: 600px) {
+    padding: 0;
+  }
 `
 export const ProductItemImage = styled.img`
   max-width: 22rem;
   height: 100%;
   border-radius: 10px;
+
+  @media screen and (max-width: 600px) {
+    padding: 0 10px;
+  }
 `
 export const ProductItemInfo = styled.div`
   margin-top: 1rem;
   > h2 {
     font-size: 1rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 0 10px;
   }
 `
 export const ProductItemPrice = styled.div`

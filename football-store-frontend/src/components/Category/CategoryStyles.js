@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { mobile } from '../../responsive'
 
 export const Container = styled.div`
   display: flex;
@@ -7,17 +6,30 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  ${mobile({ padding: '0px', flexDirection: 'column', marginTop: '30px' })}
+  @media screen and (max-width: 600px) {
+    padding: 0;
+    flex-direction: column;
+    margin-top: 10px;
+  }
 `
 
 export const CategoriesContainer = styled.div`
   display: flex;
   padding: 20px;
   justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 
 export const CategoryContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 
 export const CategoryItemContainer = styled.div`

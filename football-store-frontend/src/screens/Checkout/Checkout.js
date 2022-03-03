@@ -40,7 +40,7 @@ const Checkout = () => {
 
   const checkoutHandler = (e) => {
     e.preventDefault()
-    console.log('click')
+    // e.target.reset()
 
     if (
       !addressRef.current?.value ||
@@ -48,7 +48,6 @@ const Checkout = () => {
       !cityRef.current?.value ||
       !postalCodeRef.current?.value
     ) {
-      console.log('clicked')
       return
     }
 
@@ -61,7 +60,6 @@ const Checkout = () => {
         postalCode: postalCodeRef.current.value,
       }),
     )
-
     navigate('/cart/checkout/order')
   }
   return (

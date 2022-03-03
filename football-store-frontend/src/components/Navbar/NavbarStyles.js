@@ -1,26 +1,31 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { mobile } from '../../responsive'
 
 export const NavContainer = styled.div`
   height: 60px;
   background: #fff;
-  ${mobile({ height: '50px' })}
+  @media screen and (max-width: 600px) {
+    height: 50px;
+  }
 `
 export const NavWrapper = styled.div`
   padding: 10px 30px;
   display: flex;
   justify-content: space-between;
 
-  ${mobile({ padding: '10px 5px' })}
+  @media screen and (max-width: 600px) {
+    padding: 10px 5px;
+  }
 `
 export const Left = styled.div`
   flex: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
-  ${mobile({ flex: 1, justifyContent: 'center' })}
+  @media screen and (max-width: 600px) {
+    flex: 1;
+    justify-content: center;
+  }
 `
 
 export const LogoLink = styled(Link)`
@@ -37,37 +42,39 @@ export const Logo = styled.h1`
   align-items: center;
   justify-content: center;
 
-  ${mobile({ fontSize: '16px' })}
+  @media screen and (max-width: 600px) {
+    font-size: 16px;
+  }
 `
-
-export const Center = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
 export const Right = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
 
-  ${mobile({ flex: 3, justifyContent: 'center' })}
+  @media screen and (max-width: 600px) {
+    justify-content: center;
+  }
 `
 export const Welcome = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  ${mobile({ flex: 3, justifyContent: 'center' })}
+  @media screen and (max-width: 600px) {
+    flex: 3;
+    justify-content: center;
+  }
 `
 export const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
 
-  ${mobile({ fontSize: '12px', marginLeft: '10px' })}
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    margin-left: 10px;
+  }
 `
 export const UserGreet = styled.div`
   margin-right: 25px;

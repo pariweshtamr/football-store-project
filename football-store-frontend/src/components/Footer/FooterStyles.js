@@ -6,7 +6,9 @@ export const FooterContainer = styled.div`
   display: flex;
   background: #fcf5f5;
 
-  ${mobile({ flexDirection: 'column' })}
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 export const FooterLeft = styled.div`
   flex: 1;
@@ -14,7 +16,9 @@ export const FooterLeft = styled.div`
   flex-direction: column;
   padding: 30px;
 
-  ${mobile({ textAlign: 'center' })}
+  @media screen and (max-width: 600px) {
+    text-align: center;
+  }
 `
 
 export const Logo = styled.h1`
@@ -26,7 +30,9 @@ export const Description = styled.p`
 export const SocialContainer = styled.div`
   display: flex;
 
-  ${mobile({ display: 'flex', justifyContent: 'center' })}
+  @media screen and (max-width: 600px) {
+    justify-content: center;
+  }
 `
 export const SocialIcon = styled.div`
   width: 40px;
@@ -48,7 +54,9 @@ export const FooterCenter = styled.div`
   flex: 1;
   padding: 30px;
 
-  ${mobile({ display: 'none' })}
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `
 export const FooterTitle = styled.h3`
   margin-bottom: 20px;
@@ -80,8 +88,6 @@ export const FooterRight = styled.div`
   flex: 1;
   padding: 30px;
   text-align: center;
-
-  ${mobile({ backgroundColor: 'white' })}
 `
 export const FooterContactItem = styled.div`
   margin-bottom: 20px;

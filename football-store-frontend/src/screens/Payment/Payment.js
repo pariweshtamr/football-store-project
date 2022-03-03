@@ -5,14 +5,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { currentOrderHandler } from '../../redux/Order/OrderSlice'
 import { clearCart } from '../../redux/Cart/CartSlice'
-import { Col, Row, Card } from 'react-bootstrap'
+import { Container, Details, Title } from '../../GlobalStyles'
 import {
-  OrderItemImage,
-  OrderItem,
-  OrderItemName,
-  OrderItemPrice,
-  OrderItemQty,
-} from '../Order/OrderStyles'
+  OrderId,
+  PaymentItem,
+  PaymentItemImage,
+  PaymentItemName,
+  PaymentItemPrice,
+  PaymentItemQty,
+} from './PaymentStyles'
 
 const Payment = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
@@ -55,36 +56,80 @@ const Payment = () => {
 
   const orderItems = state.currentOrder.cartItems?.map((item) => {
     return (
-      <OrderItem key={item._id}>
-        <OrderItemImage src={item.image} alt="product img" />
+      <PaymentItem key={item._id}>
+        <PaymentItemImage src={item.image} alt="product img" />
 
-        <OrderItemName>{item.name}</OrderItemName>
-        <OrderItemPrice>${item.price}</OrderItemPrice>
+        <PaymentItemName>{item.name}</PaymentItemName>
+        <PaymentItemPrice>${item.price}</PaymentItemPrice>
 
-        <OrderItemQty>
+        <PaymentItemQty>
           x&nbsp;
           {item.productQuantity}
-        </OrderItemQty>
-      </OrderItem>
+        </PaymentItemQty>
+      </PaymentItem>
     )
   })
 
   return (
     <>
+      <OrderId>{`Order ID : ${order?._id}`}</OrderId>
       {isLoggedIn ? (
         <>
-          <Row style={{ maxWidth: '100%', overflowX: 'hidden' }}>
-            <h2
-              style={{
-                textAlign: 'center',
-                maxWidth: '100%',
-                marginLeft: '40px',
-                marginTop: '20px',
-              }}
-            >{`OrderId - ${order?._id}`}</h2>
-          </Row>
+          <Container>
+            <Title>Order Summary</Title>
 
-          <Row
+            <Container style={{ width: '94%' }}>
+              <Title>Order Items</Title>
+              <Details>
+                <div>{orderItems}</div>
+              </Details>
+            </Container>
+
+            <Details>
+              <div>
+                <p>Total Items - {order?.totalQuantity}</p>
+                <p>Total Price - ${order?.totalAmount} </p>
+              </div>
+            </Details>
+            {!paymentStatus && (
+              <div>
+                {JSON.parse(localStorage.getItem('order')).paymentMethod ===
+                  'stripe' && order.isPaid === false ? (
+                  <Stripe
+                    payment={() => setPaymentStatus(true)}
+                    data={JSON.parse(localStorage.getItem('order'))}
+                    paymentSuccess={paymentSuccess}
+                  />
+                ) : (
+                  ''
+                )}
+              </div>
+            )}
+            {JSON.parse(localStorage.getItem('order')).isPaid && (
+              <h3>Order - Paid</h3>
+            )}
+          </Container>
+
+          <Container>
+            <Title>Shipping Details</Title>
+
+            <Details>
+              <h6>
+                Address - <span>{order.shippingAddress?.address}</span>
+              </h6>
+              <h6>
+                Country - <span>{order.shippingAddress?.country}</span>
+              </h6>
+              <h6>
+                City - <span>{order.shippingAddress?.city}</span>
+              </h6>
+              <h6>
+                Postal Code - <span>{order.shippingAddress?.postalCode}</span>
+              </h6>
+            </Details>
+          </Container>
+
+          {/* <Row
             style={{
               overflowX: 'hidden',
               maxWidth: '100%',
@@ -162,7 +207,7 @@ const Payment = () => {
                 </Card.Body>
               </Card>
             </Col>
-          </Row>
+          </Row> */}
         </>
       ) : (
         <h3 style={{ textAlign: 'center', marginTop: '40px' }}>

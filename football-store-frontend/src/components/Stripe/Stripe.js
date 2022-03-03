@@ -13,7 +13,7 @@ const promise = loadStripe(
   'pk_test_51KShxEIHP3y9z5gNppWegQ7G9m2uFCuTBGrvX4NpHasrM31ZpC9jgXkG8Qn3OkqNyfhYHzAGwDwmlFTokZyiJ9HT00246flD5j',
 )
 
-const CheckoutForm = ({ data: value, paymentSuccess }) => {
+const PaymentForm = ({ data: value, paymentSuccess }) => {
   const [processing, setProcessing] = useState('')
   const [clientSecret, setClientSecret] = useState('')
   const stripe = useStripe()
@@ -22,12 +22,12 @@ const CheckoutForm = ({ data: value, paymentSuccess }) => {
   const cardStyle = {
     style: {
       base: {
-        color: '#32325d',
+        color: '#fce883',
         fontFamily: 'Arial, sans-serif',
         fontSmoothing: 'antialiased',
         fontSize: '16px',
         '::placeholder': {
-          color: '#32325d',
+          color: '#fce883',
         },
       },
       invalid: {
@@ -55,7 +55,7 @@ const CheckoutForm = ({ data: value, paymentSuccess }) => {
 
   useEffect(() => {
     createPaymentIntent()
-  }, [])
+  })
 
   const handleOnSubmit = async (e) => {
     e.preventDefault()
@@ -98,6 +98,7 @@ const CheckoutForm = ({ data: value, paymentSuccess }) => {
         </p>
 
         <form id="payment-form" onSubmit={handleOnSubmit}>
+          <input type="text" class="form-control" placeholder="Name on card" />
           <CardElement option={cardStyle} id="card-element" />
           <button id="submit" style={{ marginTop: '40px' }} disabled={!stripe}>
             Pay ${value.totalAmount}
@@ -114,7 +115,7 @@ const Stripe = ({ data, paymentSuccess }) => {
     <>
       <Wrapper>
         <Elements stripe={promise}>
-          <CheckoutForm data={data} paymentSuccess={paymentSuccess} />
+          <PaymentForm data={data} paymentSuccess={paymentSuccess} />
         </Elements>
       </Wrapper>
     </>

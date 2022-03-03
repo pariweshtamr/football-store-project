@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { mobile } from '../../responsive'
 
 export const ProductListScreenContainer = styled.div``
 export const Title = styled.h1`
@@ -27,13 +26,18 @@ export const FilterText = styled.span`
   font-weight: 600;
   margin-right: 20px;
 
-  ${mobile({ marginRight: '16px' })}
+  @media screen and (max-width: 600px) {
+    margin-right: 16px;
+  }
 `
 export const ProductListSelect = styled.select`
   padding: 10px;
   margin-right: 20px;
   border: 1px teal solid;
   background-color: #fff;
-  ${mobile({ margin: '10px 0' })};
+
+  @media screen and (max-width: 600px) {
+    margin: 10px 0;
+  }
 `
 export const Option = styled.option``

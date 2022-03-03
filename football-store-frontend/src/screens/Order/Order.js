@@ -9,9 +9,6 @@ import {
   OrderItemName,
   OrderItemPrice,
   OrderItemQty,
-  Container,
-  Title,
-  Details,
   OrderButton,
   PaymentMethod,
   PaymentInput,
@@ -20,6 +17,7 @@ import {
   MethodPaypal,
 } from './OrderStyles'
 import LoadingBox from '../../components/LoadingBox/LoadingBox'
+import { Container, Details, Title } from '../../GlobalStyles'
 
 const Order = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
@@ -174,7 +172,11 @@ const Order = () => {
                     (Coming Soon...)
                   </PaymentLabel>
                   <MethodPaypal></MethodPaypal>
-                  <OrderButton type="submit" onClick={placeOrderHandler}>
+                  <OrderButton
+                    type="submit"
+                    onClick={placeOrderHandler}
+                    disabled={!payment}
+                  >
                     Select Payment Method
                   </OrderButton>
                 </PaymentMethod>

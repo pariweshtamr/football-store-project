@@ -16,6 +16,7 @@ import { Badge } from '@material-ui/core'
 import { ShoppingCartOutlined } from '@material-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { autoLogin, userLogout } from '../../redux/User/UserAction'
+import { clearCart } from '../../redux/Cart/CartSlice'
 
 const Navbar = () => {
   const { totalQuantity } = useSelector((state) => state.cart)
@@ -28,6 +29,7 @@ const Navbar = () => {
 
   const signoutHandler = () => {
     dispatch(userLogout())
+    dispatch(clearCart())
   }
 
   return (
