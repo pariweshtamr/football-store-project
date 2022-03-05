@@ -7,9 +7,6 @@ const app = express()
 import cors from 'cors'
 import helmet from 'helmet'
 
-import { isUser } from './middlewares/auth.middleware.js'
-import Order from './models/Order/Order.schema.js'
-
 const PORT = process.env.POT || 8000
 
 // Connect MongoDB
@@ -29,6 +26,7 @@ import productRouter from './routers/productRouter.js'
 import cartRouter from './routers/cartRouter.js'
 import tokenRouter from './routers/tokenRouter.js'
 import paymentRouter from './routers/paymentRouter.js'
+import orderRouter from './routers/orderRouter.js'
 
 // USE ROUTERS
 app.use('/api/v1/user', userRouter)
@@ -37,26 +35,7 @@ app.use('/api/v1/products', productRouter)
 app.use('/api/v1/cart', cartRouter)
 app.use('/api/v1/token', tokenRouter)
 app.use('/api/v1/payment', paymentRouter)
-
-app.get('/paid', isUser, async (req, res, next) => {
-  console.log('paid')
-  const id = req.id
-  console.log(id)
-  try {
-    const result = await Order.find({ user: id })
-    if (!result) {
-      res.json({
-        message: 'No orders placed',
-      })
-    }
-    const paidOrders = result.filter((order) => order.isPaid)
-
-    res.status(200).json({ paidOrders })
-  } catch (error) {
-    console.log(error)
-    res.status(501).json({ message: 'Some error occurred' })
-  }
-})
+app.use('/api/v1/order', orderRouter)
 
 app.use('/', (req, res) => {
   res.json('Server is ready')

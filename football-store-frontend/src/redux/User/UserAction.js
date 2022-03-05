@@ -15,7 +15,6 @@ import {
 } from '../../api/userAPI'
 import {
   autoLoginPending,
-  getUserDetailsSuccess,
   loginAuto,
   loginFail,
   loginSuccess,
@@ -66,6 +65,30 @@ export const userLogin = (loginInfo) => async (dispatch) => {
   dispatch(loginFail(data))
 }
 
+export const autoLogin = () => async (dispatch) => {
+  dispatch(autoLoginPending(true))
+  const accessJWT = window.sessionStorage.getItem('accessJWT')
+  const refreshJWT = window.localStorage.getItem('refreshJWT')
+
+  //1. accessJWT EXISTS
+  if (accessJWT) {
+    dispatch(loginAuto())
+    return
+  }
+
+  //2. accessJWT does not exist but refreshJWT exists
+  if (!accessJWT && refreshJWT) {
+    // CALL API to get refreshJWT
+    const result = await getNewAccessJWT()
+    if (result?.accessJWT) {
+      window.sessionStorage.setItem('accessJWT', result.accessJWT)
+      return dispatch(loginAuto())
+    }
+
+    dispatch(userLogout())
+  }
+}
+
 export const userLogout = () => async (dispatch) => {
   const accessJWT = window.sessionStorage.getItem('accessJWT')
   const refreshJWT = window.localStorage.getItem('refreshJWT')
@@ -92,35 +115,9 @@ export const fetchUserDetails = () => async (dispatch) => {
   }
 
   if (data?.user) {
-    return dispatch(getUserDetailsSuccess(data.user))
+    return dispatch(loginSuccess(data.user))
   }
   dispatch(requestFail(data))
-}
-
-export const autoLogin = () => async (dispatch) => {
-  dispatch(autoLoginPending(true))
-  const accessJWT = window.sessionStorage.getItem('accessJWT')
-  const refreshJWT = window.localStorage.getItem('refreshJWT')
-
-  const data = await getUser()
-
-  //1. accessJWT EXISTS
-  if (accessJWT && data?.user) {
-    dispatch(loginAuto(data.user))
-    return
-  }
-
-  //2. accessJWT does not exist but refreshJWT exists
-  if (!accessJWT && refreshJWT) {
-    // CALL API to get refreshJWT
-    const result = await getNewAccessJWT()
-    if (result?.accessJWT) {
-      window.sessionStorage.setItem('accessJWT', result.accessJWT)
-      return dispatch(loginAuto(data.user))
-    }
-
-    dispatch(userLogout())
-  }
 }
 
 export const userInfoUpdate = (userInfo) => async (dispatch) => {

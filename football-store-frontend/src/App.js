@@ -18,6 +18,7 @@ import Checkout from './screens/Checkout/Checkout'
 import Order from './screens/Order/Order'
 import Payment from './screens/Payment/Payment'
 import OrderSuccess from './screens/Order/OrderSuccess'
+import OrderHistory from './components/Order/OrderHistory'
 
 function App() {
   return (
@@ -64,6 +65,14 @@ function App() {
           element={
             <PrivateRoute>
               <OrderSuccess />
+            </PrivateRoute>
+          }
+        ></Route>
+        <Route
+          path="profile/orders/history"
+          element={
+            <PrivateRoute>
+              <OrderHistory />
             </PrivateRoute>
           }
         ></Route>

@@ -11,7 +11,7 @@ export const getNewAccessJWT = async () => {
   try {
     const { data } = await Axios.get(tokenApi, {
       headers: {
-        Authorization: window.localStorage.getItem('refreshJWT'),
+        authorization: window.localStorage.getItem('refreshJWT'),
       },
     })
     return data

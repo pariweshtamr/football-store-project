@@ -11,13 +11,13 @@ export const ProductsListContainer = styled.div`
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 `
 export const ProductItemContainer = styled.div`
   /* flex: 1; */
   padding: 0 20px;
-  margin: 10px;
+  margin: 5px;
   max-width: max-content;
   height: 40rem;
   border-radius: 10px;

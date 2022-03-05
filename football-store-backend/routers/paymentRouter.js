@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 
 const paymentRouter = express.Router()
 
-const stripe = new Stripe(
+const stripe = Stripe(
   'sk_test_51KShxEIHP3y9z5gN3jl9bAn6dhZAFwZVKqjawzAtfGpwdCRRRBGh5lErkFwkS79XsYjZ8zKqq9hLAKQhMp6wi4Fe00i6Uxq9S6',
 )
 
@@ -18,6 +18,9 @@ paymentRouter.post('/', async (req, res) => {
       description: 'Soccer Boot Store.',
       currency: 'AUD',
       amount: parseInt(totalAmount),
+      automatic_payment_methods: {
+        enabled: true,
+      },
     })
     res.status(200).json({ clientSecret: paymentIntent.client_secret })
   } catch (error) {

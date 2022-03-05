@@ -38,6 +38,7 @@ const PaymentForm = ({ data: value, paymentSuccess }) => {
   }
 
   console.log(value)
+
   const createPaymentIntent = async () => {
     try {
       const { data } = await Axios.post(
@@ -55,7 +56,7 @@ const PaymentForm = ({ data: value, paymentSuccess }) => {
 
   useEffect(() => {
     createPaymentIntent()
-  })
+  }, [])
 
   const handleOnSubmit = async (e) => {
     e.preventDefault()
@@ -98,7 +99,11 @@ const PaymentForm = ({ data: value, paymentSuccess }) => {
         </p>
 
         <form id="payment-form" onSubmit={handleOnSubmit}>
-          <input type="text" class="form-control" placeholder="Name on card" />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Name on card"
+          />
           <CardElement option={cardStyle} id="card-element" />
           <button id="submit" style={{ marginTop: '40px' }} disabled={!stripe}>
             Pay ${value.totalAmount}

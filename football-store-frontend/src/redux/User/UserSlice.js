@@ -43,12 +43,11 @@ const userSlice = createSlice({
       localStorage.setItem('authState', JSON.stringify(payload))
     },
 
-    getUserDetailsSuccess: (state, { payload }) => {
-      state.userInfo = payload || {}
-      state.userFetchResponse = {}
-      state.isLoggedIn = true
-      state.isLoading = false
-    },
+    // getUserDetailsSuccess: (state, { payload }) => {
+    //   state.userInfo = payload || {}
+    //   state.userFetchResponse = {}
+    //   state.isLoading = false
+    // },
 
     profileUpdateSuccess: (state, { payload }) => {
       state.userUpdateResponse = payload || {}
@@ -59,8 +58,8 @@ const userSlice = createSlice({
       state.isPending = false
     },
 
-    loginAuto: (state, { payload }) => {
-      state.userInfo = payload || {}
+    loginAuto: (state) => {
+      // state.userInfo = payload || {}
       state.isLoggedIn = true
       state.isAutoLoginPending = false
     },
@@ -106,7 +105,6 @@ export const {
   loginAuto,
   logoutSuccess,
   autoLoginPending,
-  getUserDetailsSuccess,
   profileUpdateSuccess,
   passwordUpdateSuccess,
   resetPassResponse,

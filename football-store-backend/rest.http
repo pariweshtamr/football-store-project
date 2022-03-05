@@ -39,7 +39,7 @@ Content-Type: application/json
 
 ### Get user details
 GET http://localhost:8000/api/v1/user
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNoNyIsImlhdCI6MTY0NDY5ODIyMiwiZXhwIjoxNjQ0Njk5MTIyfQ.AchhoYPuhiF17zYFBtfjj_JbAM2Oskwzc8y3blNy7Wo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNoNyIsImlhdCI6MTY0NjQ4MTc2NCwiZXhwIjoxNjQ2NDgyNjY0fQ.vVmDtVRSza2x5mhlFrAdgWW4H98WkudPp-PhKAwZLUI
 
 
 ### update password
@@ -90,4 +90,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNo
 PATCH http://localhost:8000/api/v1/cart/orderstatus
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNoNyIsImlhdCI6MTY0NjA0MDcxNCwiZXhwIjoxNjQ2MDQxNjE0fQ.L4Se42IMnwzqEFqL5HOn6NyNwaq63caoN3YDu0I5zsA
 
-
+###
+GET http://localhost:8000/api/v1/order/paid
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNoNyIsImlhdCI6MTY0NjM4NTMyMCwiZXhwIjoxNjQ2Mzg2MjIwfQ.SnRXm8bPX9Axig35aHGj8p9-SYxubVFcf1p5SL07niQ

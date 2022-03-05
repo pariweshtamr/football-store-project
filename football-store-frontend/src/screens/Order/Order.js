@@ -23,7 +23,6 @@ const Order = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
   const state = useSelector((state) => state.order)
   const cart = useSelector((state) => state.cart)
-  const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
