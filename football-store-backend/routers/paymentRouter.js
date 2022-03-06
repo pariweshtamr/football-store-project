@@ -3,28 +3,26 @@ import Stripe from 'stripe'
 
 const paymentRouter = express.Router()
 
-const stripe = Stripe(
+const stripe = new Stripe(
   'sk_test_51KShxEIHP3y9z5gN3jl9bAn6dhZAFwZVKqjawzAtfGpwdCRRRBGh5lErkFwkS79XsYjZ8zKqq9hLAKQhMp6wi4Fe00i6Uxq9S6',
 )
 
-paymentRouter.post('/', async (req, res) => {
-  const {
-    value: { totalAmount },
-  } = req.body
-  console.log(totalAmount)
-
+paymentRouter.post('/create', async (req, res) => {
   try {
+    const { amount, shipping } = req.body
     const paymentIntent = await stripe.paymentIntents.create({
       description: 'Soccer Boot Store.',
-      currency: 'AUD',
-      amount: parseInt(totalAmount),
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      shipping,
+      amount,
+      currency: 'aud',
     })
-    res.status(200).json({ clientSecret: paymentIntent.client_secret })
+
+    res.status(200).send(paymentIntent.client_secret)
   } catch (error) {
-    console.log(error, 'paymentrouter error')
+    res.status(500).json({
+      statusCode: 500,
+      message: error.message,
+    })
   }
 })
 

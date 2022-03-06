@@ -5,7 +5,6 @@ const stateCurrentOrder = JSON.parse(localStorage.getItem('order')) || {}
 const initialState = {
   pastOrders: [],
   currentOrder: stateCurrentOrder,
-  paymentMethod: JSON.parse(localStorage.getItem('order'))?.paymentMethod || '',
   address: JSON.parse(localStorage.getItem('order'))?.shippingAddress || {},
 }
 

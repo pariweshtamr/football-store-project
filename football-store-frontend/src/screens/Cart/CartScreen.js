@@ -71,6 +71,10 @@ const CartScreen = () => {
     dispatch(clearCart())
   }
 
+  const handleOnCheckout = () => {
+    navigate('/cart/payment')
+  }
+
   let shipping = 15
   let discount = 15
 
@@ -176,7 +180,7 @@ const CartScreen = () => {
                 </CartSummaryItemPrice>
               </CartSummaryItem>
 
-              <CartSummaryButton onClick={() => navigate('/cart/checkout')}>
+              <CartSummaryButton onClick={() => handleOnCheckout()}>
                 PROCEED TO CHECKOUT
               </CartSummaryButton>
             </CartSummary>

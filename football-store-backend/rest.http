@@ -93,3 +93,6 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNo
 ###
 GET http://localhost:8000/api/v1/order/paid
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhcml3ZXNoNyIsImlhdCI6MTY0NjM4NTMyMCwiZXhwIjoxNjQ2Mzg2MjIwfQ.SnRXm8bPX9Axig35aHGj8p9-SYxubVFcf1p5SL07niQ
+
+###
+GET http://localhost:8000/api/v1/payment/create

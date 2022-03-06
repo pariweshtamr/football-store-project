@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   border: 1px solid teal;
-  width: 60%;
+  width: 100%;
   padding: 10px 20px;
-  margin: 20px;
+  margin: 2rem 0;
   border-radius: 5px;
   box-shadow: 5px 10px 20px grey;
 
