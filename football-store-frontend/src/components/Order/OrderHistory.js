@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button, Row, Accordion, Col } from 'react-bootstrap'
+import { Card, Accordion } from 'react-bootstrap'
 
 import Axios from 'axios'
 import { Details, Hr, Title } from '../../GlobalStyles'
-import { HistoryContainer, HistoryTitle } from './OrderHistoryStyles.js'
+import {
+  HistoryContainer,
+  HistoryTitle,
+  NoOrder,
+  OrderList,
+} from './OrderHistoryStyles.js'
 import {
   OrderItem,
   OrderItemImage,
@@ -39,14 +44,15 @@ const OrderHistory = () => {
     fetchOrder()
   }, [])
 
-  const paidOrders = orders.map((order) => {
+  const paidOrders = orders.map((order, i) => {
     console.log(order)
     return (
       <div key={order._id}>
         <HistoryContainer>
-          <Title
-            style={{ textAlign: 'center' }}
-          >{`Order ID: ${order._id}`}</Title>
+          {i + 1}.&nbsp;
+          <Title style={{ textAlign: 'center' }}>
+            {`Order ID: ${order._id}`}
+          </Title>
           <Details>
             <p>
               <span>Total Price - </span>${order.totalAmount}
@@ -68,10 +74,9 @@ const OrderHistory = () => {
               {new Date(order.createdAt).toDateString()}
             </p>
           </Details>
-
-          <Accordion defaultActiveKey="0" flush>
+          <Accordion flush>
             <Card>
-              <Accordion.Item as={Button} variant="link" eventKey="0">
+              <Accordion.Item eventKey="0">
                 <Accordion.Header>Order Items</Accordion.Header>
                 <Accordion.Body>
                   {order.cartItems.map((item, i) => {
@@ -105,35 +110,22 @@ const OrderHistory = () => {
       {orders.length === 0 ? (
         <>
           {noOrder ? (
-            <h2 style={{ textAlign: 'center', marginTop: '20px' }}>
-              No Orders Found
-            </h2>
+            <NoOrder>
+              <h2 style={{ textAlign: 'center', marginTop: '20px' }}>
+                No Orders Found
+              </h2>
+            </NoOrder>
           ) : (
-            <h2 style={{ textAlign: 'center', marginTop: '20px' }}>
-              Loading....
-            </h2>
+            <NoOrder>
+              <h2 style={{ textAlign: 'center', marginTop: '20px' }}>
+                Loading....
+              </h2>
+            </NoOrder>
           )}
         </>
       ) : (
         <>
-          <div
-            style={{
-              textAlign: 'center',
-              marginTop: '20px',
-              marginBottom: '20px',
-            }}
-          ></div>
-
-          <Row
-            style={{
-              maxWidth: '100%',
-              justifyContent: 'space-between',
-              marginBottom: '40px',
-              marginTop: '40px',
-            }}
-          >
-            {paidOrders}
-          </Row>
+          <OrderList>{paidOrders}</OrderList>
         </>
       )}
     </>

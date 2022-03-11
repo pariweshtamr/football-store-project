@@ -46,6 +46,8 @@ const Payment = () => {
         `/order/${JSON.parse(localStorage.getItem('order'))?._id}/success`,
         { state: { data } },
       )
+
+      window.scrollTo(0, 0)
     } catch (error) {
       console.log(error.message)
     }
@@ -83,7 +85,7 @@ const Payment = () => {
           <Container>
             <Title>Order Summary</Title>
 
-            <Container style={{ width: '94%' }}>
+            <Container style={{ width: '91%' }}>
               <Title>Order Items</Title>
               <Details>
                 <div>{orderItems}</div>
@@ -91,7 +93,7 @@ const Payment = () => {
             </Container>
 
             <Details>
-              <div>
+              <div style={{ textAlign: 'center' }}>
                 <p>Total Items - {order?.totalQuantity}</p>
                 <p>Total Price - ${order?.totalAmount} </p>
               </div>
@@ -113,25 +115,6 @@ const Payment = () => {
             {JSON.parse(localStorage.getItem('order')).isPaid && (
               <h3>Order - Paid</h3>
             )}
-          </Container>
-
-          <Container>
-            <Title>Shipping Details</Title>
-
-            <Details>
-              <h6>
-                Address - <span>{order.shippingAddress?.address}</span>
-              </h6>
-              <h6>
-                Country - <span>{order.shippingAddress?.country}</span>
-              </h6>
-              <h6>
-                City - <span>{order.shippingAddress?.city}</span>
-              </h6>
-              <h6>
-                Postal Code - <span>{order.shippingAddress?.postal_code}</span>
-              </h6>
-            </Details>
           </Container>
         </>
       ) : (

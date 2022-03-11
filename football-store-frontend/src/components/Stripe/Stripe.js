@@ -82,7 +82,9 @@ const PaymentForm = ({ data: value, paymentSuccess }) => {
   return (
     <>
       <div>
-        <p>Test Card Number - 4242 4242 4242 4242</p>
+        <p style={{ textAlign: 'center' }}>
+          Test Card Number - 4242 4242 4242 4242
+        </p>
 
         <PaymentDetailsForm id="payment-form" onSubmit={handleOnSubmit}>
           <PaymentDetailsTitle>CARD DETAILS</PaymentDetailsTitle>
@@ -90,10 +92,10 @@ const PaymentForm = ({ data: value, paymentSuccess }) => {
           <CardElement options={configCardElement} id="card-element" />
           <PaymentButton
             type="submit"
-            style={{ marginTop: '40px' }}
+            style={{ marginTop: '40px', backgroundColor: '#000' }}
             disabled={!stripe}
           >
-            Pay ${value.totalAmount}
+            PAY ${value.totalAmount}
           </PaymentButton>
           {processing && <h5>Processing.....</h5>}
         </PaymentDetailsForm>

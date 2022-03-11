@@ -73,6 +73,8 @@ const CartScreen = () => {
 
   const handleOnCheckout = () => {
     navigate('/cart/checkout')
+
+    window.scrollTo(0, 0)
   }
 
   let shipping = 0

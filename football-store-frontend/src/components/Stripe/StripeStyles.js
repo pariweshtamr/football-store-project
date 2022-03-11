@@ -203,14 +203,4 @@ export const ShippingInput = styled.input`
   margin: 10px 10px 20px 0;
   padding: 10px;
 `
-export const PaymentButton = styled.button`
-  width: 100%;
-  font-weight: bolder;
-  margin-top: 20px;
-  border: none;
-  border-radius: 5px;
-  padding: 15px;
-  background-color: #ffc107e3;
-  color: black;
-  cursor: pointer;
-`
+export const PaymentButton = styled.button``

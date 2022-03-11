@@ -5,7 +5,6 @@ import Announcement from '../../components/Announcement/Announcement'
 import Banner from '../../components/Banner/Banner'
 import Categories from '../../components/Category/Categories'
 import { Hr } from '../../GlobalStyles'
-import { autoLogin, fetchUserDetails } from '../../redux/User/UserAction'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
@@ -13,10 +12,6 @@ const HomeScreen = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
 
   useEffect(() => {
-    dispatch(fetchUserDetails())
-
-    !isLoggedIn && dispatch(autoLogin())
-
     isLoggedIn && navigate('/', { replace: true })
   }, [isLoggedIn, navigate, dispatch])
   return (

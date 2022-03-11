@@ -38,6 +38,8 @@ const ProductScreen = () => {
   const addToCartHandler = (selectedProduct) => {
     dispatch(addProductToCart(selectedProduct))
     navigate('/cart')
+
+    window.scrollTo(0, 0)
   }
 
   useEffect(() => {

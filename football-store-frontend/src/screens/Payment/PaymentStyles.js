@@ -4,7 +4,7 @@ export const PaymentItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 `
 export const PaymentItemImage = styled.img`
   width: 10%;

@@ -20,3 +20,17 @@ export const HistoryTitle = styled.div`
   font-weight: 600;
   text-decoration: underline;
 `
+
+export const NoOrder = styled.div`
+  text-align: center;
+  margin-top: 2rem;
+`
+
+export const OrderList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-content: center;
+  gap: 2rem;
+  padding: 2rem;
+`
