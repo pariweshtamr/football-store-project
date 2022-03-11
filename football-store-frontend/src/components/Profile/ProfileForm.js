@@ -115,8 +115,8 @@ export const ProfileForm = () => {
             <ProfileInput
               name="email"
               type="email"
+              disabled
               value={userProfile.email}
-              onChange={changeHandler}
             ></ProfileInput>
           </ProfileItemContainer>
 

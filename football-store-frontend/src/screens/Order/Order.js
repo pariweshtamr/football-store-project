@@ -15,6 +15,7 @@ import {
   PaymentLabel,
   MethodStripe,
   MethodPaypal,
+  OrderDetails,
 } from './OrderStyles'
 import LoadingBox from '../../components/LoadingBox/LoadingBox'
 import { Container, Details, Hr, Title } from '../../GlobalStyles'
@@ -101,103 +102,106 @@ const Order = () => {
               <Hr>
                 <hr />
               </Hr>
-              <Container>
-                <Title>Shipping Details</Title>
+              <OrderDetails>
+                <div style={{ width: '40%' }}>
+                  <Container>
+                    <Title>Order Summary</Title>
 
-                <Details>
-                  <h6>
-                    Address - <span>{address}</span>
-                  </h6>
-                  <h6>
-                    Country - <span>{country}</span>
-                  </h6>
-                  <h6>
-                    City - <span>{city}</span>
-                  </h6>
-                  <h6>
-                    Postal Code - <span>{postal_code}</span>
-                  </h6>
-                </Details>
-              </Container>
+                    <Details>
+                      <div>
+                        Total Items :{' '}
+                        <span>
+                          {
+                            JSON.parse(localStorage.getItem('cartState'))
+                              .totalQuantity
+                          }
+                        </span>
+                      </div>
+                      <div>
+                        Total Price - $
+                        <span>
+                          {
+                            JSON.parse(localStorage.getItem('cartState'))
+                              .totalAmount
+                          }
+                        </span>
+                      </div>
+                    </Details>
 
-              <Container>
-                <Title>Order Summary</Title>
+                    <PaymentMethod>
+                      <MethodStripe>
+                        <PaymentInput
+                          type="radio"
+                          name="flexRadioDefault"
+                          id="flexRadioDefault1"
+                          value="stripe"
+                          onChange={(e) => setPayment(e.target.value)}
+                        />
 
-                <Details>
-                  <div>
-                    Total Items :{' '}
-                    <span>
-                      {
-                        JSON.parse(localStorage.getItem('cartState'))
-                          .totalQuantity
-                      }
-                    </span>
-                  </div>
-                  <div>
-                    Total Price - $
-                    <span>
-                      {
-                        JSON.parse(localStorage.getItem('cartState'))
-                          .totalAmount
-                      }
-                    </span>
-                  </div>
-                </Details>
+                        <PaymentLabel htmlFor="flexRadioDefault1">
+                          Stripe{' '}
+                          <i
+                            className="fab fa-cc-stripe"
+                            style={{
+                              color: '#5433FF',
+                            }}
+                          ></i>
+                        </PaymentLabel>
+                      </MethodStripe>
+                      <PaymentInput
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault1"
+                        disabled
+                      />
 
-                <PaymentMethod>
-                  <MethodStripe>
-                    <PaymentInput
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault1"
-                      value="stripe"
-                      onChange={(e) => setPayment(e.target.value)}
-                    />
+                      <PaymentLabel>
+                        Paypal{' '}
+                        <i
+                          className="fab fa-paypal"
+                          style={{
+                            color: '#00457C',
+                          }}
+                        ></i>{' '}
+                        (Coming Soon...)
+                      </PaymentLabel>
+                      <MethodPaypal></MethodPaypal>
+                      <OrderButton
+                        type="submit"
+                        onClick={placeOrderHandler}
+                        disabled={!payment}
+                      >
+                        Select Payment Method
+                      </OrderButton>
+                    </PaymentMethod>
+                  </Container>
 
-                    <PaymentLabel htmlFor="flexRadioDefault1">
-                      Stripe{' '}
-                      <i
-                        className="fab fa-cc-stripe"
-                        style={{
-                          color: '#5433FF',
-                        }}
-                      ></i>
-                    </PaymentLabel>
-                  </MethodStripe>
-                  <PaymentInput
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
-                    disabled
-                  />
+                  <Container>
+                    <Title>Shipping Details</Title>
 
-                  <PaymentLabel>
-                    Paypal{' '}
-                    <i
-                      className="fab fa-paypal"
-                      style={{
-                        color: '#00457C',
-                      }}
-                    ></i>{' '}
-                    (Coming Soon...)
-                  </PaymentLabel>
-                  <MethodPaypal></MethodPaypal>
-                  <OrderButton
-                    type="submit"
-                    onClick={placeOrderHandler}
-                    disabled={!payment}
-                  >
-                    Select Payment Method
-                  </OrderButton>
-                </PaymentMethod>
-              </Container>
-
-              <Container>
-                <Title>Order Items</Title>
-                <Details>
-                  <div>{orderItems}</div>
-                </Details>
-              </Container>
+                    <Details>
+                      <h6>
+                        Address - <span>{address}</span>
+                      </h6>
+                      <h6>
+                        Country - <span>{country}</span>
+                      </h6>
+                      <h6>
+                        City - <span>{city}</span>
+                      </h6>
+                      <h6>
+                        Postal Code - <span>{postal_code}</span>
+                      </h6>
+                    </Details>
+                  </Container>
+                </div>
+                <Container style={{ width: '60%' }}>
+                  <Title>Order Items</Title>
+                  <Details>
+                    <div>{orderItems}</div>
+                  </Details>
+                </Container>
+              </OrderDetails>
             </>
           ) : (
             <LoadingBox />

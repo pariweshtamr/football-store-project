@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { mobile } from '../../responsive'
 
 export const ProfileFormContainer = styled.div`
   /* width: 100vw; */
@@ -9,7 +8,9 @@ export const ProfileFormContainer = styled.div`
   padding: 2rem;
   justify-content: flex-start;
 
-  ${mobile({ height: '100%' })}
+  @media screen and (max-width: 600px) {
+    height: 100%;
+  }
 `
 export const FormTitle = styled.h1`
   font-size: 24px;
@@ -24,7 +25,10 @@ export const ProfileFormWrapper = styled.form`
   opacity: 0.9;
   border-radius: 5px;
 
-  ${mobile({ width: '80%', margin: '20px 0' })}
+  @media screen and (max-width: 600px) {
+    width: 80%;
+    margin: 20px 0;
+  }
 `
 export const ProfileItemContainer = styled.div`
   display: flex;
@@ -52,6 +56,9 @@ export const ProfileButton = styled.button`
   background-color: #ffc107e3;
   color: black;
   cursor: pointer;
+  font-weight: 500;
 
-  ${mobile({ padding: '10px' })}
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+  }
 `

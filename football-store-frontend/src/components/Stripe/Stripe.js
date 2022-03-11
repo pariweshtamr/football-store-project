@@ -13,6 +13,7 @@ import {
   PaymentDetailsTitle,
   Wrapper,
 } from './StripeStyles'
+import { Details } from '../../GlobalStyles'
 
 const promise = loadStripe(
   'pk_test_51KShxEIHP3y9z5gNppWegQ7G9m2uFCuTBGrvX4NpHasrM31ZpC9jgXkG8Qn3OkqNyfhYHzAGwDwmlFTokZyiJ9HT00246flD5j',
@@ -82,9 +83,11 @@ const PaymentForm = ({ data: value, paymentSuccess }) => {
   return (
     <>
       <div>
-        <p style={{ textAlign: 'center' }}>
-          Test Card Number - 4242 4242 4242 4242
-        </p>
+        <Details>
+          <p style={{ textAlign: 'center' }}>
+            Test Card Number - <span> 4242 4242 4242 4242</span>
+          </p>
+        </Details>
 
         <PaymentDetailsForm id="payment-form" onSubmit={handleOnSubmit}>
           <PaymentDetailsTitle>CARD DETAILS</PaymentDetailsTitle>

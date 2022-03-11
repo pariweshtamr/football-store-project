@@ -182,6 +182,7 @@ export const PaymentInput = styled.input`
 export const PaymentDetailsForm = styled.form`
   display: flex;
   flex-direction: column;
+  margin: 2rem 0;
 `
 export const PaymentDetailsRow = styled.div`
   display: flex;

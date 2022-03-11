@@ -14,10 +14,18 @@ export const PaymentItemDetails = styled.div`
   display: flex;
 `
 export const OrderId = styled.h2`
-  padding: 2rem;
+  padding: 2rem 0 0 2rem;
   text-decoration: underline;
   color: teal;
 `
 export const PaymentItemName = styled.div``
 export const PaymentItemPrice = styled.div``
 export const PaymentItemQty = styled.div``
+export const PaymentBg = styled.div`
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.6)
+  );
+  background-size: cover;
+  padding-bottom: 2rem;
+`

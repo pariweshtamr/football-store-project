@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { mobile } from '../../responsive'
 
 export const RegisterContainer = styled.div`
   width: 100%;
@@ -15,7 +14,9 @@ export const RegisterContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
 
-  ${mobile({ height: '100%' })}
+  @media screen and (max-width: 600px) {
+    height: 100%;
+  }
 `
 export const RegisterWrapper = styled.div`
   padding: 20px;
@@ -25,7 +26,10 @@ export const RegisterWrapper = styled.div`
   border-radius: 5px;
   margin-left: 5rem;
 
-  ${mobile({ width: '80%', margin: '20px 0' })}
+  @media screen and (max-width: 600px) {
+    width: 80%;
+    margin: 20px 0;
+  }
 `
 export const RegisterTitle = styled.h1`
   font-size: 24px;
@@ -37,7 +41,9 @@ export const RegisterForm = styled.form`
   display: flex;
   flex-wrap: wrap;
 
-  ${mobile({ flexDirection: 'column' })}
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 export const RegisterInput = styled.input`
   flex: 1;
@@ -55,7 +61,9 @@ export const RegisterButton = styled.button`
   color: black;
   cursor: pointer;
 
-  ${mobile({ padding: '10px' })}
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+  }
 `
 
 export const LoginOption = styled.p`
@@ -72,5 +80,7 @@ export const LoginLink = styled(Link)`
     color: #000;
   }
 
-  ${mobile({ padding: '10px' })}
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+  }
 `

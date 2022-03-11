@@ -8,12 +8,14 @@ import { clearCart } from '../../redux/Cart/CartSlice'
 import { Container, Details, Hr, Title } from '../../GlobalStyles'
 import {
   OrderId,
+  PaymentBg,
   PaymentItem,
   PaymentItemImage,
   PaymentItemName,
   PaymentItemPrice,
   PaymentItemQty,
 } from './PaymentStyles'
+import paymentWallpaper from '../../assets/paymentWallpaper.jpeg'
 
 const Payment = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
@@ -79,49 +81,55 @@ const Payment = () => {
       <Hr>
         <hr />
       </Hr>
-      <OrderId>{`Order ID : ${order?._id}`}</OrderId>
-      {isLoggedIn ? (
-        <>
-          <Container>
-            <Title>Order Summary</Title>
+      <PaymentBg style={{ backgroundImage: `url(${paymentWallpaper})` }}>
+        <OrderId>{`Order ID : ${order?._id}`}</OrderId>
+        {isLoggedIn ? (
+          <>
+            <Container style={{ width: '60%' }}>
+              <Title>Order Summary</Title>
 
-            <Container style={{ width: '91%' }}>
-              <Title>Order Items</Title>
+              <Container style={{ width: '93%', marginBottom: '1.5rem' }}>
+                <Title>Order Items</Title>
+                <Details>
+                  <div>{orderItems}</div>
+                </Details>
+              </Container>
+
               <Details>
-                <div>{orderItems}</div>
+                <div style={{ textAlign: 'center' }}>
+                  <p>
+                    Total Items - <span>{order?.totalQuantity}</span>
+                  </p>
+                  <p>
+                    Total Price - <span>${order?.totalAmount} </span>
+                  </p>
+                </div>
               </Details>
+              {!paymentStatus && (
+                <div>
+                  {JSON.parse(localStorage.getItem('order')).paymentMethod ===
+                    'stripe' && order.isPaid === false ? (
+                    <Stripe
+                      payment={() => setPaymentStatus(true)}
+                      data={JSON.parse(localStorage.getItem('order'))}
+                      paymentSuccess={paymentSuccess}
+                    />
+                  ) : (
+                    ''
+                  )}
+                </div>
+              )}
+              {JSON.parse(localStorage.getItem('order')).isPaid && (
+                <h3>Order - Paid</h3>
+              )}
             </Container>
-
-            <Details>
-              <div style={{ textAlign: 'center' }}>
-                <p>Total Items - {order?.totalQuantity}</p>
-                <p>Total Price - ${order?.totalAmount} </p>
-              </div>
-            </Details>
-            {!paymentStatus && (
-              <div>
-                {JSON.parse(localStorage.getItem('order')).paymentMethod ===
-                  'stripe' && order.isPaid === false ? (
-                  <Stripe
-                    payment={() => setPaymentStatus(true)}
-                    data={JSON.parse(localStorage.getItem('order'))}
-                    paymentSuccess={paymentSuccess}
-                  />
-                ) : (
-                  ''
-                )}
-              </div>
-            )}
-            {JSON.parse(localStorage.getItem('order')).isPaid && (
-              <h3>Order - Paid</h3>
-            )}
-          </Container>
-        </>
-      ) : (
-        <h3 style={{ textAlign: 'center', marginTop: '40px' }}>
-          Please Sign In to Place Order!
-        </h3>
-      )}
+          </>
+        ) : (
+          <h3 style={{ textAlign: 'center', marginTop: '40px' }}>
+            Please Sign In to Place Order!
+          </h3>
+        )}
+      </PaymentBg>
     </>
   )
 }

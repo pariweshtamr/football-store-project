@@ -1,6 +1,9 @@
 import styled from 'styled-components'
-import { mobile } from '../../responsive'
 
+export const OrderDetails = styled.div`
+  display: flex;
+  width: 100%;
+`
 export const OrderItem = styled.div`
   display: flex;
   justify-content: space-between;
@@ -9,7 +12,7 @@ export const OrderItem = styled.div`
   text-decoration: none;
 `
 export const OrderItemImage = styled.img`
-  width: 25%;
+  width: 10%;
 `
 
 export const OrderItemDetails = styled.div`
@@ -22,8 +25,10 @@ export const OrderItemPrice = styled.div``
 export const OrderItemQty = styled.div``
 
 export const OrderButton = styled.button`
-  width: 30%;
-  margin: 20px 0;
+  width: 100%;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 30px 0 5px 0;
   border: none;
   border-radius: 5px;
   padding: 10px;
@@ -31,7 +36,9 @@ export const OrderButton = styled.button`
   color: black;
   cursor: pointer;
 
-  ${mobile({ padding: '10px' })}
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+  }
 `
 
 export const PaymentMethod = styled.div`

@@ -2,16 +2,16 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  border: 1px solid teal;
-  width: 60%;
+  background: #fcf5f5;
+  border: 1px solid #fcf5f5;
   padding: 10px 20px;
-  margin: 2rem;
+  margin: 1.5rem 1.5rem 0 1.5rem;
   border-radius: 5px;
   box-shadow: 2px 5px 8px grey;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: max-content;
 `
 
 export const Title = styled.div`
@@ -46,6 +46,11 @@ export const Button = styled(Link)`
   text-decoration: none;
   text-align: center;
   text-transform: uppercase;
+  font-weight: 500;
+
+  &:hover {
+    color: black;
+  }
 `
 
 export const Hr = styled.div`
