@@ -31,7 +31,6 @@ const Payment = () => {
         'http://localhost:8000/api/v1/cart/orderstatus',
         {
           isPaid: true,
-          orderStatus: 'paid',
           orderId: JSON.parse(localStorage.getItem('order'))?._id,
         },
         {

@@ -145,7 +145,7 @@ export const CartSummary = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 5px;
   padding: 20px;
-  height: 60vh;
+  height: max-content;
 `
 export const CartSummaryTitle = styled.h2`
   font-weight: 300;

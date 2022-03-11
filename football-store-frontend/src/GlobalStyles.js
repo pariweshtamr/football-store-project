@@ -15,19 +15,22 @@ export const Container = styled.div`
 `
 
 export const Title = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 10px;
   text-decoration: underline;
 `
 
 export const Details = styled.div`
-  span {
+  p {
     font-weight: 400;
+  }
+  span {
+    font-weight: 500;
   }
 
   > div {
-    font-weight: 500;
+    font-weight: 600;
   }
 `
 

@@ -28,6 +28,8 @@ const Order = () => {
   const [loading, setLoading] = useState(false)
   const [payment, setPayment] = useState('')
 
+  console.log(cart)
+
   const { address, city, postal_code, country } = JSON.parse(
     localStorage.getItem('shippingAddress'),
   )
@@ -81,7 +83,7 @@ const Order = () => {
         <OrderItemPrice>${item.price}</OrderItemPrice>
 
         <OrderItemQty>
-          x&nbsp;
+          &nbsp;x&nbsp;
           {item.productQuantity}
         </OrderItemQty>
       </OrderItem>

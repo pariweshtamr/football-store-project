@@ -2,6 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Card, Button, Row, Accordion, Col } from 'react-bootstrap'
 
 import Axios from 'axios'
+import { Details, Hr, Title } from '../../GlobalStyles'
+import { HistoryContainer, HistoryTitle } from './OrderHistoryStyles.js'
+import {
+  OrderItem,
+  OrderItemImage,
+  OrderItemName,
+  OrderItemPrice,
+  OrderItemQty,
+} from '../../screens/Order/OrderStyles'
 
 const OrderHistory = () => {
   const [orders, setOrders] = useState([])
@@ -34,72 +43,70 @@ const OrderHistory = () => {
     console.log(order)
     return (
       <div key={order._id}>
-        <Col style={{ marginLeft: '20px', marginBottom: '30px' }}>
-          <Card style={{ width: '35rem' }}>
-            <Card.Img variant="top" src={order.image} />
-            <Card.Body>
-              <Card.Title>
-                <h4>{`Order Id - ${order._id}`}</h4>
-                <p>
-                  <span>Total Price - </span>${order.totalAmount}
-                </p>
-                <p>
-                  <span>Total Items - </span>
-                  {order.totalQuantity}
-                </p>
-                <p>
-                  <span>Order Status - </span>
-                  {'Paid'}
-                </p>
-                <p>
-                  <span>Payment Method - </span>
-                  {order.paymentMethod.toUpperCase(0)}
-                </p>
-                <p>
-                  <span>Order Date - </span>
-                  {new Date(order.createdAt).toDateString()}
-                </p>
-              </Card.Title>
-              <Accordion defaultActiveKey="0" flush>
-                <Card>
-                  <Card.Header>
-                    <Accordion.Item as={Button} variant="link" eventKey="0">
-                      Order Items
-                    </Accordion.Item>
-                  </Card.Header>
-                  <Card.Body>
-                    <Row>
-                      {order.cartItems.map((item) => {
-                        return (
-                          <Card style={{ width: '18rem', marginTop: '20px' }}>
-                            <Card.Img variant="top" src={item.image} />
-                            <Card.Body>
-                              <Card.Title>{item.name}</Card.Title>
-                              <Card.Text>Quantity - {item.qty}</Card.Text>
-                              <Card.Text>Price - ${item.price}</Card.Text>
-                            </Card.Body>
-                          </Card>
-                        )
-                      })}
-                    </Row>
-                  </Card.Body>
-                </Card>
-              </Accordion>
-            </Card.Body>
-          </Card>
-        </Col>
+        <HistoryContainer>
+          <Title
+            style={{ textAlign: 'center' }}
+          >{`Order ID: ${order._id}`}</Title>
+          <Details>
+            <p>
+              <span>Total Price - </span>${order.totalAmount}
+            </p>
+            <p>
+              <span>Total Items - </span>
+              {order.totalQuantity}
+            </p>
+            <p>
+              <span>Order Status - </span>
+              {'Paid'}
+            </p>
+            <p>
+              <span>Payment Method - </span>
+              {order.paymentMethod.toUpperCase(0)}
+            </p>
+            <p>
+              <span>Order Date - </span>
+              {new Date(order.createdAt).toDateString()}
+            </p>
+          </Details>
+
+          <Accordion defaultActiveKey="0" flush>
+            <Card>
+              <Accordion.Item as={Button} variant="link" eventKey="0">
+                <Accordion.Header>Order Items</Accordion.Header>
+                <Accordion.Body>
+                  {order.cartItems.map((item, i) => {
+                    return (
+                      <OrderItem key={i}>
+                        <OrderItemImage src={item.image} alt="product img" />
+                        <OrderItemName>{item.name}</OrderItemName>
+                        <OrderItemPrice>${item.price}</OrderItemPrice>
+                        <OrderItemQty>
+                          x&nbsp;
+                          {item.productQuantity}
+                        </OrderItemQty>
+                      </OrderItem>
+                    )
+                  })}
+                </Accordion.Body>
+              </Accordion.Item>
+            </Card>
+          </Accordion>
+        </HistoryContainer>
       </div>
     )
   })
   console.log(paidOrders)
   return (
     <>
-      <h2 style={{ textAlign: 'center', marginTop: '20px' }}>Orders Placed</h2>
+      <Hr>
+        <hr />
+      </Hr>
+      <HistoryTitle>Your Orders</HistoryTitle>
       {orders.length === 0 ? (
         <>
           {noOrder ? (
             <h2 style={{ textAlign: 'center', marginTop: '20px' }}>
-              No Order Found
+              No Orders Found
             </h2>
           ) : (
             <h2 style={{ textAlign: 'center', marginTop: '20px' }}>

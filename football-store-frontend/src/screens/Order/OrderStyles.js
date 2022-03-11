@@ -6,6 +6,7 @@ export const OrderItem = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
+  text-decoration: none;
 `
 export const OrderItemImage = styled.img`
   width: 25%;
@@ -14,7 +15,9 @@ export const OrderItemImage = styled.img`
 export const OrderItemDetails = styled.div`
   display: flex;
 `
-export const OrderItemName = styled.div``
+export const OrderItemName = styled.div`
+  text-decoration: none;
+`
 export const OrderItemPrice = styled.div``
 export const OrderItemQty = styled.div``
 

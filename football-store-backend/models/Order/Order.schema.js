@@ -10,7 +10,7 @@ const OrderSchema = new Schema(
     cartItems: [
       {
         name: { type: String },
-        qty: { type: Number },
+        productQuantity: { type: Number },
         image: { type: String },
         price: { type: String },
         numReviews: { type: String },
