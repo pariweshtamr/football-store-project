@@ -17,7 +17,7 @@ import {
   MethodPaypal,
 } from './OrderStyles'
 import LoadingBox from '../../components/LoadingBox/LoadingBox'
-import { Container, Details, Title } from '../../GlobalStyles'
+import { Container, Details, Hr, Title } from '../../GlobalStyles'
 
 const Order = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
@@ -28,7 +28,7 @@ const Order = () => {
   const [loading, setLoading] = useState(false)
   const [payment, setPayment] = useState('')
 
-  const { address, city, postalCode, country } = JSON.parse(
+  const { address, city, postal_code, country } = JSON.parse(
     localStorage.getItem('shippingAddress'),
   )
 
@@ -70,23 +70,23 @@ const Order = () => {
 
   console.log(JSON.parse(localStorage.getItem(state)))
 
-  const orderItems = JSON.parse(localStorage.getItem('state'))?.cartItems.map(
-    (item) => {
-      return (
-        <OrderItem key={item._id}>
-          <OrderItemImage src={item.image} alt="product img" />
+  const orderItems = JSON.parse(
+    localStorage.getItem('cartState'),
+  )?.cartItems.map((item) => {
+    return (
+      <OrderItem key={item._id}>
+        <OrderItemImage src={item.image} alt="product img" />
 
-          <OrderItemName>{item.name}</OrderItemName>
-          <OrderItemPrice>${item.price}</OrderItemPrice>
+        <OrderItemName>{item.name}</OrderItemName>
+        <OrderItemPrice>${item.price}</OrderItemPrice>
 
-          <OrderItemQty>
-            x&nbsp;
-            {item.productQuantity}
-          </OrderItemQty>
-        </OrderItem>
-      )
-    },
-  )
+        <OrderItemQty>
+          x&nbsp;
+          {item.productQuantity}
+        </OrderItemQty>
+      </OrderItem>
+    )
+  })
 
   return loading ? (
     <LoadingBox />
@@ -96,6 +96,9 @@ const Order = () => {
         <>
           {state ? (
             <>
+              <Hr>
+                <hr />
+              </Hr>
               <Container>
                 <Title>Shipping Details</Title>
 
@@ -110,7 +113,7 @@ const Order = () => {
                     City - <span>{city}</span>
                   </h6>
                   <h6>
-                    Postal Code - <span>{postalCode}</span>
+                    Postal Code - <span>{postal_code}</span>
                   </h6>
                 </Details>
               </Container>
@@ -122,13 +125,19 @@ const Order = () => {
                   <div>
                     Total Items :{' '}
                     <span>
-                      {JSON.parse(localStorage.getItem('state')).totalQuantity}
+                      {
+                        JSON.parse(localStorage.getItem('cartState'))
+                          .totalQuantity
+                      }
                     </span>
                   </div>
                   <div>
                     Total Price - $
                     <span>
-                      {JSON.parse(localStorage.getItem('state')).totalAmount}
+                      {
+                        JSON.parse(localStorage.getItem('cartState'))
+                          .totalAmount
+                      }
                     </span>
                   </div>
                 </Details>

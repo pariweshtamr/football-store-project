@@ -14,7 +14,9 @@ export const PaymentItemDetails = styled.div`
   display: flex;
 `
 export const OrderId = styled.h2`
-  padding: 10px 20px;
+  padding: 2rem;
+  text-decoration: underline;
+  color: teal;
 `
 export const PaymentItemName = styled.div``
 export const PaymentItemPrice = styled.div``

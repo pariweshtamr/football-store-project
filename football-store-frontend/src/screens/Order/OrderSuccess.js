@@ -1,24 +1,38 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { Button, Hr } from '../../GlobalStyles'
+import { SuccessContainer, SuccessIcon } from './OrderStyles'
 
 const OrderSuccess = () => {
+  const location = useLocation()
+  const { order } = location.state.data
+
   return (
     <>
-      <div style={{ textAlign: 'center', marginTop: '50px' }}>
-        <i
-          className="fas fa-check-circle fa-8x"
-          style={{ color: 'green', textAlign: 'center', marginBottom: '20px' }}
-        ></i>
-      </div>
-      <h2 style={{ textAlign: 'center' }}>
-        Order has been Successfully placed! You will recieve your order shortly{' '}
-        <i className="fas fa-smile" style={{ color: 'orange' }}></i>
-      </h2>
-      <h3 style={{ textAlign: 'center' }}>
-        You can see your Order{' '}
-        <i className="fas fa-shopping-bag" style={{ color: 'blue' }}></i> from
-        the Order history in <Link to="/profile"> My Account!</Link>
-      </h3>
+      <Hr>
+        <hr />
+      </Hr>
+      <SuccessContainer>
+        <SuccessIcon>
+          <i className="fas fa-check-circle fa-8x"></i>
+        </SuccessIcon>
+        <h4>
+          {order._id
+            ? `Order has been Successfully placed! Your order number is ${order._id}`
+            : `Successful. Your order is being prepared...`}{' '}
+          &nbsp;
+          <i className="fas fa-smile" style={{ color: 'orange' }}></i>
+        </h4>
+        <h5 style={{ textAlign: 'center' }}>
+          You can see your order{' '}
+          <i className="fas fa-shopping-bag" style={{ color: 'teal' }}></i> from
+          the Order history section in <Link to="/profile"> My Account!</Link>
+        </h5>
+
+        <Button to="/" style={{ width: '10rem' }}>
+          Home
+        </Button>
+      </SuccessContainer>
     </>
   )
 }

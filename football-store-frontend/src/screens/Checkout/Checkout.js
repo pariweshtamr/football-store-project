@@ -14,6 +14,7 @@ import {
   ShippingLabel,
   ShippingRow,
 } from './CheckoutStyles'
+import { Hr } from '../../GlobalStyles'
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -27,14 +28,14 @@ const Checkout = () => {
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('shippingAddress'))) {
-      const { address, postalCode, country, city } = JSON.parse(
+      const { address, postal_code, country, city } = JSON.parse(
         localStorage.getItem('shippingAddress'),
       )
 
       addressRef.current.value = address
       cityRef.current.value = city
       countryRef.current.value = country
-      postalCodeRef.current.value = postalCode
+      postalCodeRef.current.value = postal_code
     }
   }, [])
 
@@ -57,7 +58,7 @@ const Checkout = () => {
         address: addressRef.current.value,
         country: countryRef.current.value,
         city: cityRef.current.value,
-        postalCode: postalCodeRef.current.value,
+        postal_code: postalCodeRef.current.value,
       }),
     )
     navigate('/cart/checkout/order')
@@ -66,6 +67,9 @@ const Checkout = () => {
     <>
       {isLoggedIn ? (
         <>
+          <Hr>
+            <hr />
+          </Hr>
           <CheckoutContainer>
             <CheckoutWrapper>
               <CheckoutTitle>SHIPPING DETAILS</CheckoutTitle>

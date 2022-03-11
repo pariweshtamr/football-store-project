@@ -7,7 +7,12 @@ import {
   useElements,
 } from '@stripe/react-stripe-js'
 import Axios from 'axios'
-import { Wrapper } from './StripeStyles'
+import {
+  PaymentButton,
+  PaymentDetailsForm,
+  PaymentDetailsTitle,
+  Wrapper,
+} from './StripeStyles'
 
 const promise = loadStripe(
   'pk_test_51KShxEIHP3y9z5gNppWegQ7G9m2uFCuTBGrvX4NpHasrM31ZpC9jgXkG8Qn3OkqNyfhYHzAGwDwmlFTokZyiJ9HT00246flD5j',
@@ -15,57 +20,24 @@ const promise = loadStripe(
 
 const PaymentForm = ({ data: value, paymentSuccess }) => {
   const [processing, setProcessing] = useState('')
-  const [clientSecret, setClientSecret] = useState('')
   const stripe = useStripe()
   const elements = useElements()
 
-  const cardStyle = {
-    style: {
-      base: {
-        color: '#fce883',
-        fontFamily: 'Arial, sans-serif',
-        fontSmoothing: 'antialiased',
-        fontSize: '16px',
-        '::placeholder': {
-          color: '#fce883',
-        },
-      },
-      invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a',
-      },
-    },
-  }
-
   console.log(value)
-
-  const createPaymentIntent = async () => {
-    try {
-      const { data } = await Axios.post(
-        'http://localhost:8000/api/v1/payment',
-        {
-          value,
-        },
-      )
-      console.log(data)
-      setClientSecret(data.clientSecret)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    createPaymentIntent()
-  }, [])
 
   const handleOnSubmit = async (e) => {
     e.preventDefault()
     setProcessing(true)
-    console.log('clicked')
-    console.log(clientSecret)
+
+    const res = await Axios.post(
+      'http://localhost:8000/api/v1/payment/create',
+      {
+        amount: value.totalAmount * 100,
+      },
+    )
 
     try {
-      const payload = await stripe.confirmCardPayment(clientSecret, {
+      const payload = await stripe.confirmCardPayment(res.data, {
         payment_method: {
           card: elements.getElement(CardElement),
         },
@@ -87,29 +59,44 @@ const PaymentForm = ({ data: value, paymentSuccess }) => {
     }
   }
 
+  const configCardElement = {
+    iconStyle: 'solid',
+    style: {
+      base: {
+        color: 'teal',
+        fontSmoothing: 'antialiased',
+        fontSize: '14px',
+        '::placeholder': {
+          color: 'gray',
+        },
+      },
+      invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a',
+      },
+    },
+
+    hidePostalCode: true,
+  }
+
   return (
     <>
       <div>
-        <p>
-          Test Card Number - 4242 4242 4242 4242
-          <span style={{ margin: '50px' }}> MM/YY - 11/33</span>
-        </p>
-        <p>
-          CVC - 111<span style={{ margin: '50px' }}> ZIP - 11111</span>
-        </p>
+        <p>Test Card Number - 4242 4242 4242 4242</p>
 
-        <form id="payment-form" onSubmit={handleOnSubmit}>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Name on card"
-          />
-          <CardElement option={cardStyle} id="card-element" />
-          <button id="submit" style={{ marginTop: '40px' }} disabled={!stripe}>
+        <PaymentDetailsForm id="payment-form" onSubmit={handleOnSubmit}>
+          <PaymentDetailsTitle>CARD DETAILS</PaymentDetailsTitle>
+          <hr />
+          <CardElement options={configCardElement} id="card-element" />
+          <PaymentButton
+            type="submit"
+            style={{ marginTop: '40px' }}
+            disabled={!stripe}
+          >
             Pay ${value.totalAmount}
-          </button>
+          </PaymentButton>
           {processing && <h5>Processing.....</h5>}
-        </form>
+        </PaymentDetailsForm>
       </div>
     </>
   )

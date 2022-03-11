@@ -103,12 +103,6 @@ export const Button = styled.button`
   }
 `
 
-export const Hr = styled.div`
-  width: 95vw;
-  height: 1px;
-  color: teal;
-  margin: 0 auto;
-`
 export const Unavailable = styled.div`
   color: red;
   font-size: 1.5rem;

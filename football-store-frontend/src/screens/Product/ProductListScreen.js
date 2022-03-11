@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Products from '../../components/Product/Products'
+import { Hr } from '../../GlobalStyles'
 import {
   ProductListScreenContainer,
   Title,
   FilterContainer,
   Filter,
-  Hr,
   FilterText,
   ProductListSelect,
   Option,

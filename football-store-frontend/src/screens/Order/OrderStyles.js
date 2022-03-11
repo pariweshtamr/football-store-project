@@ -50,3 +50,18 @@ export const PaymentLabel = styled.label`
   text-transform: uppercase;
   letter-spacing: 2px;
 `
+
+export const SuccessIcon = styled.div`
+  color: green;
+  text-align: center;
+  margin-bottom: 20px;
+`
+
+export const SuccessContainer = styled.div`
+  height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+`

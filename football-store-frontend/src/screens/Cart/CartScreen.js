@@ -72,7 +72,7 @@ const CartScreen = () => {
   }
 
   const handleOnCheckout = () => {
-    navigate('/cart/payment')
+    navigate('/cart/checkout')
   }
 
   let shipping = 15

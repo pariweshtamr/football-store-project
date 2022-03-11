@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   border: 1px solid teal;
-  width: 100%;
+  width: 60%;
   padding: 10px 20px;
-  margin: 2rem 0;
+  margin: 2rem;
   border-radius: 5px;
   box-shadow: 5px 10px 20px grey;
 
@@ -41,4 +41,13 @@ export const Button = styled(Link)`
   color: black;
   cursor: pointer;
   text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+`
+
+export const Hr = styled.div`
+  width: 95vw;
+  height: 1px;
+  color: teal;
+  margin: 0 auto;
 `

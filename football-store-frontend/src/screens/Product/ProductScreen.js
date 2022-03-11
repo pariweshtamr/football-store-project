@@ -19,11 +19,11 @@ import {
   Size,
   Unavailable,
   FilterSizeOption,
-  Hr,
 } from './ProductScreenStyles'
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchAProductById } from '../../redux/Product/ProductAction'
 import { addProductToCart } from '../../redux/Cart/CartSlice'
+import { Hr } from '../../GlobalStyles'
 
 const ProductScreen = () => {
   const dispatch = useDispatch()

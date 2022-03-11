@@ -6,12 +6,6 @@ export const Title = styled.h1`
   padding-left: 20px;
   font-weight: bolder;
 `
-export const Hr = styled.div`
-  width: 95vw;
-  height: 1px;
-  color: teal;
-  margin: 0 auto;
-`
 
 export const FilterContainer = styled.div`
   display: flex;
