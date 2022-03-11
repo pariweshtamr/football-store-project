@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Announcement from '../../components/Announcement/Announcement'
 import Banner from '../../components/Banner/Banner'
 import Categories from '../../components/Category/Categories'
+import { Hr } from '../../GlobalStyles'
 import { autoLogin, fetchUserDetails } from '../../redux/User/UserAction'
 
 const HomeScreen = () => {
@@ -20,6 +21,9 @@ const HomeScreen = () => {
   }, [isLoggedIn, navigate, dispatch])
   return (
     <>
+      <Hr>
+        <hr />
+      </Hr>
       <Announcement />
       <Banner />
       <Categories />

@@ -31,9 +31,8 @@ import {
   RemoveButton,
   CartActionButton,
   ProductLink,
-  Hr,
+  Hr2,
   ClearCartButton,
-  HrMain,
   TopText,
 } from './CartScreenStyles'
 import MessageBox from '../../components/MessageBox/MessageBox'
@@ -46,6 +45,7 @@ import {
   getTotals,
   removeProductFromCart,
 } from '../../redux/Cart/CartSlice'
+import { Hr } from '../../GlobalStyles'
 
 const CartScreen = () => {
   const dispatch = useDispatch()
@@ -75,14 +75,13 @@ const CartScreen = () => {
     navigate('/cart/checkout')
   }
 
-  let shipping = 15
-  let discount = 15
+  let shipping = 0
 
   return (
     <CartContainer>
-      <HrMain>
+      <Hr>
         <hr />
-      </HrMain>
+      </Hr>
       <Announcement />
       <CartWrapper>
         <CartTitle>Your Cart</CartTitle>
@@ -143,7 +142,7 @@ const CartScreen = () => {
                       </CartActionButton>
                     </CartProductDetails>
                   </CartProduct>
-                  <Hr />
+                  <Hr2 />
                 </div>
               ))}
               <ClearCartButton type="button" onClick={() => clearCartHandler()}>
@@ -164,19 +163,11 @@ const CartScreen = () => {
                 <CartSummaryItemText>Shipping: </CartSummaryItemText>
                 <CartSummaryItemPrice>${shipping}</CartSummaryItemPrice>
               </CartSummaryItem>
-              <CartSummaryItem>
-                <CartSummaryItemText>Discount: </CartSummaryItemText>
-                <CartSummaryItemDiscount variant="danger">
-                  ${cart.totalAmount > 250 ? `(${discount})` : 0}
-                </CartSummaryItemDiscount>
-              </CartSummaryItem>
+
               <CartSummaryItem type="total">
                 <CartSummaryItemText>Total</CartSummaryItemText>
                 <CartSummaryItemPrice>
-                  $
-                  {cart.totalAmount +
-                    shipping -
-                    `${cart.totalAmount > 250 ? `${discount}` : 0}`}
+                  ${cart.totalAmount + shipping}
                 </CartSummaryItemPrice>
               </CartSummaryItem>
 

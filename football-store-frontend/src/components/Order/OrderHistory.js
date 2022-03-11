@@ -14,7 +14,7 @@ const OrderHistory = () => {
           'http://localhost:8000/api/v1/order/paid',
           {
             headers: {
-              Authorization: window.sessionStorage.getItem('accessJWT'),
+              authorization: window.sessionStorage.getItem('accessJWT'),
             },
           },
         )
@@ -33,40 +33,40 @@ const OrderHistory = () => {
   const paidOrders = orders.map((order) => {
     console.log(order)
     return (
-      <Col style={{ marginLeft: '20px', marginBottom: '30px' }}>
-        <Card style={{ width: '35rem' }}>
-          <Card.Img variant="top" src={order.image} />
-          <Card.Body>
-            <Card.Title>
-              <h4>{`Order Id - ${order._id}`}</h4>
-              <p>
-                <span>Total Price - </span>${order.totalPrice}
-              </p>
-              <p>
-                <span>Total Items - </span>
-                {order.totalItems}
-              </p>
-              <p>
-                <span>Order Status - </span>
-                {'Paid'}
-              </p>
-              <p>
-                <span>Payment Method - </span>
-                {order.paymentMethod.toUpperCase(0)}
-              </p>
-              <p>
-                <span>Order Date - </span>
-                {new Date(order.createdAt).toDateString()}
-              </p>
-            </Card.Title>
-            <Accordion defaultActiveKey="0">
-              <Card>
-                <Card.Header>
-                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                    Order Items
-                  </Accordion.Toggle>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
+      <div key={order._id}>
+        <Col style={{ marginLeft: '20px', marginBottom: '30px' }}>
+          <Card style={{ width: '35rem' }}>
+            <Card.Img variant="top" src={order.image} />
+            <Card.Body>
+              <Card.Title>
+                <h4>{`Order Id - ${order._id}`}</h4>
+                <p>
+                  <span>Total Price - </span>${order.totalAmount}
+                </p>
+                <p>
+                  <span>Total Items - </span>
+                  {order.totalQuantity}
+                </p>
+                <p>
+                  <span>Order Status - </span>
+                  {'Paid'}
+                </p>
+                <p>
+                  <span>Payment Method - </span>
+                  {order.paymentMethod.toUpperCase(0)}
+                </p>
+                <p>
+                  <span>Order Date - </span>
+                  {new Date(order.createdAt).toDateString()}
+                </p>
+              </Card.Title>
+              <Accordion defaultActiveKey="0" flush>
+                <Card>
+                  <Card.Header>
+                    <Accordion.Item as={Button} variant="link" eventKey="0">
+                      Order Items
+                    </Accordion.Item>
+                  </Card.Header>
                   <Card.Body>
                     <Row>
                       {order.cartItems.map((item) => {
@@ -83,12 +83,12 @@ const OrderHistory = () => {
                       })}
                     </Row>
                   </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-          </Card.Body>
-        </Card>
-      </Col>
+                </Card>
+              </Accordion>
+            </Card.Body>
+          </Card>
+        </Col>
+      </div>
     )
   })
   console.log(paidOrders)

@@ -134,7 +134,7 @@ export const RemoveButton = styled.button`
     background-color: #f8f4f4;
   }
 `
-export const Hr = styled.hr`
+export const Hr2 = styled.hr`
   background-color: #1a1a1a;
   border: none;
   height: 1px;
@@ -182,10 +182,4 @@ export const ClearCartButton = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
-`
-export const HrMain = styled.div`
-  width: 95vw;
-  height: 1px;
-  color: teal;
-  margin: 0 auto;
 `

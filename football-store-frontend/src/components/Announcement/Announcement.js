@@ -4,7 +4,7 @@ import { AnnouncementContainer } from './AnnouncementStyles'
 const Announcement = () => {
   return (
     <AnnouncementContainer>
-      Amazing Deal! Free Shipping on orders over $250. Limited time only!!!
+      Amazing Deal! Free Shipping on all orders for a limited time!!!
     </AnnouncementContainer>
   )
 }
