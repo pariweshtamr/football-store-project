@@ -53,6 +53,7 @@ export const getUser = async () => {
         authorization: window.sessionStorage.getItem('accessJWT'),
       },
     })
+    console.log(data, 'userapi')
     return data
   } catch (error) {
     console.log(error)

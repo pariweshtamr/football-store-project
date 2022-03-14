@@ -6,7 +6,7 @@ import { Details, Hr, Title } from '../../GlobalStyles'
 import {
   HistoryContainer,
   HistoryTitle,
-  NoOrder,
+  NoOrderContainer,
   OrderList,
 } from './OrderHistoryStyles.js'
 import {
@@ -108,21 +108,9 @@ const OrderHistory = () => {
       </Hr>
       <HistoryTitle>Your Orders</HistoryTitle>
       {orders.length === 0 ? (
-        <>
-          {noOrder ? (
-            <NoOrder>
-              <h2 style={{ textAlign: 'center', marginTop: '20px' }}>
-                No Orders Found
-              </h2>
-            </NoOrder>
-          ) : (
-            <NoOrder>
-              <h2 style={{ textAlign: 'center', marginTop: '20px' }}>
-                Loading....
-              </h2>
-            </NoOrder>
-          )}
-        </>
+        <NoOrderContainer>
+          {noOrder ? <h2>No Orders Found!</h2> : <h2>Loading....</h2>}
+        </NoOrderContainer>
       ) : (
         <>
           <OrderList>{paidOrders}</OrderList>

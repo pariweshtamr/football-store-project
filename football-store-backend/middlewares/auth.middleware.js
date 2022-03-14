@@ -5,6 +5,7 @@ import { getUserById } from '../models/User/User.model.js'
 export const isUser = async (req, res, next) => {
   try {
     const { authorization } = req.headers
+
     if (authorization) {
       //validate the accessJWT
       const decoded = verifyAccessJWT(authorization)

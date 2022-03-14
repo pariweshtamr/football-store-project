@@ -26,18 +26,18 @@ const Checkout = () => {
   const cityRef = useRef()
   const postalCodeRef = useRef()
 
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem('shippingAddress'))) {
-      const { address, postal_code, country, city } = JSON.parse(
-        localStorage.getItem('shippingAddress'),
-      )
+  // useEffect(() => {
+  //   if (JSON.parse(localStorage.getItem('shippingAddress'))) {
+  //     const { address, postal_code, country, city } = JSON.parse(
+  //       localStorage.getItem('shippingAddress'),
+  //     )
 
-      addressRef.current.value = address
-      cityRef.current.value = city
-      countryRef.current.value = country
-      postalCodeRef.current.value = postal_code
-    }
-  }, [])
+  //     addressRef.current.value = address
+  //     cityRef.current.value = city
+  //     countryRef.current.value = country
+  //     postalCodeRef.current.value = postal_code
+  //   }
+  // }, [])
 
   const checkoutHandler = (e) => {
     e.preventDefault()
