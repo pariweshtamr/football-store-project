@@ -45,7 +45,7 @@ const Navbar = () => {
             {isLoggedIn ? (
               <Welcome>
                 <UserGreet>
-                  Hi,{' '}
+                  Hi,
                   <ProfileLink to="/profile">{userInfo.firstName}</ProfileLink>
                 </UserGreet>
                 <MenuLink to="/" onClick={signoutHandler}>

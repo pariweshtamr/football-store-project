@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Axios from 'axios'
 import Stripe from '../../components/Stripe/Stripe'
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,7 +19,6 @@ import paymentWallpaper from '../../assets/paymentWallpaper.jpeg'
 
 const Payment = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
-  const [paymentStatus, setPaymentStatus] = useState(false)
   const { currentOrder: order } = useSelector((state) => state.order)
   console.log(order)
   const orders = useSelector((state) => state.order)
@@ -55,7 +54,6 @@ const Payment = () => {
     }
 
     //RESET CART AFTER PAYMENT
-    setPaymentStatus(true)
     dispatch(clearCart())
   }
   console.log(orders.currentOrder.cartItems)
@@ -105,19 +103,17 @@ const Payment = () => {
                   </p>
                 </div>
               </Details>
-              {!paymentStatus && (
-                <div>
-                  {JSON.parse(localStorage.getItem('order')).paymentMethod ===
-                    'stripe' && order.isPaid === false ? (
-                    <Stripe
-                      data={JSON.parse(localStorage.getItem('order'))}
-                      paymentSuccess={paymentSuccess}
-                    />
-                  ) : (
-                    ''
-                  )}
-                </div>
-              )}
+              <div>
+                {JSON.parse(localStorage.getItem('order')).paymentMethod ===
+                  'stripe' && order.isPaid === false ? (
+                  <Stripe
+                    data={JSON.parse(localStorage.getItem('order'))}
+                    paymentSuccess={paymentSuccess}
+                  />
+                ) : (
+                  ''
+                )}
+              </div>
               {JSON.parse(localStorage.getItem('order')).isPaid && (
                 <h3>Order - Paid</h3>
               )}

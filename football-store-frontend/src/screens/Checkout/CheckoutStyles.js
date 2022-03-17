@@ -14,7 +14,9 @@ export const CheckoutContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  ${mobile({ height: '100%' })}
+  @media screen and (max-width: 600px) {
+    height: 100%;
+  }
 `
 export const CheckoutWrapper = styled.div`
   padding: 20px;
@@ -24,7 +26,10 @@ export const CheckoutWrapper = styled.div`
   border-radius: 5px;
   margin: 0 auto;
 
-  ${mobile({ width: '80%', margin: '20px 0' })}
+  @media screen and (max-width: 600px) {
+    width: 80%;
+    margin: 20px 0;
+  }
 `
 export const CheckoutTitle = styled.h1`
   font-size: 24px;
@@ -35,12 +40,15 @@ export const CheckoutTitle = styled.h1`
 export const ShippingForm = styled.form`
   display: flex;
   flex-direction: column;
-  ${mobile({ flexDirection: 'column' })}
 `
 export const ShippingRow = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    gap: 20px;
+  }
 `
 export const ShippingDetails = styled.label`
   display: flex;
@@ -55,15 +63,7 @@ export const ShippingInput = styled.input`
   padding: 10px;
   height: 3.2rem;
 `
-export const CountryInput = styled.div`
-  select {
-    height: 3.2rem;
-    min-width: 40%;
-    width: 100%;
-    margin: 10px 10px 20px 0;
-    padding: 10px;
-  }
-`
+
 export const OrderButton = styled.button`
   width: 100%;
   margin-top: 20px;
@@ -74,5 +74,7 @@ export const OrderButton = styled.button`
   color: black;
   cursor: pointer;
 
-  ${mobile({ padding: '10px' })}
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+  }
 `

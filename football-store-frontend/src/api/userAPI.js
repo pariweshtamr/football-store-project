@@ -10,7 +10,6 @@ const userApi = rootUrl + '/user'
 export const createUser = async (newUser) => {
   try {
     const { data } = await Axios.post(userApi + '/register', newUser)
-    console.log(data)
     return data
   } catch (error) {
     console.log(error)
@@ -24,7 +23,6 @@ export const createUser = async (newUser) => {
 export const verifyNewUser = async (info) => {
   try {
     const { data } = await Axios.patch(userApi + '/email-verification', info)
-    console.log(data)
     return data
   } catch (error) {
     console.log(error)
@@ -54,7 +52,6 @@ export const getUser = async () => {
         authorization: window.sessionStorage.getItem('accessJWT'),
       },
     })
-    console.log(data, 'userapi')
     return data
   } catch (error) {
     console.log(error)

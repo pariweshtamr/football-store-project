@@ -5,7 +5,7 @@ import Announcement from '../../components/Announcement/Announcement'
 import Banner from '../../components/Banner/Banner'
 import Categories from '../../components/Category/Categories'
 import { Hr } from '../../GlobalStyles'
-import { autoLogin, fetchUserDetails } from '../../redux/User/UserAction'
+// import { autoLogin } from '../../redux/User/UserAction'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()

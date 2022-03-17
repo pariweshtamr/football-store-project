@@ -14,7 +14,7 @@ export const NavWrapper = styled.div`
   justify-content: space-between;
 
   @media screen and (max-width: 600px) {
-    padding: 10px 5px;
+    padding: 10px 15px;
   }
 `
 export const Left = styled.div`
@@ -24,7 +24,7 @@ export const Left = styled.div`
   align-items: center;
   @media screen and (max-width: 600px) {
     flex: 1;
-    justify-content: center;
+    justify-content: flex-start;
   }
 `
 
@@ -43,7 +43,7 @@ export const Logo = styled.h1`
   justify-content: center;
 
   @media screen and (max-width: 600px) {
-    font-size: 16px;
+    font-size: 18px;
   }
 `
 export const Right = styled.div`
@@ -53,7 +53,7 @@ export const Right = styled.div`
   justify-content: flex-end;
 
   @media screen and (max-width: 600px) {
-    justify-content: center;
+    justify-content: space-between;
   }
 `
 export const Welcome = styled.div`
@@ -64,6 +64,7 @@ export const Welcome = styled.div`
   @media screen and (max-width: 600px) {
     flex: 3;
     justify-content: center;
+    font-size: 14px;
   }
 `
 export const MenuItem = styled.div`
@@ -85,6 +86,10 @@ export const MenuLink = styled(Link)`
 
   &:hover {
     color: #000;
+  }
+
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
   }
 `
 export const ProfileLink = styled(Link)`

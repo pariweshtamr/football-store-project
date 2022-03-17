@@ -49,7 +49,7 @@ const OrderHistory = () => {
     return (
       <div key={order._id}>
         <HistoryContainer>
-          {i + 1}.&nbsp;
+          <strong>{i + 1}.&nbsp;</strong>
           <Title style={{ textAlign: 'center' }}>
             {`Order ID: ${order._id}`}
           </Title>

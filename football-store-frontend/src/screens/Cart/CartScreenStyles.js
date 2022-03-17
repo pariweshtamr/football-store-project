@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { mobile } from '../../responsive'
 
 export const CartContainer = styled.div``
 export const ShopLink = styled(Link)`
@@ -14,7 +13,9 @@ export const ProductLink = styled(Link)`
 export const CartWrapper = styled.div`
   padding: 20px;
 
-  ${mobile({ padding: '10px' })}
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+  }
 `
 export const CartTitle = styled.h1`
   font-weight: 300;
@@ -28,14 +29,21 @@ export const CartTop = styled.div`
   justify-content: flex-start;
   padding: 20px 0px;
 
-  ${mobile({ padding: '5px', margin: '20px 0' })}
+  @media screen and (max-width: 600px) {
+    padding: 5px;
+    margin: 20px 0;
+    justify-content: center;
+  }
 `
 export const CartTopButton = styled.button`
   padding: 10px;
   font-weight: 600;
   cursor: pointer;
 
-  ${mobile({ padding: '5px', fontSize: '13px' })}
+  @media screen and (max-width: 600px) {
+    padding: 5px;
+    font-size: 13px;
+  }
 `
 export const CartTopTexts = styled.div`
   display: flex;
@@ -45,25 +53,40 @@ export const TopText = styled.span`
   cursor: pointer;
   margin: 0 35px;
 
-  ${mobile({ display: 'none' })}
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `
 export const CartBottom = styled.div`
   display: flex;
   justify-content: space-between;
 
-  ${mobile({ flexDirection: 'column' })}
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 export const CartProductInfo = styled.div`
   flex: 3;
   margin-right: 1rem;
 
-  ${mobile({ marginBottom: '40px' })}
+  @media screen and (max-width: 600px) {
+    margin-bottom: 40px;
+    margin-right: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+  }
 `
 export const CartProduct = styled.div`
   display: flex;
   justify-content: space-between;
 
-  ${mobile({ flexDirection: 'column' })}
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `
 export const CartProductDetails = styled.div`
   display: flex;
@@ -72,6 +95,11 @@ export const CartProductDetails = styled.div`
 export const CartProductImage = styled.img`
   width: 200px;
   height: 200px;
+
+  @media screen and (max-width: 600px) {
+    width: 120px;
+    height: 120px;
+  }
 `
 export const CartProductDescription = styled.div`
   padding: 20px;
@@ -79,7 +107,11 @@ export const CartProductDescription = styled.div`
   flex-direction: column;
   justify-content: center;
 `
-export const CartProductName = styled.span``
+export const CartProductName = styled.span`
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+  }
+`
 
 export const CartPriceDetail = styled.div`
   flex: 1;
@@ -98,13 +130,18 @@ export const CartProductQty = styled.span`
   font-size: 24px;
   margin: 0px 20px;
 
-  ${mobile({ margin: '0px 15px' })}
+  @media screen and (max-width: 600px) {
+    margin: 0px 15px;
+    font-size: 16px;
+  }
 `
 export const CartProductSize = styled.select`
   font-size: 24px;
   margin: 10px;
 
-  ${mobile({ margin: '0px 15px' })}
+  @media screen and (max-width: 600px) {
+    margin: 0px 15px;
+  }
 `
 export const CartProductInfoTitle = styled.div`
   font-weight: bolder;
@@ -116,11 +153,17 @@ export const FilterCartSizeOption = styled.option``
 export const CartProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
+  @media screen and (max-width: 600px) {
+    font-size: 20px;
+  }
 `
 export const CartActionButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 600px) {
+    font-size: 10px;
+  }
 `
 export const RemoveButton = styled.button`
   max-height: 3rem;
@@ -132,6 +175,10 @@ export const RemoveButton = styled.button`
 
   &:hover {
     background-color: #f8f4f4;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 5px;
+    margin-left: 20px;
   }
 `
 export const Hr2 = styled.hr`
@@ -182,4 +229,10 @@ export const ClearCartButton = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
+
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+    font-size: 13px;
+    width: 150px;
+  }
 `
