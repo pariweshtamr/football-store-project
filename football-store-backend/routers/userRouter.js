@@ -8,6 +8,7 @@ import {
 import { getJWTs } from '../helpers/jwt.helper.js'
 import { isUser } from '../middlewares/auth.middleware.js'
 import {
+  createUserValidation,
   forgotPasswordResetFormValidation,
   loginUserFormValidation,
   passwordUpdateFormValidation,
@@ -27,11 +28,12 @@ import {
   updateUserProfile,
   updateUserProfileByEmail,
 } from '../models/User/User.model.js'
+import Order from '../models/Order/Order.schema.js'
 
 const userRouter = express.Router()
 
 // CREATE NEW USER
-userRouter.post('/register', async (req, res) => {
+userRouter.post('/register', createUserValidation, async (req, res) => {
   try {
     //encrypt password
     const hashPass = hashPassword(req.body.password)
@@ -309,4 +311,5 @@ userRouter.post(
     }
   },
 )
+
 export default userRouter

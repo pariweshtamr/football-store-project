@@ -30,7 +30,7 @@ const Payment = () => {
   const paymentSuccess = async () => {
     try {
       const { data } = await Axios.post(
-        'http://localhost:8000/api/v1/cart/orderstatus',
+        'http://localhost:8000/api/v1/order/orderstatus',
         {
           isPaid: true,
           orderId: JSON.parse(localStorage.getItem('order'))?._id,
@@ -110,7 +110,6 @@ const Payment = () => {
                   {JSON.parse(localStorage.getItem('order')).paymentMethod ===
                     'stripe' && order.isPaid === false ? (
                     <Stripe
-                      payment={() => setPaymentStatus(true)}
                       data={JSON.parse(localStorage.getItem('order'))}
                       paymentSuccess={paymentSuccess}
                     />

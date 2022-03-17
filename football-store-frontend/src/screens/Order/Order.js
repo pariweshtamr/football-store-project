@@ -22,7 +22,7 @@ import { Container, Details, Hr, Title } from '../../GlobalStyles'
 
 const Order = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
-  const state = useSelector((state) => state.order)
+  const orderState = useSelector((state) => state.order)
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -31,18 +31,17 @@ const Order = () => {
 
   console.log(cart)
 
-  const { address, city, postal_code, country } = JSON.parse(
+  const { address, city, state, postal_code, country } = JSON.parse(
     localStorage.getItem('shippingAddress'),
   )
 
   const placeOrderHandler = () => {
-    console.log(payment)
     setLoading(true)
 
     const sendCartData = async () => {
       try {
         const { data } = await Axios.post(
-          'http://localhost:8000/api/v1/cart',
+          'http://localhost:8000/api/v1/order',
           {
             ...cart,
             shippingAddress: {
@@ -71,7 +70,7 @@ const Order = () => {
     }
   }
 
-  console.log(JSON.parse(localStorage.getItem(state)))
+  console.log(JSON.parse(localStorage.getItem(orderState)))
 
   const orderItems = JSON.parse(
     localStorage.getItem('cartState'),
@@ -97,7 +96,7 @@ const Order = () => {
     <>
       {isLoggedIn ? (
         <>
-          {state ? (
+          {orderState ? (
             <>
               <Hr>
                 <hr />
@@ -185,6 +184,9 @@ const Order = () => {
                       </h6>
                       <h6>
                         Country - <span>{country}</span>
+                      </h6>
+                      <h6>
+                        State - <span>{state}</span>
                       </h6>
                       <h6>
                         City - <span>{city}</span>

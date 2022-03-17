@@ -27,6 +27,7 @@ import cartRouter from './routers/cartRouter.js'
 import tokenRouter from './routers/tokenRouter.js'
 import paymentRouter from './routers/paymentRouter.js'
 import orderRouter from './routers/orderRouter.js'
+import { isUser } from './middlewares/auth.middleware.js'
 
 // USE ROUTERS
 app.use('/api/v1/user', userRouter)
@@ -45,5 +46,5 @@ app.listen(PORT, (error) => {
   if (error) {
     return console.log(error)
   }
-  console.log('Backend server is running')
+  console.log(`Backend server is running at http://localhost:${PORT}`)
 })

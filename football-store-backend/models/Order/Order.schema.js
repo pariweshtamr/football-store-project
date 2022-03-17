@@ -42,10 +42,6 @@ const OrderSchema = new Schema(
     paidAt: {
       type: Date,
     },
-    orderStatus: {
-      type: String,
-      default: 'pending',
-    },
   },
   {
     timestamps: true,

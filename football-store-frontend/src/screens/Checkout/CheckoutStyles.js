@@ -47,12 +47,22 @@ export const ShippingDetails = styled.label`
   flex-direction: column;
 `
 export const ShippingLabel = styled.label``
+
 export const ShippingInput = styled.input`
-  flex: 1;
   min-width: 40%;
   width: 100%;
   margin: 10px 10px 20px 0;
   padding: 10px;
+  height: 3.2rem;
+`
+export const CountryInput = styled.div`
+  select {
+    height: 3.2rem;
+    min-width: 40%;
+    width: 100%;
+    margin: 10px 10px 20px 0;
+    padding: 10px;
+  }
 `
 export const OrderButton = styled.button`
   width: 100%;

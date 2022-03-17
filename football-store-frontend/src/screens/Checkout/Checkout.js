@@ -23,29 +23,31 @@ const Checkout = () => {
 
   const addressRef = useRef()
   const countryRef = useRef()
+  const stateRef = useRef()
   const cityRef = useRef()
   const postalCodeRef = useRef()
 
-  // useEffect(() => {
-  //   if (JSON.parse(localStorage.getItem('shippingAddress'))) {
-  //     const { address, postal_code, country, city } = JSON.parse(
-  //       localStorage.getItem('shippingAddress'),
-  //     )
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('shippingAddress'))) {
+      const { address, postal_code, country, state, city } = JSON.parse(
+        localStorage.getItem('shippingAddress'),
+      )
 
-  //     addressRef.current.value = address
-  //     cityRef.current.value = city
-  //     countryRef.current.value = country
-  //     postalCodeRef.current.value = postal_code
-  //   }
-  // }, [])
+      addressRef.current.value = address
+      cityRef.current.value = city
+      countryRef.current.value = country
+      stateRef.current.value = state
+      postalCodeRef.current.value = postal_code
+    }
+  }, [])
 
   const checkoutHandler = (e) => {
     e.preventDefault()
-    // e.target.reset()
 
     if (
       !addressRef.current?.value ||
       !countryRef.current?.value ||
+      !stateRef.current?.value ||
       !cityRef.current?.value ||
       !postalCodeRef.current?.value
     ) {
@@ -58,6 +60,7 @@ const Checkout = () => {
         address: addressRef.current.value,
         country: countryRef.current.value,
         city: cityRef.current.value,
+        state: stateRef.current.value,
         postal_code: postalCodeRef.current.value,
       }),
     )
@@ -87,15 +90,26 @@ const Checkout = () => {
                   />
                 </ShippingDetails>
 
-                <ShippingDetails>
-                  <ShippingLabel>Country</ShippingLabel>
+                <ShippingRow>
+                  <ShippingDetails>
+                    <ShippingLabel>Country</ShippingLabel>
+                    <ShippingInput
+                      ref={countryRef}
+                      placeholder="Country"
+                      required
+                    />
+                  </ShippingDetails>
 
-                  <ShippingInput
-                    ref={countryRef}
-                    placeholder="Country"
-                    required
-                  />
-                </ShippingDetails>
+                  <ShippingDetails>
+                    <ShippingLabel>State</ShippingLabel>
+
+                    <ShippingInput
+                      ref={stateRef}
+                      placeholder="State"
+                      required
+                    />
+                  </ShippingDetails>
+                </ShippingRow>
 
                 <ShippingRow>
                   <ShippingDetails>

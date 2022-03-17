@@ -1,4 +1,4 @@
-import User from './User.Schema.js'
+import User from './User.schema.js'
 
 // REGISTER USER
 
@@ -66,4 +66,13 @@ export const getUserByUsernameAndRefreshToken = (filter) => {
 
 export const removeRefreshJWT = (refreshJWT) => {
   return User.findOneAndUpdate({ refreshJWT }, { refreshJWT: '' })
+}
+
+export const createOrder = (newOrder) => {
+  try {
+    const order = User(newOrder).save()
+    return order
+  } catch (error) {
+    console.log(error)
+  }
 }
