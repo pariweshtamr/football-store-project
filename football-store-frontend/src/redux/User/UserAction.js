@@ -32,6 +32,7 @@ export const userRegister = (newUser) => async (dispatch) => {
 
   // call api
   const data = await createUser(newUser)
+  console.log(data)
   data?.status === 'success'
     ? dispatch(requestSuccess(data))
     : dispatch(requestFail(data))

@@ -37,18 +37,18 @@ orderRouter.post('/', isUser, async (req, res) => {
   }
 })
 
+// get orders
+
 orderRouter.get('/', isUser, async (req, res) => {
   res.status(200)
 })
 
-// get user order
+// get paid orders
 
 orderRouter.get('/paid', isUser, async (req, res) => {
   const user = req.user._id
-  console.log(user)
   try {
     const result = await getOrderByUser(user)
-    console.log(result.isPaid)
     if (!result) {
       res.json({
         message: 'No orders placed',
@@ -57,7 +57,6 @@ orderRouter.get('/paid', isUser, async (req, res) => {
 
     // converting object to array to use filter function
     const values = Object.values(result)
-    console.log(values)
     const paidOrders = values.filter((order) => order.isPaid)
 
     res.status(200).json({ paidOrders })
@@ -67,9 +66,10 @@ orderRouter.get('/paid', isUser, async (req, res) => {
   }
 })
 
+// update order status
+
 orderRouter.post('/orderstatus', async (req, res) => {
   const { orderId: id, isPaid } = req.body
-  console.log(req.body, 'orderRouter')
   try {
     const orderUpdated = await Order.findByIdAndUpdate(
       id,

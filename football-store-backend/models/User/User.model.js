@@ -5,6 +5,7 @@ import User from './User.schema.js'
 export const createUser = (newUser) => {
   try {
     const user = User(newUser).save()
+    console.log(user)
     return user
   } catch (error) {
     console.log(error)
@@ -66,13 +67,4 @@ export const getUserByUsernameAndRefreshToken = (filter) => {
 
 export const removeRefreshJWT = (refreshJWT) => {
   return User.findOneAndUpdate({ refreshJWT }, { refreshJWT: '' })
-}
-
-export const createOrder = (newOrder) => {
-  try {
-    const order = User(newOrder).save()
-    return order
-  } catch (error) {
-    console.log(error)
-  }
 }

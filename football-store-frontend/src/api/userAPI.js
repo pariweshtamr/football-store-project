@@ -10,6 +10,7 @@ const userApi = rootUrl + '/user'
 export const createUser = async (newUser) => {
   try {
     const { data } = await Axios.post(userApi + '/register', newUser)
+    console.log(data)
     return data
   } catch (error) {
     console.log(error)

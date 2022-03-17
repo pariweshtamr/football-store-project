@@ -8,11 +8,11 @@ POST http://localhost:8000/api/v1/user/register
 Content-Type: application/json
 
 {
-    "firstName": "Pariwesh",
+    "firstName": "Prerana",
     "lastName": "Tamrakar",
-    "username": "pariwesh7",
-    "email": "user@example.com",
-    "password": "1234567"
+    "username": "pre04",
+    "email": "user2@example.com",
+    "password": "C.ronaldo7",
 }
 
 ##### Email APIs

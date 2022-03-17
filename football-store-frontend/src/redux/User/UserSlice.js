@@ -43,12 +43,6 @@ const userSlice = createSlice({
       localStorage.setItem('authState', JSON.stringify(payload))
     },
 
-    // getUserDetailsSuccess: (state, { payload }) => {
-    //   state.userInfo = payload || {}
-    //   state.userFetchResponse = {}
-    //   state.isLoading = false
-    // },
-
     profileUpdateSuccess: (state, { payload }) => {
       state.userUpdateResponse = payload || {}
       state.isLoading = false

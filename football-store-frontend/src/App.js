@@ -18,18 +18,16 @@ import OrderSuccess from './screens/Order/OrderSuccess'
 import OrderHistory from './components/Order/OrderHistory'
 import Checkout from './screens/Checkout/Checkout'
 import Order from './screens/Order/Order'
-import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { autoLogin, fetchUserDetails } from './redux/User/UserAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchUserDetails } from './redux/User/UserAction'
 
 function App() {
-  const dispatch = useDispatch()
   const { isLoggedIn } = useSelector((state) => state.user)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    !isLoggedIn && dispatch(autoLogin())
-
-    dispatch(fetchUserDetails())
+    isLoggedIn && dispatch(fetchUserDetails())
   }, [isLoggedIn, dispatch])
   return (
     <Router>

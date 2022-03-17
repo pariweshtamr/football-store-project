@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import LoadingBox from '../../components/LoadingBox/LoadingBox'
 import MessageBox from '../../components/MessageBox/MessageBox'
 import { userRegister } from '../../redux/User/UserAction'
+import { Alert } from 'react-bootstrap'
+
 import {
   LoginLink,
   LoginOption,
@@ -35,13 +37,13 @@ const RegisterScreen = () => {
     e.preventDefault()
 
     // check for password confirmation
-    const { password, confirmPassword } = user
-
+    const { confirmPassword, ...newUser } = user
+    const { password } = user
     if (password !== confirmPassword) {
       setPasswordError('Password does not match')
       return
     }
-    dispatch(userRegister(user))
+    dispatch(userRegister(newUser))
   }
 
   const handleOnChange = (e) => {
@@ -79,19 +81,19 @@ const RegisterScreen = () => {
           <RegisterInput
             name="firstName"
             onChange={handleOnChange}
-            placeholder="Enter your First name"
+            placeholder="First name"
             required
           />
           <RegisterInput
             name="lastName"
             onChange={handleOnChange}
-            placeholder="Enter your Last name *"
+            placeholder="Last name *"
             required
           />
           <RegisterInput
             name="email"
             onChange={handleOnChange}
-            placeholder="Enter your Email address"
+            placeholder="Email address"
             required
           />
           <RegisterInput
@@ -105,16 +107,17 @@ const RegisterScreen = () => {
             onChange={handleOnChange}
             type="password"
             minLength="7"
-            placeholder="Create a password"
+            placeholder="Create password"
             required
           />
           <RegisterInput
             name="confirmPassword"
             onChange={handleOnChange}
             type="password"
-            placeholder="Confirm your password"
+            placeholder="Confirm password"
             required
           />
+          {passwordError && <Alert variant="danger">{passwordError}</Alert>}
           <RegisterButton type="submit">REGISTER</RegisterButton>
         </RegisterForm>
         <LoginOption>Already have an account?</LoginOption>

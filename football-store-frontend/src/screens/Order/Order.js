@@ -29,8 +29,6 @@ const Order = () => {
   const [loading, setLoading] = useState(false)
   const [payment, setPayment] = useState('')
 
-  console.log(cart)
-
   const { address, city, state, postal_code, country } = JSON.parse(
     localStorage.getItem('shippingAddress'),
   )
