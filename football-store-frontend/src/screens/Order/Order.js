@@ -16,6 +16,8 @@ import {
   MethodStripe,
   MethodPaypal,
   OrderDetails,
+  DisplayOrderItems,
+  Left,
 } from './OrderStyles'
 import LoadingBox from '../../components/LoadingBox/LoadingBox'
 import { Container, Details, Hr, Title } from '../../GlobalStyles'
@@ -100,7 +102,7 @@ const Order = () => {
                 <hr />
               </Hr>
               <OrderDetails>
-                <div style={{ width: '40%' }}>
+                <Left>
                   <Container>
                     <Title>Order Summary</Title>
 
@@ -194,13 +196,16 @@ const Order = () => {
                       </h6>
                     </Details>
                   </Container>
-                </div>
-                <Container style={{ width: '60%' }}>
-                  <Title>Order Items</Title>
-                  <Details>
-                    <div>{orderItems}</div>
-                  </Details>
-                </Container>
+                </Left>
+
+                <DisplayOrderItems style={{ width: '60%' }}>
+                  <Container>
+                    <Title>Order Items</Title>
+                    <Details>
+                      <div>{orderItems}</div>
+                    </Details>
+                  </Container>
+                </DisplayOrderItems>
               </OrderDetails>
             </>
           ) : (

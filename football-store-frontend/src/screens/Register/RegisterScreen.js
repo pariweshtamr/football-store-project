@@ -87,7 +87,7 @@ const RegisterScreen = () => {
           <RegisterInput
             name="lastName"
             onChange={handleOnChange}
-            placeholder="Last name *"
+            placeholder="Last name"
             required
           />
           <RegisterInput

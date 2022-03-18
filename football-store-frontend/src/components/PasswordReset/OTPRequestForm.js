@@ -58,7 +58,6 @@ const OTPRequestForm = () => {
               {resetPasswordRequestResponse.message}
             </MessageBox>
           )}
-          <hr />
 
           <PRForm onSubmit={handleOnSubmit}>
             <PRFInput

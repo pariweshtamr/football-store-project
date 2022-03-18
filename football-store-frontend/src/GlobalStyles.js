@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  width: 60%;
   background: #fcf5f5;
   border: 1px solid #fcf5f5;
   padding: 10px 20px;
@@ -12,6 +13,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: max-content;
+
+  @media screen and (max-width: 600px) {
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    margin: 1rem auto;
+  }
 `
 
 export const Title = styled.div`
@@ -19,6 +27,10 @@ export const Title = styled.div`
   font-weight: 600;
   margin-bottom: 10px;
   text-decoration: underline;
+
+  @media screen and (max-width: 600px) {
+    margin: 0 auto 20px auto;
+  }
 `
 
 export const Details = styled.div`

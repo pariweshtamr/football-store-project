@@ -10,7 +10,9 @@ export const ResetPassFormContainer = styled.div`
   justify-content: flex-end;
   background-size: cover;
 
-  ${mobile({ height: '100%' })}
+  @media screen and (max-width: 600px) {
+    height: 100%;
+  }
 `
 export const FormTitle = styled.h1`
   font-size: 24px;
@@ -25,7 +27,10 @@ export const ResetPassFormWrapper = styled.form`
   opacity: 0.9;
   border-radius: 5px;
 
-  ${mobile({ width: '80%', margin: '20px 0' })}
+  @media screen and (max-width: 600px) {
+    width: 85%;
+    margin: 20px 0;
+  }
 `
 export const ResetPassItemContainer = styled.div`
   display: flex;

@@ -3,6 +3,16 @@ import styled from 'styled-components'
 export const OrderDetails = styled.div`
   display: flex;
   width: 100%;
+  background: #fff;
+  margin-bottom: 2rem;
+`
+
+export const Left = styled.div`
+  min-width: 40%;
+  width: 20%;
+  @media screen and (max-width: 600px) {
+    min-width: 100%;
+  }
 `
 export const OrderItem = styled.div`
   display: flex;
@@ -10,6 +20,11 @@ export const OrderItem = styled.div`
   align-items: center;
   padding-bottom: 20px;
   text-decoration: none;
+`
+export const DisplayOrderItems = styled.div`
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
 `
 export const OrderItemImage = styled.img`
   width: 10%;
@@ -74,4 +89,8 @@ export const SuccessContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+
+  h4 {
+    text-align: center;
+  }
 `

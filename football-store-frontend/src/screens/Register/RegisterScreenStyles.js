@@ -16,6 +16,8 @@ export const RegisterContainer = styled.div`
 
   @media screen and (max-width: 600px) {
     height: 100%;
+    justify-content: center;
+    padding: 1rem 0;
   }
 `
 export const RegisterWrapper = styled.div`
@@ -27,7 +29,7 @@ export const RegisterWrapper = styled.div`
   margin-left: 5rem;
 
   @media screen and (max-width: 600px) {
-    width: 80%;
+    width: 85%;
     margin: 20px 0;
   }
 `
@@ -70,11 +72,16 @@ export const LoginOption = styled.p`
   text-align: left;
   color: teal;
   text-decoration: underline;
+  @media screen and (max-width: 600px) {
+    text-align: center;
+  }
 `
 export const LoginLink = styled(Link)`
   cursor: pointer;
   font-size: 2rem;
   color: teal;
+  display: flex;
+  text-decoration: none;
 
   &:hover {
     color: #000;
@@ -82,5 +89,6 @@ export const LoginLink = styled(Link)`
 
   @media screen and (max-width: 600px) {
     padding: 10px;
+    justify-content: center;
   }
 `

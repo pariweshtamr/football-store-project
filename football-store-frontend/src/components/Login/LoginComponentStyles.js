@@ -11,10 +11,18 @@ export const LoginContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 600px) {
+    height: 80vh;
+  }
 `
 export const RegisterOrHome = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    text-align: center;
+    flex-direction: column;
+  }
 `
 export const ExternalLink = styled.div`
   display: flex;
@@ -34,7 +42,9 @@ export const LoginWrapper = styled.div`
   opacity: 0.85;
   border-radius: 5px;
 
-  ${mobile({ width: '80%' })}
+  @media screen and (max-width: 600px) {
+    width: 85%;
+  }
 `
 export const LoginTitle = styled.h1`
   font-size: 24px;
@@ -49,6 +59,7 @@ export const LoginForm = styled.form`
 export const LoginInput = styled.input`
   flex: 1;
   min-width: 40%;
+  width: 100%;
   margin: 20px 10px 0 0;
   padding: 10px;
 `
@@ -62,7 +73,11 @@ export const LoginButton = styled.button`
   color: black;
   cursor: pointer;
 
-  ${mobile({ padding: '10px' })}
+  @media screen and (max-width: 600px) {
+    padding: 10px;
+    margin: 20px auto;
+    width: 100%;
+  }
 `
 
 export const ForgotPasswordLink = styled(Link)`

@@ -7,6 +7,7 @@ import { currentOrderHandler } from '../../redux/Order/OrderSlice'
 import { clearCart } from '../../redux/Cart/CartSlice'
 import { Container, Details, Hr, Title } from '../../GlobalStyles'
 import {
+  DisplayOrdetItems,
   OrderId,
   PaymentBg,
   PaymentItem,
@@ -15,7 +16,6 @@ import {
   PaymentItemPrice,
   PaymentItemQty,
 } from './PaymentStyles'
-import paymentWallpaper from '../../assets/paymentWallpaper.jpeg'
 
 const Payment = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
@@ -79,19 +79,20 @@ const Payment = () => {
       <Hr>
         <hr />
       </Hr>
-      <PaymentBg style={{ backgroundImage: `url(${paymentWallpaper})` }}>
+      <PaymentBg>
         <OrderId>{`Order ID : ${order?._id}`}</OrderId>
         {isLoggedIn ? (
           <>
-            <Container style={{ width: '60%' }}>
+            <Container>
               <Title>Order Summary</Title>
-
-              <Container style={{ width: '93%', marginBottom: '1.5rem' }}>
-                <Title>Order Items</Title>
-                <Details>
-                  <div>{orderItems}</div>
-                </Details>
-              </Container>
+              <DisplayOrdetItems>
+                <Container style={{ width: '93%', marginBottom: '1.5rem' }}>
+                  <Title>Order Items</Title>
+                  <Details>
+                    <div>{orderItems}</div>
+                  </Details>
+                </Container>
+              </DisplayOrdetItems>
 
               <Details>
                 <div style={{ textAlign: 'center' }}>
