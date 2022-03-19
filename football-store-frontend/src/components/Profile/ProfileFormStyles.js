@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const ProfileFormContainer = styled.div`
-  /* width: 100vw; */
   height: 100%;
   display: flex;
   align-items: Flex-start;
@@ -10,6 +9,7 @@ export const ProfileFormContainer = styled.div`
 
   @media screen and (max-width: 600px) {
     height: 100%;
+    min-width: 100vw;
   }
 `
 export const FormTitle = styled.h1`
@@ -26,7 +26,7 @@ export const ProfileFormWrapper = styled.form`
   border-radius: 5px;
 
   @media screen and (max-width: 600px) {
-    width: 80%;
+    width: 100%;
     margin: 20px 0;
   }
 `

@@ -17,8 +17,9 @@ export const Container = styled.div`
   @media screen and (max-width: 600px) {
     justify-content: center;
     align-items: center;
-    width: max-content;
+    width: 90%;
     margin: 1rem auto;
+    padding: 10px;
   }
 `
 
@@ -30,6 +31,7 @@ export const Title = styled.div`
 
   @media screen and (max-width: 600px) {
     margin: 0 auto 20px auto;
+    font-size: 1.1rem;
   }
 `
 
@@ -43,6 +45,9 @@ export const Details = styled.div`
 
   > div {
     font-weight: 600;
+  }
+
+  @media screen and (max-width: 600px) {
   }
 `
 

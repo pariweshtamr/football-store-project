@@ -5,6 +5,10 @@ export const Title = styled.h1`
   margin: 20px;
   padding-left: 20px;
   font-weight: bolder;
+
+  @media screen and (max-width: 600px) {
+    margin: 10px 20px 10px 20px;
+  }
 `
 
 export const FilterContainer = styled.div`
@@ -14,6 +18,10 @@ export const FilterContainer = styled.div`
 export const Filter = styled.div`
   padding: 0 20px;
   margin: 20px;
+
+  @media screen and (max-width: 600px) {
+    margin: 10px 20px 10px 20px;
+  }
 `
 export const FilterText = styled.span`
   font-size: 20px;
@@ -21,7 +29,8 @@ export const FilterText = styled.span`
   margin-right: 20px;
 
   @media screen and (max-width: 600px) {
-    margin-right: 16px;
+    font-size: 16px;
+    margin-right: 5px;
   }
 `
 export const ProductListSelect = styled.select`
@@ -31,7 +40,11 @@ export const ProductListSelect = styled.select`
   background-color: #fff;
 
   @media screen and (max-width: 600px) {
-    margin: 10px 0;
+    margin: 0 5px 0 0;
+    width: 93px;
   }
 `
-export const Option = styled.option``
+export const Option = styled.option`
+  @media screen and (max-width: 600px) {
+  }
+`

@@ -13,9 +13,13 @@ export const ProductsListContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 export const ProductItemContainer = styled.div`
-  /* flex: 1; */
   padding: 0 20px;
   margin: 5px;
   max-width: max-content;
@@ -31,6 +35,7 @@ export const ProductItemContainer = styled.div`
 
   @media screen and (max-width: 600px) {
     padding: 0;
+    margin: 10px 0;
   }
 `
 export const ProductItemImage = styled.img`

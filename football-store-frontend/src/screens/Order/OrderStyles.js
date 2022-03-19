@@ -35,9 +35,21 @@ export const OrderItemDetails = styled.div`
 `
 export const OrderItemName = styled.div`
   text-decoration: none;
+
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+  }
 `
-export const OrderItemPrice = styled.div``
-export const OrderItemQty = styled.div``
+export const OrderItemPrice = styled.div`
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
+`
+export const OrderItemQty = styled.div`
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
+`
 
 export const OrderButton = styled.button`
   width: 100%;

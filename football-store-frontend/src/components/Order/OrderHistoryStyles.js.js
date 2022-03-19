@@ -12,6 +12,10 @@ export const HistoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media screen and (max-width: 600px) {
+    width: 22.5rem;
+  }
 `
 
 export const HistoryTitle = styled.div`
@@ -22,7 +26,6 @@ export const HistoryTitle = styled.div`
   text-decoration: underline;
 `
 
-
 export const OrderList = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -30,6 +33,12 @@ export const OrderList = styled.div`
   align-content: center;
   gap: 2rem;
   padding: 2rem;
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+    padding: 2rem 0;
+    justify-items: center;
+  }
 `
 
 export const NoOrderContainer = styled.div`

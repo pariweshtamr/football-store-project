@@ -13,6 +13,10 @@ export const Profile = styled.div`
   align-items: center;
   justify-content: space-between;
   background-size: cover;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+  }
 `
 export const RightSide = styled.div`
   display: flex;
@@ -21,6 +25,10 @@ export const RightSide = styled.div`
 export const LeftSide = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+  }
 `
 
 export const GreetUser = styled.h1`
@@ -34,11 +42,19 @@ export const GreetUser = styled.h1`
   color: teal;
   padding: 0 2rem;
   opacity: 0.9;
+
+  @media screen and (max-width: 600px) {
+    font-size: 3rem;
+  }
 `
 
 export const UserName = styled.span`
   color: #f8f8f8;
   font-size: 3.5rem;
+
+  @media screen and (max-width: 600px) {
+    font-size: 2.5rem;
+  }
 `
 export const History = styled.div`
   display: flex;
