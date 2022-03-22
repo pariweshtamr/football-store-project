@@ -18,6 +18,13 @@ export const ProductsListContainer = styled.div`
     flex-direction: column;
     justify-content: center;
   }
+  /* @media screen and (max-width: 1024px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-content: center;
+    margin-bottom: 2rem;
+  } */
 `
 export const ProductItemContainer = styled.div`
   padding: 0 20px;
@@ -36,6 +43,10 @@ export const ProductItemContainer = styled.div`
   @media screen and (max-width: 600px) {
     padding: 0;
     margin: 10px 0;
+  }
+  @media screen and (max-width: 1024px) {
+    padding: 0 15px;
+    margin: 0;
   }
 `
 export const ProductItemImage = styled.img`

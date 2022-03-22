@@ -17,6 +17,11 @@ export const BannerWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
   }
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `
 
 export const ImgContainer = styled.div`
@@ -26,6 +31,9 @@ export const ImgContainer = styled.div`
   align-items: center;
   justify-content: center;
   @media screen and (max-width: 600px) {
+    height: 80%;
+  }
+  @media screen and (max-width: 1024px) {
     height: 80%;
   }
 `
@@ -42,13 +50,13 @@ export const InfoContainer = styled.div`
   flex: 1;
   padding: 50px;
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1024px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     padding: 5px 0;
-    margin-top: -20rem;
+    margin-top: -15rem;
   }
 `
 export const Title = styled.h1`
