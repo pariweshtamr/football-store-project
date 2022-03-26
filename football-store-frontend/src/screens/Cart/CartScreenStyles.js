@@ -16,6 +16,9 @@ export const CartWrapper = styled.div`
   @media screen and (max-width: 600px) {
     padding: 10px;
   }
+  @media screen and (max-width: 1024px) {
+    min-height: 67vh;
+  }
 `
 export const CartTitle = styled.h1`
   font-weight: 300;
@@ -62,6 +65,9 @@ export const CartBottom = styled.div`
   justify-content: space-between;
 
   @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+  @media screen and (max-width: 1024px) {
     flex-direction: column;
   }
 `
@@ -135,20 +141,11 @@ export const CartProductQty = styled.span`
     font-size: 16px;
   }
 `
-export const CartProductSize = styled.select`
-  font-size: 24px;
-  margin: 10px;
 
-  @media screen and (max-width: 600px) {
-    margin: 0px 15px;
-  }
-`
 export const CartProductInfoTitle = styled.div`
   font-weight: bolder;
   margin-left: 10px;
 `
-export const FilterCartQtyOption = styled.option``
-export const FilterCartSizeOption = styled.option``
 
 export const CartProductPrice = styled.div`
   font-size: 30px;
@@ -193,6 +190,10 @@ export const CartSummary = styled.div`
   border-radius: 5px;
   padding: 20px;
   height: max-content;
+
+  @media screen and (max-width: 1024px) {
+    margin-top: 3rem;
+  }
 `
 export const CartSummaryTitle = styled.h2`
   font-weight: 300;
@@ -211,9 +212,6 @@ export const CartSummaryItemText = styled.span`
 `
 export const CartSummaryItemPrice = styled.span``
 
-export const CartSummaryItemDiscount = styled.span`
-  color: red;
-`
 export const CartSummaryButton = styled.button`
   width: 100%;
   padding: 10px;

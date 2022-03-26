@@ -11,6 +11,10 @@ export const ProfileFormContainer = styled.div`
     height: 100%;
     min-width: 100vw;
   }
+  @media screen and (max-width: 1024px) {
+    height: 100%;
+    min-width: 100vw;
+  }
 `
 export const FormTitle = styled.h1`
   font-size: 24px;
@@ -26,6 +30,10 @@ export const ProfileFormWrapper = styled.form`
   border-radius: 5px;
 
   @media screen and (max-width: 600px) {
+    width: 100%;
+    margin: 20px 0;
+  }
+  @media screen and (max-width: 1024px) {
     width: 100%;
     margin: 20px 0;
   }

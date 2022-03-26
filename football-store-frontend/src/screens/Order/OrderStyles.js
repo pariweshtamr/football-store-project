@@ -5,6 +5,13 @@ export const OrderDetails = styled.div`
   width: 100%;
   background: #fff;
   margin-bottom: 2rem;
+
+  @media screen and (max-width: 600px) {
+    margin-bottom: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    height: 67vh;
+  }
 `
 
 export const Left = styled.div`

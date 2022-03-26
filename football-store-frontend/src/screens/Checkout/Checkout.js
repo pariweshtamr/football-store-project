@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LoginLink } from '../Register/RegisterScreenStyles'
 import {
@@ -26,20 +26,6 @@ const Checkout = () => {
   const stateRef = useRef()
   const cityRef = useRef()
   const postalCodeRef = useRef()
-
-  useEffect(() => {
-    if (JSON.parse(localStorage.getItem('shippingAddress'))) {
-      const { address, postal_code, country, state, city } = JSON.parse(
-        localStorage.getItem('shippingAddress'),
-      )
-
-      addressRef.current.value = address
-      cityRef.current.value = city
-      countryRef.current.value = country
-      stateRef.current.value = state
-      postalCodeRef.current.value = postal_code
-    }
-  }, [])
 
   const checkoutHandler = (e) => {
     e.preventDefault()

@@ -39,6 +39,11 @@ export const OrderList = styled.div`
     padding: 2rem 0;
     justify-items: center;
   }
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    padding: 2rem 0;
+    justify-items: center;
+  }
 `
 
 export const NoOrderContainer = styled.div`

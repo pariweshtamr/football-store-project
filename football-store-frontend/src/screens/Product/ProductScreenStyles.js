@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const ProductContainer = styled.div``
+export const ProductContainer = styled.div`
+  @media screen and (max-width: 1024px) {
+    min-height: 67vh;
+  }
+`
 
 export const BackLink = styled(Link)`
   text-decoration: none;
@@ -18,6 +22,9 @@ export const ProductWrapper = styled.div`
   @media screen and (max-width: 600px) {
     flex-direction: column;
     padding: 10px;
+  }
+  @media screen and (max-width: 1024px) {
+    margin-top: 7rem;
   }
 `
 export const ImgContainer = styled.div`

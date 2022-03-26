@@ -45,7 +45,6 @@ const OrderHistory = () => {
   }, [])
 
   const paidOrders = orders.map((order, i) => {
-    console.log(order)
     return (
       <div key={order._id}>
         <HistoryContainer>
@@ -100,7 +99,6 @@ const OrderHistory = () => {
       </div>
     )
   })
-  console.log(paidOrders)
   return (
     <>
       <Hr>

@@ -21,6 +21,10 @@ export const Container = styled.div`
     margin: 1rem auto;
     padding: 10px;
   }
+
+  @media screen and (max-width: 1024px) {
+    min-width: 90%;
+  }
 `
 
 export const Title = styled.div`

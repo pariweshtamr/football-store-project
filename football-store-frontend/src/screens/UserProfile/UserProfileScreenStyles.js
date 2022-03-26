@@ -17,6 +17,11 @@ export const Profile = styled.div`
   @media screen and (max-width: 600px) {
     flex-direction: column-reverse;
   }
+
+  @media screen and (max-width: 1024px) {
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
 `
 export const RightSide = styled.div`
   display: flex;
@@ -45,6 +50,10 @@ export const GreetUser = styled.h1`
 
   @media screen and (max-width: 600px) {
     font-size: 3rem;
+  }
+
+  @media screen and (max-width: 1024px) {
+    margin: 2rem 0 0 0;
   }
 `
 

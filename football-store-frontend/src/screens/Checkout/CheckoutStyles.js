@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { mobile } from '../../responsive'
 
 export const CheckoutContainer = styled.div`
   width: 100%;
@@ -27,7 +26,11 @@ export const CheckoutWrapper = styled.div`
   margin: 0 auto;
 
   @media screen and (max-width: 600px) {
-    width: 80%;
+    min-width: 90%;
+    margin: 20px 0;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 70%;
     margin: 20px 0;
   }
 `
